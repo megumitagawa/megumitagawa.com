@@ -1,20 +1,14 @@
-import PropTypes from "prop-types"
 import React from "react"
+import { siteMetadata } from "../../gatsby-config"
 
-const Footer = ({ title }) => (
+const Footer = () => (
   <footer>
     <p>
-      <small>© {new Date().getFullYear()} {title}</small>
+      <small>
+        © {new Date().getFullYear()} {siteMetadata.title}
+      </small>
     </p>
   </footer>
 )
-
-Footer.propTypes = {
-  title: PropTypes.string
-}
-
-Footer.defaultProps = {
-  title: ''
-}
 
 export default Footer

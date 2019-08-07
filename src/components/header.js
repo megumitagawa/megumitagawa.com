@@ -1,24 +1,14 @@
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { siteMetadata } from "../../gatsby-config"
 
-const Header = ({ title, description }) => (
+const Header = () => (
   <header>
     <Link to="/">
-      <p>{description}</p>
-      <h1>{title}</h1>
+      <p>{siteMetadata.description}</p>
+      <h1>{siteMetadata.title}</h1>
     </Link>
   </header>
 )
-
-Header.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string
-}
-
-Header.defaultProps = {
-  title: '',
-  description: ''
-}
 
 export default Header

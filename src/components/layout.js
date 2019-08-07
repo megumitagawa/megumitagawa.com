@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Header from "./header"
+import Nav from "./nav"
 import Footer from "./footer"
 
 import "sanitize.css"
@@ -19,6 +20,7 @@ const Layout = ({ children, location }) => {
   return (
     <>
       <Header h1={headerH1} />
+      <Nav />
       <main>{children}</main>
       <Footer />
     </>

@@ -14,16 +14,20 @@ import "sanitize.css"
 import "reset-css"
 import "./layout.css"
 
-const Layout = ({ children }) => (
-  <>
-    <Header />
-    <main>{children}</main>
-    <Footer />
-  </>
-)
+const Layout = ({ children, location }) => {
+  const headerH1 = location.pathname === "/"
+  return (
+    <>
+      <Header h1={headerH1} />
+      <main>{children}</main>
+      <Footer />
+    </>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default Layout

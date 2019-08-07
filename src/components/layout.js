@@ -10,20 +10,23 @@ import PropTypes from "prop-types"
 import Header from "./header"
 import Nav from "./nav"
 import Footer from "./footer"
+import BackgroundImageFluid from "./background-image-fluid"
 
 import "sanitize.css"
 import "reset-css"
-import "./layout.css"
+import styles from "./layout.module.css"
 
 const Layout = ({ children, location }) => {
   const headerH1 = location.pathname === "/"
   return (
-    <>
-      <Header h1={headerH1} />
-      <Nav />
-      <main>{children}</main>
-      <Footer />
-    </>
+    <BackgroundImageFluid relativePath="bg.jpg">
+      <div className={styles.wrapper}>
+        <Header h1={headerH1} />
+        <Nav />
+        <main>{children}</main>
+        <Footer />
+      </div>
+    </BackgroundImageFluid>
   )
 }
 

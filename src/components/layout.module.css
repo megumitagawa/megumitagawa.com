@@ -3,7 +3,7 @@
 ::after {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 a {
   color: inherit;
@@ -18,4 +18,8 @@ button {
   background: none;
   appearance: none;
   font-family: var(--app-font-family);
+}
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
 }

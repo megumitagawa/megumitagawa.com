@@ -12,20 +12,26 @@ import Nav from "./nav"
 import Footer from "./footer"
 import BackgroundImageFluid from "./background-image-fluid"
 
-import "sanitize.css"
-import "reset-css"
-import styles from "./layout.module.css"
+import css from "../styles/layout.module.css"
 
 const tempNavActive = false
 
 const Layout = ({ children, location }) => {
   const indexPage = location.pathname === "/"
+  const navActive = indexPage || tempNavActive
   return (
     <BackgroundImageFluid relativePath="bg.jpg">
-      <div className={styles.spacer}>
+      <div className={css.spacer}>
         <Header h1={indexPage} />
-        <Nav active={indexPage || tempNavActive} />
-        <main>{children}</main>
+        <div className={`
+          ${css.wrapper}
+          ${navActive ? css.isActive : ''}
+        `}>
+          <Nav />
+          <main className={css.main}>
+            {children}
+          </main>
+        </div>
         <Footer />
       </div>
     </BackgroundImageFluid>

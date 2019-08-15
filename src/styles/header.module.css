@@ -1,0 +1,18 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+}
+.occupation {
+  text-align: center;
+  font-size: 12px;
+  font-family: Comfortaa, sans-serif;
+}
+.name {
+  text-align: center;
+  font-size: 24px;
+  font-family: Comfortaa, sans-serif;
+  margin-top: 10px;
+}

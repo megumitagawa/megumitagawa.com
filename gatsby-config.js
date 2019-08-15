@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `tagawa megumi`,
-    description: `composer, arranger, keyboardist`,
+    description: `composer / arranger / keyboardist`,
     author: `@dsktschy`,
   },
   plugins: [
@@ -27,6 +27,8 @@ module.exports = {
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-postcss`,
+    `gatsby-plugin-svg-sprite`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

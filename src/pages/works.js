@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import Sections from "../components/sections"
 import SEO from "../components/seo"
+import DottedLine from '../components/dotted-line'
 
 const tempSections = [
   {
@@ -21,7 +22,9 @@ const tempSections = [
 const WorksPage = ({ location }) => (
   <Layout location={location}>
     <SEO title="works" />
-    <h1>works</h1>
+    <h1>
+      <DottedLine>works</DottedLine>
+    </h1>
     <Sections
       HeadingTag="h2"
       contents={tempSections}

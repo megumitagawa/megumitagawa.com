@@ -1,11 +1,13 @@
 import React from "react"
 import { siteMetadata } from "../../gatsby-config"
 
+import css from "../styles/footer.module.css"
+
 const Footer = () => (
-  <footer>
-    <p>
+  <footer className={css.footer}>
+    <p className={css.copyright}>
       <small>
-        © {new Date().getFullYear()} {siteMetadata.title}
+        &copy; {new Date().getFullYear()} {siteMetadata.title}
       </small>
     </p>
   </footer>

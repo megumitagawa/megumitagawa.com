@@ -1,49 +1,52 @@
 import React from "react"
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import DottedLine from './dotted-line'
+import SvgSpriteFluid from "./svg-sprite-fluid"
 
-const Nav = ({ active }) => (
-  <nav
-    className={`
-      nav
-      ${active ? 'is-active' : ''}
-    `}
-  >
-    <ul>
-      <li>
-        <Link to="/profile/">profile</Link>
+import css from '../styles/nav.module.css'
+import dotsSvg from '../images/dots.svg'
+
+const Nav = () => (
+  <nav className={css.nav}>
+    <ul className={css.list}>
+      <li className={css.item}>
+        <Link to="/profile/">
+          <DottedLine>profile</DottedLine>
+        </Link>
       </li>
-      <li>
-        <Link to="/works/">works</Link>
+      <li className={css.item}>
+        <Link to="/works/">
+          <DottedLine>works</DottedLine>
+        </Link>
       </li>
-      <li>
+      <li className={css.item}>
         <a
           href="https://soundcloud.com/megumi-tagawa"
           target="_blank"
           rel="noopener noreferrer"
         >
-          sounds
+          <DottedLine>sounds</DottedLine>
         </a>
       </li>
-      <li>
+      <li className={css.item}>
         <a
           href="https://twitter.com/gushime"
           target="_blank"
           rel="noopener noreferrer"
         >
-          twitter
+          <DottedLine>twitter</DottedLine>
         </a>
       </li>
-      <li>
-        <a href="mailto:mgs1104@me.com">contact</a>
+      <li className={css.item}>
+        <a href="mailto:mgs1104@me.com">
+          <DottedLine>contact</DottedLine>
+        </a>
       </li>
     </ul>
-    <button />
+    <button className={css.trigger}>
+      <SvgSpriteFluid id={dotsSvg.id} />
+    </button>
   </nav>
 )
-
-Nav.propTypes = {
-  active: PropTypes.bool.isRequired
-}
 
 export default Nav

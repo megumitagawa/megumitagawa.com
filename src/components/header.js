@@ -3,13 +3,19 @@ import React from "react"
 import PropTypes from "prop-types"
 import { siteMetadata } from "../../gatsby-config"
 
+import css from "../styles/header.module.css"
+
 const Header = ({ h1 }) => {
   const Tag = h1 ? "h1" : "p"
   return (
-    <header>
+    <header className={css.header}>
       <Link to="/">
-        <p>{siteMetadata.description}</p>
-        <Tag>{siteMetadata.title}</Tag>
+        <p className={css.occupation}>
+          {siteMetadata.description}
+        </p>
+        <Tag className={css.name}>
+          {siteMetadata.title}
+        </Tag>
       </Link>
     </header>
   )

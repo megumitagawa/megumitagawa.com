@@ -57,7 +57,7 @@ function SEO({ description, lang, meta, title }) {
       link={[
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans+JP&display=swap'
+          href: 'https://fonts.googleapis.com/css?family=Comfortaa|Noto+Sans+JP&display=swap'
         }
       ]}
     />

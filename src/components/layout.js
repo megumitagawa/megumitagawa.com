@@ -16,13 +16,15 @@ import "sanitize.css"
 import "reset-css"
 import styles from "./layout.module.css"
 
+const tempNavActive = false
+
 const Layout = ({ children, location }) => {
-  const headerH1 = location.pathname === "/"
+  const indexPage = location.pathname === "/"
   return (
     <BackgroundImageFluid relativePath="bg.jpg">
-      <div className={styles.wrapper}>
-        <Header h1={headerH1} />
-        <Nav />
+      <div className={styles.spacer}>
+        <Header h1={indexPage} />
+        <Nav active={indexPage || tempNavActive} />
         <main>{children}</main>
         <Footer />
       </div>
@@ -31,8 +33,7 @@ const Layout = ({ children, location }) => {
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired
 }
 
 export default Layout

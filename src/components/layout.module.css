@@ -19,10 +19,7 @@ button {
   appearance: none;
   font-family: var(--app-font-family);
 }
-body {
-  font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
-}
-.wrapper {
+.spacer {
   width: 100%;
   min-height: 100vh;
 }

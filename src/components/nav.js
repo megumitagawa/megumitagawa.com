@@ -1,8 +1,14 @@
-import { Link } from "gatsby"
 import React from "react"
+import { Link } from "gatsby"
+import PropTypes from "prop-types"
 
-const Nav = () => (
-  <nav>
+const Nav = ({ active }) => (
+  <nav
+    className={`
+      nav
+      ${active ? 'is-active' : ''}
+    `}
+  >
     <ul>
       <li>
         <Link to="/profile/">profile</Link>
@@ -16,16 +22,7 @@ const Nav = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          soundcloud
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://megcomp.blog38.fc2.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          blog
+          sounds
         </a>
       </li>
       <li>
@@ -41,7 +38,12 @@ const Nav = () => (
         <a href="mailto:mgs1104@me.com">contact</a>
       </li>
     </ul>
+    <button />
   </nav>
 )
+
+Nav.propTypes = {
+  active: PropTypes.bool.isRequired
+}
 
 export default Nav

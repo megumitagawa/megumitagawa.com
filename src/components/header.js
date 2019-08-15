@@ -16,10 +16,7 @@ const Header = ({ h1 }) => {
 }
 
 Header.propTypes = {
-  h1: PropTypes.bool,
-}
-Header.defaultProps = {
-  h1: false,
+  h1: PropTypes.bool.isRequired
 }
 
 export default Header

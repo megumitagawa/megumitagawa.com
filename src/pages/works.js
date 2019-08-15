@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Layout from "../components/layout"
 import Sections from "../components/sections"
 import SEO from "../components/seo"
@@ -31,5 +32,9 @@ const WorksPage = ({ location }) => (
     />
   </Layout>
 )
+
+WorksPage.propTypes = {
+  location: PropTypes.object.isRequired
+}
 
 export default WorksPage

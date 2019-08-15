@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Layout from "../components/layout"
 import Sections from "../components/sections"
 import SEO from "../components/seo"
@@ -27,5 +28,9 @@ const ProfilePage = ({ location }) => (
     />
   </Layout>
 )
+
+ProfilePage.propTypes = {
+  location: PropTypes.object.isRequired
+}
 
 export default ProfilePage

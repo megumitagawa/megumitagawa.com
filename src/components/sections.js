@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Paragraphs from "./paragraphs"
 
 const Sections = ({ HeadingTag, contents }) => {
@@ -9,6 +10,11 @@ const Sections = ({ HeadingTag, contents }) => {
     </section>
   ))
   return <>{sections}</>
+}
+
+Sections.propTypes = {
+  HeadingTag: PropTypes.string.isRequired,
+  contents: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default Sections

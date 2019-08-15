@@ -1,6 +1,7 @@
 // https://takumon.com/simple-gatsby-image-wrapper
 
 import React from "react"
+import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -26,6 +27,10 @@ const ImageFluid = ({ relativePath }) => {
     return edge.node.relativePath.includes(relativePath)
   })
   return <Img fluid={image.node.childImageSharp.fluid} />
+}
+
+ImageFluid.propTypes = {
+  relativePath: PropTypes.string.isRequired
 }
 
 export default ImageFluid

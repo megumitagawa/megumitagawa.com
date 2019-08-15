@@ -5,6 +5,7 @@
  */
 
 import React from "react"
+import PropTypes from "prop-types"
 
 const Paragraphs = ({ contents }) => {
   const paragraphs = contents
@@ -21,6 +22,10 @@ const Paragraphs = ({ contents }) => {
     return <p key={i}>{linesWithBr}</p>
   })
   return <>{paragraphsWithBr}</>
+}
+
+Paragraphs.propTypes = {
+  contents: PropTypes.string.isRequired
 }
 
 export default Paragraphs

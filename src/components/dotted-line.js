@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import SvgSpriteFluid from "./svg-sprite-fluid"
 
 import css from '../styles/dotted-line.module.css'
@@ -17,5 +18,9 @@ const DottedLine = ({ children }) => (
     </span>
   </span>
 )
+
+DottedLine.propTypes = {
+  children: PropTypes.node.isRequired
+}
 
 export default DottedLine

@@ -43,9 +43,9 @@ const Nav = () => (
         </a>
       </li>
     </ul>
-    <button className={css.trigger}>
+    <Link to="/" className={css.trigger}>
       <SvgSpriteFluid id={dotsSvg.id} />
-    </button>
+    </Link>
   </nav>
 )
 

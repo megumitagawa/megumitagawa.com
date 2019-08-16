@@ -1,6 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
-import Layout from "../components/layout"
 import Sections from "../components/sections"
 import SEO from "../components/seo"
 import DottedLine from '../components/dotted-line'
@@ -20,8 +18,8 @@ const tempSections = [
   }
 ]
 
-const WorksPage = ({ location }) => (
-  <Layout location={location}>
+const WorksPage = () => (
+  <div>
     <SEO title="works" />
     <h1>
       <DottedLine>works</DottedLine>
@@ -30,11 +28,7 @@ const WorksPage = ({ location }) => (
       HeadingTag="h2"
       contents={tempSections}
     />
-  </Layout>
+  </div>
 )
-
-WorksPage.propTypes = {
-  location: PropTypes.object.isRequired
-}
 
 export default WorksPage

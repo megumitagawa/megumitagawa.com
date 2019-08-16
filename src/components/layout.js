@@ -7,6 +7,7 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 import Header from "./header"
 import Nav from "./nav"
 import Footer from "./footer"
@@ -14,22 +15,30 @@ import BackgroundImageFluid from "./background-image-fluid"
 
 import css from "../styles/layout.module.css"
 
-const tempNavActive = false
-
 const Layout = ({ children, location }) => {
+  const duration = 500
   const indexPage = location.pathname === "/"
-  const navActive = indexPage || tempNavActive
   return (
     <BackgroundImageFluid relativePath="bg.jpg">
       <div className={css.spacer}>
         <Header h1={indexPage} />
-        <div className={`
-          ${css.wrapper}
-          ${navActive ? css.isActive : ''}
-        `}>
+        <div
+          className={`
+            ${css.wrapper}
+            ${indexPage ? css.isActive : ''}
+          `}
+          style={{ transitionDuration: `${duration}ms` }}
+        >
           <Nav />
           <main className={css.main}>
-            {children}
+            <TransitionGroup component={null}>
+              <CSSTransition
+                key={location.pathname}
+                timeout={{ enter: duration, exit: duration }}
+              >
+                {children}
+              </CSSTransition>
+            </TransitionGroup>
           </main>
         </div>
         <Footer />

@@ -1,6 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
-import Layout from "../components/layout"
 import Sections from "../components/sections"
 import SEO from "../components/seo"
 import DottedLine from '../components/dotted-line'
@@ -16,8 +14,8 @@ const tempSections = [
   }
 ]
 
-const ProfilePage = ({ location }) => (
-  <Layout location={location}>
+const ProfilePage = () => (
+  <div>
     <SEO title="profile" />
     <h1>
       <DottedLine>profile</DottedLine>
@@ -26,11 +24,7 @@ const ProfilePage = ({ location }) => (
       HeadingTag="h2"
       contents={tempSections}
     />
-  </Layout>
+  </div>
 )
-
-ProfilePage.propTypes = {
-  location: PropTypes.object.isRequired
-}
 
 export default ProfilePage

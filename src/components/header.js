@@ -1,7 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
 import PropTypes from "prop-types"
-import { siteMetadata } from "../../gatsby-config"
 
 import css from "../styles/header.module.css"
 
@@ -11,10 +10,10 @@ const Header = ({ h1 }) => {
     <header className={css.header}>
       <Link to="/">
         <p className={css.occupation}>
-          {siteMetadata.description}
+          composer / arranger / keyboardist
         </p>
         <Tag className={css.name}>
-          {siteMetadata.title}
+          tagawa megumi
         </Tag>
       </Link>
     </header>

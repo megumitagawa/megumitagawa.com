@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `tagawa megumi`,
-    description: `composer / arranger / keyboardist`,
+    title: `megumi tagawa - 田川めぐみ`,
+    description: `The official website of Megumi TAGAWA - 田川めぐみオフィシャルウェブサイト`,
     author: `@dsktschy`,
+    url: `https://megumitagawa.com`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,13 +19,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        name: `megumi tagawa`,
+        short_name: `megumitagawa`,
+        start_url: `.`,
+        background_color: `#f4f6f3`,
+        theme_color: `#d8ded3`,
         display: `minimal-ui`,
-        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icon: `static/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-postcss`,

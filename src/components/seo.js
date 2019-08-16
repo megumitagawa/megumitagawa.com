@@ -10,71 +10,31 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { siteMetadata } from "../../gatsby-config"
 
-function SEO({ description, lang, meta, title }) {
-  const metaDescription = description || siteMetadata.description
-
+const SEO = ({ description, title }) => {
+  const titleSeparator = title ? ' | ' : ''
+  const fullTitle = title + titleSeparator + siteMetadata.title
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-      link={[
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css?family=Comfortaa|Noto+Sans+JP&display=swap'
-        }
-      ]}
-    />
+    <Helmet htmlAttributes={{ lang: 'ja' }}>
+      <title>{fullTitle}</title>
+      <meta name="description" content={description} />
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={`${siteMetadata.url}/images/og-image.jpg`} />
+      <meta property="twitter:card" contact="summary_large_image" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa|Noto+Sans+JP&display=swap" />
+    </Helmet>
   )
 }
 
 SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
+  title: '',
+  description: siteMetadata.description,
 }
 
 SEO.propTypes = {
+  title: PropTypes.string,
   description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO

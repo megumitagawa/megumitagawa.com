@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "megumitagawa.com",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "The front-end of megumitagawa.com",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "dsktschy",
   "dependencies": {
     "gatsby": "^2.13.50",
     "gatsby-background-image": "^0.8.3",
@@ -30,10 +30,6 @@
   "devDependencies": {
     "prettier": "^1.18.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -44,9 +40,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/dsktschy/megumitagawa.com"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/dsktschy/megumitagawa.com/issues"
+  },
+  "engines": {
+    "node": ">=12.2.0",
+    "npm": ">=6.9.0"
   }
 }

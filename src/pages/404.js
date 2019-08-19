@@ -1,6 +1,6 @@
 import React from "react"
 import SEO from "../components/seo"
-import DottedLine from '../components/dotted-line'
+import DottedLine from "../components/dotted-line"
 
 const NotFoundPage = () => (
   <div>

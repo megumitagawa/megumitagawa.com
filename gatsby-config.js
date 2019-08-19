@@ -3,7 +3,7 @@ module.exports = {
     title: `megumi tagawa - 田川めぐみ`,
     description: `The official website of Megumi TAGAWA - 田川めぐみオフィシャルウェブサイト`,
     author: `@dsktschy`,
-    url: `https://megumitagawa.com`
+    url: `https://megumitagawa.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

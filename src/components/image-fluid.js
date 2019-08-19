@@ -30,7 +30,7 @@ const ImageFluid = ({ relativePath }) => {
 }
 
 ImageFluid.propTypes = {
-  relativePath: PropTypes.string.isRequired
+  relativePath: PropTypes.string.isRequired,
 }
 
 export default ImageFluid

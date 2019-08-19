@@ -11,24 +11,30 @@ import Helmet from "react-helmet"
 import { siteMetadata } from "../../gatsby-config"
 
 const SEO = ({ description, title }) => {
-  const titleSeparator = title ? ' | ' : ''
+  const titleSeparator = title ? " | " : ""
   const fullTitle = title + titleSeparator + siteMetadata.title
   return (
-    <Helmet htmlAttributes={{ lang: 'ja' }}>
+    <Helmet htmlAttributes={{ lang: "ja" }}>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content={`${siteMetadata.url}/images/og-image.jpg`} />
+      <meta
+        property="og:image"
+        content={`${siteMetadata.url}/images/og-image.jpg`}
+      />
       <meta property="twitter:card" contact="summary_large_image" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa|Noto+Sans+JP&display=swap" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Comfortaa|Noto+Sans+JP&display=swap"
+      />
     </Helmet>
   )
 }
 
 SEO.defaultProps = {
-  title: '',
+  title: "",
   description: siteMetadata.description,
 }
 

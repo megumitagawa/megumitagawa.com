@@ -25,7 +25,7 @@ const Layout = ({ children, location }) => {
         <div
           className={`
             ${css.wrapper}
-            ${indexPage ? css.isActive : ''}
+            ${indexPage ? css.isActive : ""}
           `}
           style={{ transitionDuration: `${duration}ms` }}
         >
@@ -49,7 +49,7 @@ const Layout = ({ children, location }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 }
 
 export default Layout

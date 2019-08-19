@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import css from '../styles/svg-sprite-fluid.module.css'
+import css from "../styles/svg-sprite-fluid.module.css"
 
 const SvgSpriteFluid = ({ id }) => (
   <svg className={css.svgSpriteFluid}>
@@ -10,7 +10,7 @@ const SvgSpriteFluid = ({ id }) => (
 )
 
 SvgSpriteFluid.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 }
 
 export default SvgSpriteFluid

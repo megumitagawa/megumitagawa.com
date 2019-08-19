@@ -1,10 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
-import DottedLine from './dotted-line'
+import DottedLine from "./dotted-line"
 import SvgSpriteFluid from "./svg-sprite-fluid"
 
-import css from '../styles/nav.module.css'
-import dotsSvg from '../images/dots.svg'
+import css from "../styles/nav.module.css"
+import dotsSvg from "../images/dots.svg"
 
 const Nav = () => (
   <nav className={css.nav}>

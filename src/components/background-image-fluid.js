@@ -31,7 +31,7 @@ const BackgroundImageFluid = ({ relativePath, children }) => {
 
 BackgroundImageFluid.propTypes = {
   relativePath: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default BackgroundImageFluid

@@ -10,7 +10,7 @@ const Header = ({ h1 }) => {
     <header className={css.header}>
       <Link to="/">
         <p className={css.occupation}>composer / arranger / keyboardist</p>
-        <Tag className={css.name}>tagawa megumi</Tag>
+        <Tag className={css.name}>megumi tagawa</Tag>
       </Link>
     </header>
   )

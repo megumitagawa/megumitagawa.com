@@ -17,6 +17,7 @@
 }
 .main {
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   width: 50%;
   height: 100%;
   padding: 0 calc(25% - 280px / 2);

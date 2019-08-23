@@ -2,6 +2,7 @@
   position: relative;
   width: 50%;
   height: 100%;
+  z-index: 1;
 }
 .list {
   position: absolute;

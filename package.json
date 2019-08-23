@@ -2,7 +2,7 @@
   "name": "megumitagawa.com",
   "private": true,
   "description": "The front-end of megumitagawa.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "dsktschy",
   "dependencies": {
     "gatsby": "^2.13.50",

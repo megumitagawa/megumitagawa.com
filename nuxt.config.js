@@ -39,4 +39,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // Source directory: https://nuxtjs.org/docs/configuration-glossary/configuration-srcdir
+  srcDir: 'src/',
 }

@@ -21,7 +21,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    { src: '@/plugins/set-client-error-handler.ts', mode: 'client' },
+    { src: '@/plugins/set-server-error-handler.ts', mode: 'server' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

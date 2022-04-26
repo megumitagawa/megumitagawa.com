@@ -1,20 +1,9 @@
 import { Plugin } from '@nuxt/types'
-import { ContentfulClientApi, createClient } from 'contentful'
-
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $contentfulClientApi: ContentfulClientApi
-  }
-}
+import { createClient } from 'contentful'
 
 const plugin: Plugin = ({ $config }, inject) => {
-  inject(
-    'contentfulClientApi',
-    createClient({
-      space: `${$config.ctfSpaceId}`,
-      accessToken: `${$config.ctfCdaAccessToken}`,
-    })
-  )
+  if (!$config.createClientParams) return
+  inject('contentfulClientApi', createClient($config.createClientParams))
 }
 
 export default plugin

@@ -1,12 +1,34 @@
+import { createClient } from 'contentful'
+import { NuxtConfig } from '@nuxt/types'
+import { NuxtOptionsRuntimeConfig } from '@nuxt/types/config/runtime'
+import { createNuxtOptionsGenerateRoute } from './src/lib/WorkEntries'
+import { WorkFields } from './src/lib/WorkFields'
+
+const {
+  NODE_ENV = 'production',
+  NUXT_PUBLIC_SITE_URL = '',
+  NUXT_PUBLIC_INDEX_PAGE_WORK_LIST_LENGTH = '',
+  NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH = '',
+  NUXT_PRIVATE_CTF_SPACE_ID = '',
+  NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN = '',
+} = process.env
+
+const indexPageWorkListLengthNumber = +NUXT_PUBLIC_INDEX_PAGE_WORK_LIST_LENGTH
+const indexPageWorkListLength =
+  indexPageWorkListLengthNumber > 0 ? indexPageWorkListLengthNumber : 5
+const worksPageWorkListLengthNumber = +NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH
+const worksPageWorkListLength =
+  worksPageWorkListLengthNumber > 0 ? worksPageWorkListLengthNumber : 20
+
 // When target is static, asyncData behavior is different between nuxt dev and nuxt start
 // Plugin and environment variables for contentful should be available when running nuxt dev
-const productionMode = process.env.NODE_ENV === 'production'
-const contentfulRuntimeConfig = {
-  ctfSpaceId: process.env.NUXT_PRIVATE_CTF_SPACE_ID || '',
-  ctfCdaAccessToken: process.env.NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN || '',
+const productionMode = NODE_ENV === 'production'
+const createClientParams = {
+  space: NUXT_PRIVATE_CTF_SPACE_ID,
+  accessToken: NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN,
 }
 
-export default {
+const nuxtConfig: NuxtConfig = {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -66,12 +88,28 @@ export default {
 
   // Public environment variables: https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config
   publicRuntimeConfig: {
-    siteUrl: process.env.NUXT_PUBLIC_SITE_URL || '',
-    ...(productionMode ? {} : contentfulRuntimeConfig),
-  },
+    siteUrl: NUXT_PUBLIC_SITE_URL,
+    indexPageWorkListLength,
+    worksPageWorkListLength,
+    ...(productionMode ? {} : { createClientParams }),
+  } as NuxtOptionsRuntimeConfig,
 
   // Private environment variables: https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config
   privateRuntimeConfig: {
-    ...(productionMode ? contentfulRuntimeConfig : {}),
+    ...(productionMode ? { createClientParams } : {}),
+  } as NuxtOptionsRuntimeConfig,
+
+  // Generating configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
+  generate: {
+    async routes() {
+      const contentfulClientApi = createClient(createClientParams)
+      const workEntries =
+        await contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
+          { content_type: 'work', limit: worksPageWorkListLength }
+        )
+      return createNuxtOptionsGenerateRoute(workEntries, '/works/page/')
+    },
   },
 }
+
+export default nuxtConfig

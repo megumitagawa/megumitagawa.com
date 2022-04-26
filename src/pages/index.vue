@@ -24,7 +24,9 @@
         <!-- eslint-enable vue/no-v-html -->
       </div>
       <div>
-        {{ pageData.shortTextMap.get('index-page-works-section-link') }}
+        <NuxtLink to="/works">
+          {{ pageData.shortTextMap.get('index-page-works-section-link') }}
+        </NuxtLink>
       </div>
     </div>
     <div>
@@ -131,7 +133,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
     const { items: workEntryList } =
       await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
-        { content_type: 'work', limit: 5 }
+        { content_type: 'work', limit: $config.indexPageWorkListLength }
       )
 
     const pageEntry = pageEntryList[0]

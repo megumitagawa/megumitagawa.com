@@ -1,13 +1,10 @@
 import * as Contentful from 'contentful'
+import { ResourcesData } from './ResourcesData'
 
-export interface PageData {
+export type PageData = {
   title: string
   description: string
   ogImage:
     | Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<Contentful.AssetFields>
     | undefined
-  shortTextMap: Map<string, string>
-  longTextMap: Map<string, string>
-  htmlStringRichTextMap: Map<string, string>
-  mediaMap: Map<string, Contentful.Asset>
-}
+} & ResourcesData

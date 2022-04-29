@@ -4,10 +4,7 @@
  */
 
 import * as Contentful from 'contentful'
-import { ShortTextFields } from '@/lib/ShortTextFields'
-import { LongTextFields } from '@/lib/LongTextFields'
-import { RichTextFields } from '@/lib/RichTextFields'
-import { MediaFields } from '@/lib/MediaFields'
+import { ResourcesFields } from '@/lib/ResourcesFields'
 
 export interface PageFields {
   entryTitle: Contentful.EntryFields.Symbol
@@ -15,8 +12,5 @@ export interface PageFields {
   title: Contentful.EntryFields.Symbol
   description: Contentful.EntryFields.Symbol
   ogImage: Contentful.Asset
-  shortTextList?: Contentful.Entry<ShortTextFields>[]
-  longTextList?: Contentful.Entry<LongTextFields>[]
-  richTextList?: Contentful.Entry<RichTextFields>[]
-  mediaList?: Contentful.Entry<MediaFields>[]
+  resources: Contentful.Entry<ResourcesFields>
 }

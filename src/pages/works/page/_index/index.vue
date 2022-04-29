@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { makeErrorCatchable } from '@/lib/AsyncData'
+import { makeErrorCatchable, makeStoreReady } from '@/lib/AsyncData'
 import { PageData } from '@/lib/PageData'
 import { createPageData, createPageHead } from '@/lib/PageEntry'
 import { PageFields } from '@/lib/PageFields'
@@ -65,37 +65,39 @@ type Props = {}
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'WorksPageIndexPage',
 
-  asyncData: makeErrorCatchable(async ({ app, params, route, $config }) => {
-    const { items: pageEntryList } =
-      await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
-        { content_type: 'page', 'fields.path': '/works' }
-      )
-    if (pageEntryList.length < 1) throw new Error('No page entry')
+  asyncData: makeErrorCatchable(
+    makeStoreReady(async ({ app, params, route, $config }) => {
+      const { items: pageEntryList } =
+        await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
+          { content_type: 'page', 'fields.path': '/works' }
+        )
+      if (pageEntryList.length < 1) throw new Error('No page entry')
 
-    const indexNumber = +params.index
-    if (!(indexNumber > 0)) throw new Error('Not found')
-    const limit = $config.worksPageWorkListLength
-    const workEntries =
-      await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
-        { content_type: 'work', limit, skip: limit * (indexNumber - 1) }
-      )
-    const { items: workEntryList } = workEntries
-    if (workEntryList.length < 1) throw new Error('Not found')
+      const indexNumber = +params.index
+      if (!(indexNumber > 0)) throw new Error('Not found')
+      const limit = $config.worksPageWorkListLength
+      const workEntries =
+        await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
+          { content_type: 'work', limit, skip: limit * (indexNumber - 1) }
+        )
+      const { items: workEntryList } = workEntries
+      if (workEntryList.length < 1) throw new Error('Not found')
 
-    const pageEntry = pageEntryList[0]
-    const ogUrl = `${$config.siteUrl}${route.path}`
-    const pageHead = createPageHead(pageEntry, ogUrl)
-    const pageData = createPageData(pageEntry)
-    const workDataList = workEntryList.map(createWorkData)
-    const pagerData = createPagerData(workEntries, indexNumber)
+      const pageEntry = pageEntryList[0]
+      const ogUrl = `${$config.siteUrl}${route.path}`
+      const pageHead = createPageHead(pageEntry, ogUrl)
+      const pageData = createPageData(pageEntry)
+      const workDataList = workEntryList.map(createWorkData)
+      const pagerData = createPagerData(workEntries, indexNumber)
 
-    return {
-      pageHead,
-      pageData,
-      workDataList,
-      pagerData,
-    }
-  }),
+      return {
+        pageHead,
+        pageData,
+        workDataList,
+        pagerData,
+      }
+    })
+  ),
 
   head() {
     return this.pageHead

@@ -70,6 +70,8 @@ const nuxtConfig: NuxtConfig = {
     '@nuxtjs/stylelint-module',
     // https://image.nuxtjs.org/
     '@nuxt/image',
+    // https://typed-vuex.roe.dev/
+    'nuxt-typed-vuex',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

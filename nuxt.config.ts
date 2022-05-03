@@ -11,6 +11,7 @@ const {
   NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH = '',
   NUXT_PRIVATE_CTF_SPACE_ID = '',
   NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN = '',
+  NUXT_PRIVATE_META_ROBOTS_NONE = 'off',
 } = process.env
 
 const indexPageWorkListLengthNumber = +NUXT_PUBLIC_INDEX_PAGE_WORK_LIST_LENGTH
@@ -28,6 +29,8 @@ const createClientParams = {
   accessToken: NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN,
 }
 
+const metaRobotsNone = NUXT_PRIVATE_META_ROBOTS_NONE.toLowerCase() === 'on'
+
 const nuxtConfig: NuxtConfig = {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -42,6 +45,9 @@ const nuxtConfig: NuxtConfig = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
+      ...(metaRobotsNone
+        ? [{ name: 'robots', content: 'noindex,nofollow' }]
+        : []),
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },

@@ -3,14 +3,14 @@
     <div v-show="$accessor.backdrop.sending">...</div>
     <div v-show="$accessor.backdrop.succeeded">
       {{
-        $accessor.resourcesData.longTextMap.get(
+        $accessor.resources.longTextMap.get(
           'global-backdrop-submission-success'
         )
       }}
     </div>
     <div v-show="$accessor.backdrop.failed">
       {{
-        $accessor.resourcesData.longTextMap.get(
+        $accessor.resources.longTextMap.get(
           'global-backdrop-submission-failure'
         )
       }}

@@ -1,16 +1,13 @@
 import * as Contentful from 'contentful'
-import { PagerData } from '@/lib/PagerData'
+import { Pager } from '@/lib/Pager'
 import { WorkFields } from '@/lib/WorkFields'
 
 export type WorkEntries =
   Contentful.EntryCollectionWithLinkResolutionAndWithoutUnresolvableLinks<WorkFields>
 
-type CreatePagerData = (
-  workEntries: WorkEntries,
-  currentIndex: number
-) => PagerData
+type CreatePager = (workEntries: WorkEntries, currentIndex: number) => Pager
 
-export const createPagerData: CreatePagerData = (workEntries, currentIndex) => {
+export const createPager: CreatePager = (workEntries, currentIndex) => {
   const { total, limit } = workEntries
   const totalIndex = Math.ceil(total / limit)
   const maybePreviousIndex = currentIndex - 1

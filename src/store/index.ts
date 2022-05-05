@@ -1,10 +1,10 @@
 import { getAccessorType } from 'typed-vuex'
 import * as backdrop from '@/store/backdrop'
-import * as resourcesData from '@/store/resourcesData'
+import * as resources from '@/store/resources'
 
 export const accessorType = getAccessorType({
   modules: {
     backdrop,
-    resourcesData,
+    resources,
   },
 })

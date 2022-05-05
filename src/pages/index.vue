@@ -2,11 +2,11 @@
   <div>
     <div id="works">
       <div>
-        {{ pageData.shortTextMap.get('index-page-works-section-heading') }}
+        {{ shortTextMap.get('index-page-works-section-heading') }}
       </div>
-      <div v-for="workData of workDataList" :key="workData.id">
+      <div v-for="work of workList" :key="work.id">
         <div
-          v-for="featuredMedia of workData.featuredMediaList"
+          v-for="featuredMedia of work.featuredMediaList"
           :key="featuredMedia.sys.id"
         >
           <NuxtPicture
@@ -17,70 +17,65 @@
           />
         </div>
         <div>
-          {{ workData.title }}
+          {{ work.title }}
         </div>
         <!-- eslint-disable vue/no-v-html -->
-        <div v-html="workData.htmlStringContent" />
+        <div v-html="work.htmlStringContent" />
         <!-- eslint-enable vue/no-v-html -->
       </div>
-      <div v-if="workDataList.length">
+      <div v-if="workList.length">
         <NuxtLink to="/works">
-          {{ pageData.shortTextMap.get('index-page-works-section-link') }}
+          {{ shortTextMap.get('index-page-works-section-link') }}
         </NuxtLink>
       </div>
-      <div v-if="!workDataList.length">
-        {{ pageData.shortTextMap.get('index-page-no-entry-message') }}
+      <div v-if="!workList.length">
+        {{ shortTextMap.get('index-page-no-entry-message') }}
       </div>
     </div>
 
     <div id="profile">
       <div>
-        {{ pageData.shortTextMap.get('index-page-profile-section-heading') }}
+        {{ shortTextMap.get('index-page-profile-section-heading') }}
       </div>
       <div>
         <NuxtPicture
           :src="`https:${
-            pageData.mediaMap.get('index-page-profile-section').fields.file.url
+            mediaMap.get('index-page-profile-section').fields.file.url
           }`"
           :width="
-            pageData.mediaMap.get('index-page-profile-section').fields.file
-              .details.image.width
+            mediaMap.get('index-page-profile-section').fields.file.details.image
+              .width
           "
           :height="
-            pageData.mediaMap.get('index-page-profile-section').fields.file
-              .details.image.height
+            mediaMap.get('index-page-profile-section').fields.file.details.image
+              .height
           "
           :alt="
-            pageData.mediaMap.get('index-page-profile-section').fields
-              .description || ''
+            mediaMap.get('index-page-profile-section').fields.description || ''
           "
         />
       </div>
       <div>
-        {{ pageData.shortTextMap.get('index-page-profile-section-name-ja') }}
+        {{ shortTextMap.get('index-page-profile-section-name-ja') }}
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <div
-        v-html="
-          pageData.htmlStringRichTextMap.get('index-page-profile-section-ja')
-        "
+        v-html="htmlStringRichTextMap.get('index-page-profile-section-ja')"
       />
       <!-- eslint-enable vue/no-v-html -->
       <div>
-        {{ pageData.shortTextMap.get('index-page-profile-section-name-en') }}
+        {{ shortTextMap.get('index-page-profile-section-name-en') }}
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <div
-        v-html="
-          pageData.htmlStringRichTextMap.get('index-page-profile-section-en')
-        "
+        v-html="htmlStringRichTextMap.get('index-page-profile-section-en')"
       />
       <!-- eslint-enable vue/no-v-html -->
     </div>
 
     <div id="contact">
       <div>
-        {{ pageData.shortTextMap.get('index-page-contact-section-heading') }}
+        {{ shortTextMap.get('index-page-contact-section-heading') }}
       </div>
       <form
         :name="$config.netlifyFormName"
@@ -99,7 +94,7 @@
           name="name"
           required
           :placeholder="
-            pageData.shortTextMap.get(
+            shortTextMap.get(
               'index-page-contact-section-name-input-placeholder'
             )
           "
@@ -109,7 +104,7 @@
           name="email"
           required
           :placeholder="
-            pageData.shortTextMap.get(
+            shortTextMap.get(
               'index-page-contact-section-email-input-placeholder'
             )
           "
@@ -118,13 +113,13 @@
           name="message"
           required
           :placeholder="
-            pageData.shortTextMap.get(
+            shortTextMap.get(
               'index-page-contact-section-message-textarea-placeholder'
             )
           "
         />
         <button type="submit">
-          {{ pageData.shortTextMap.get('index-page-contact-section-button') }}
+          {{ shortTextMap.get('index-page-contact-section-button') }}
         </button>
       </form>
     </div>
@@ -136,18 +131,15 @@ import Vue from 'vue'
 import { makeErrorCatchable, makeStoreReady } from '@/lib/AsyncData'
 import { FormEvent, submitPostRequest } from '@/lib/FormEvent'
 import { wait } from '@/lib/Milliseconds'
-import { PageData } from '@/lib/PageData'
-import { createPageData, createPageHead } from '@/lib/PageEntry'
+import { Page } from '~/lib/Page'
+import { createPage } from '@/lib/PageEntry'
 import { PageFields } from '@/lib/PageFields'
-import { PageHead } from '@/lib/PageHead'
-import { WorkData } from '@/lib/WorkData'
-import { createWorkData } from '@/lib/WorkEntry'
+import { Work } from '~/lib/Work'
+import { createWork } from '@/lib/WorkEntry'
 import { WorkFields } from '@/lib/WorkFields'
 
-type Data = {
-  pageHead: PageHead
-  pageData: PageData
-  workDataList: WorkData[]
+type Data = Page & {
+  workList: Work[]
 }
 type Methods = {
   handleSubmit: (formEvent: FormEvent<HTMLFormElement>) => Promise<void>
@@ -173,20 +165,21 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
       const pageEntry = pageEntryList[0]
       const ogUrl = `${$config.siteUrl}${route.path}`
-      const pageHead = createPageHead(pageEntry, ogUrl)
-      const pageData = createPageData(pageEntry)
-      const workDataList = workEntryList.map(createWorkData)
+      const page = createPage(pageEntry, ogUrl)
+      const workList = workEntryList.map(createWork)
 
       return {
-        pageHead,
-        pageData,
-        workDataList,
+        ...page,
+        workList,
       }
     })
   ),
 
   head() {
-    return this.pageHead
+    return {
+      title: this.title,
+      meta: this.meta,
+    }
   },
 
   methods: {

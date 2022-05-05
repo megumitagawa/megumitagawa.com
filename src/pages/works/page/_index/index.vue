@@ -1,11 +1,11 @@
 <template>
   <div>
     <div>
-      {{ pageData.shortTextMap.get('works-page-heading') }}
+      {{ shortTextMap.get('works-page-heading') }}
     </div>
-    <div v-for="workData of workDataList" :key="workData.id">
+    <div v-for="work of workList" :key="work.id">
       <div
-        v-for="featuredMedia of workData.featuredMediaList"
+        v-for="featuredMedia of work.featuredMediaList"
         :key="featuredMedia.sys.id"
       >
         <NuxtPicture
@@ -16,24 +16,24 @@
         />
       </div>
       <div>
-        {{ workData.title }}
+        {{ work.title }}
       </div>
       <!-- eslint-disable vue/no-v-html -->
-      <div v-html="workData.htmlStringContent" />
+      <div v-html="work.htmlStringContent" />
       <!-- eslint-enable vue/no-v-html -->
     </div>
-    <div v-if="!workDataList.length">
-      {{ pageData.shortTextMap.get('works-page-no-entry-message') }}
+    <div v-if="!workList.length">
+      {{ shortTextMap.get('works-page-no-entry-message') }}
     </div>
-    <div v-if="pagerData.previousIndex">
-      <NuxtLink :to="`/works/page/${pagerData.previousIndex}`">
-        {{ pageData.shortTextMap.get('works-page-pager-previous-link') }}
+    <div v-if="pager.previousIndex">
+      <NuxtLink :to="`/works/page/${pager.previousIndex}`">
+        {{ shortTextMap.get('works-page-pager-previous-link') }}
       </NuxtLink>
     </div>
-    <div>{{ pagerData.currentIndex }} / {{ pagerData.totalIndex }}</div>
-    <div v-if="pagerData.nextIndex">
-      <NuxtLink :to="`/works/page/${pagerData.nextIndex}`">
-        {{ pageData.shortTextMap.get('works-page-pager-next-link') }}
+    <div>{{ pager.currentIndex }} / {{ pager.totalIndex }}</div>
+    <div v-if="pager.nextIndex">
+      <NuxtLink :to="`/works/page/${pager.nextIndex}`">
+        {{ shortTextMap.get('works-page-pager-next-link') }}
       </NuxtLink>
     </div>
   </div>
@@ -42,21 +42,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { makeErrorCatchable, makeStoreReady } from '@/lib/AsyncData'
-import { PageData } from '@/lib/PageData'
-import { createPageData, createPageHead } from '@/lib/PageEntry'
+import { Page } from '~/lib/Page'
+import { createPage } from '@/lib/PageEntry'
 import { PageFields } from '@/lib/PageFields'
-import { PageHead } from '@/lib/PageHead'
-import { PagerData } from '@/lib/PagerData'
-import { WorkData } from '@/lib/WorkData'
-import { createPagerData } from '@/lib/WorkEntries'
-import { createWorkData } from '@/lib/WorkEntry'
+import { Pager } from '~/lib/Pager'
+import { Work } from '~/lib/Work'
+import { createPager } from '@/lib/WorkEntries'
+import { createWork } from '@/lib/WorkEntry'
 import { WorkFields } from '@/lib/WorkFields'
 
-type Data = {
-  pageHead: PageHead
-  pageData: PageData
-  workDataList: WorkData[]
-  pagerData: PagerData
+type Data = Page & {
+  workList: Work[]
+  pager: Pager
 }
 type Methods = {}
 type Computed = {}
@@ -85,22 +82,23 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
       const pageEntry = pageEntryList[0]
       const ogUrl = `${$config.siteUrl}${route.path}`
-      const pageHead = createPageHead(pageEntry, ogUrl)
-      const pageData = createPageData(pageEntry)
-      const workDataList = workEntryList.map(createWorkData)
-      const pagerData = createPagerData(workEntries, indexNumber)
+      const page = createPage(pageEntry, ogUrl)
+      const workList = workEntryList.map(createWork)
+      const pager = createPager(workEntries, indexNumber)
 
       return {
-        pageHead,
-        pageData,
-        workDataList,
-        pagerData,
+        ...page,
+        workList,
+        pager,
       }
     })
   ),
 
   head() {
-    return this.pageHead
+    return {
+      title: this.title,
+      meta: this.meta,
+    }
   },
 })
 </script>

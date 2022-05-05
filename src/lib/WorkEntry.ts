@@ -1,14 +1,14 @@
 import * as Contentful from 'contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { WorkData } from '@/lib/WorkData'
+import { Work } from '@/lib/Work'
 import { WorkFields } from '@/lib/WorkFields'
 
 export type WorkEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<WorkFields>
 
-type CreateWorkData = (workEntry: WorkEntry) => WorkData
+type CreateWork = (workEntry: WorkEntry) => Work
 
-export const createWorkData: CreateWorkData = (workEntry) => {
+export const createWork: CreateWork = (workEntry) => {
   const { id } = workEntry.sys
   const { title, content, featuredMediaList = [] } = workEntry.fields
 

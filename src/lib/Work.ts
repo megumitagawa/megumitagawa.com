@@ -1,6 +1,6 @@
 import * as Contentful from 'contentful'
 
-export interface WorkData {
+export interface Work {
   id: string
   title: string
   htmlStringContent: string

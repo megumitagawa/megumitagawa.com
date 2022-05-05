@@ -8,10 +8,10 @@ export const state = () => ({
   mediaMap: new Map<string, Contentful.Asset>(),
 })
 
-type ResourceDataState = ReturnType<typeof state>
+type ResourceState = ReturnType<typeof state>
 
 export const mutations = mutationTree(state, {
-  set(state, value: Partial<ResourceDataState>) {
+  set(state, value: Partial<ResourceState>) {
     const { shortTextMap, longTextMap, htmlStringRichTextMap, mediaMap } = value
     if (typeof shortTextMap !== 'undefined') state.shortTextMap = shortTextMap
     if (typeof longTextMap !== 'undefined') state.longTextMap = longTextMap

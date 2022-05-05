@@ -1,8 +1,8 @@
 <template>
   <div>
     <NuxtLink to="/">
-      {{ $accessor.resourcesData.shortTextMap.get('global-header-ja') }} |
-      {{ $accessor.resourcesData.shortTextMap.get('global-header-en') }}
+      {{ $accessor.resources.shortTextMap.get('global-header-ja') }} |
+      {{ $accessor.resources.shortTextMap.get('global-header-en') }}
     </NuxtLink>
   </div>
 </template>

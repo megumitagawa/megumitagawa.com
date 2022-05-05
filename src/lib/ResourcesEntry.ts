@@ -1,14 +1,14 @@
 import * as Contentful from 'contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { ResourcesData } from '@/lib/ResourcesData'
+import { Resources } from '@/lib/Resources'
 import { ResourcesFields } from '@/lib/ResourcesFields'
 
 export type ResourcesEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<ResourcesFields>
 
-type CreateResourcesData = (resourcesEntry: ResourcesEntry) => ResourcesData
+type CreateResources = (resourcesEntry: ResourcesEntry) => Resources
 
-export const createResourcesData: CreateResourcesData = (resourcesEntry) => {
+export const createResources: CreateResources = (resourcesEntry) => {
   const {
     shortTextList = [],
     longTextList = [],

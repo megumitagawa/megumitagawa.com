@@ -1,55 +1,49 @@
 import * as Contentful from 'contentful'
-import { PageData } from '@/lib/PageData'
+import { Page } from '@/lib/Page'
 import { PageFields } from '@/lib/PageFields'
-import { PageHead } from '@/lib/PageHead'
-import { createResourcesData } from '@/lib/ResourcesEntry'
+import { createResources } from '@/lib/ResourcesEntry'
 
 export type PageEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<PageFields>
 
-type CreatePageHead = (pageEntry: PageEntry, ogUrl: string) => PageHead
+type CreatePage = (pageEntry: PageEntry, ogUrl: string) => Page
 
-export const createPageHead: CreatePageHead = (pageEntry, ogUrl) => {
-  const { title, description, ogImage } = pageEntry.fields
-
-  return {
+export const createPage: CreatePage = (pageEntry, ogUrl) => {
+  const {
     title,
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: description,
-      },
-      {
-        hid: 'og:title',
-        name: 'og:title',
-        content: title,
-      },
-      {
-        hid: 'og:description',
-        name: 'og:description',
-        content: description,
-      },
-      {
-        hid: 'og:image',
-        name: 'og:image',
-        content: ogImage ? `https:${ogImage.fields.file.url}` : '',
-      },
-      {
-        hid: 'og:url',
-        name: 'og:url',
-        content: ogUrl,
-      },
-    ],
-  }
-}
-
-type CreatePageData = (pageEntry: PageEntry) => PageData
-
-export const createPageData: CreatePageData = (pageEntry) => {
-  const { title, description, ogImage, resources } = pageEntry.fields
-  const resourcesData = resources
-    ? createResourcesData(resources)
+    description,
+    ogImage,
+    resources: resourcesEntry,
+  } = pageEntry.fields
+  const meta = [
+    {
+      hid: 'description',
+      name: 'description',
+      content: description,
+    },
+    {
+      hid: 'og:title',
+      name: 'og:title',
+      content: title,
+    },
+    {
+      hid: 'og:description',
+      name: 'og:description',
+      content: description,
+    },
+    {
+      hid: 'og:image',
+      name: 'og:image',
+      content: ogImage ? `https:${ogImage.fields.file.url}` : '',
+    },
+    {
+      hid: 'og:url',
+      name: 'og:url',
+      content: ogUrl,
+    },
+  ]
+  const resources = resourcesEntry
+    ? createResources(resourcesEntry)
     : {
         shortTextMap: new Map<string, string>(),
         longTextMap: new Map<string, string>(),
@@ -59,8 +53,8 @@ export const createPageData: CreatePageData = (pageEntry) => {
 
   return {
     title,
+    meta,
     description,
-    ogImage,
-    ...resourcesData,
+    ...resources,
   }
 }

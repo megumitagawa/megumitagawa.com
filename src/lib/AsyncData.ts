@@ -1,6 +1,6 @@
 import Vue, { ComponentOptions } from 'vue'
 import { createHandleError } from '@/lib/ContextError'
-import { createResourcesData } from '@/lib/ResourcesEntry'
+import { createResources } from '@/lib/ResourcesEntry'
 import { ResourcesFields } from '@/lib/ResourcesFields'
 
 type AsyncData = Exclude<ComponentOptions<Vue>['asyncData'], undefined>
@@ -30,8 +30,8 @@ export const makeStoreReady: MakeStoreReady =
     if (ResourcesEntryList.length < 1)
       throw new Error('No global components resources entry')
 
-    const resourcesData = createResourcesData(ResourcesEntryList[0])
-    $accessor.resourcesData.set(resourcesData)
+    const resources = createResources(ResourcesEntryList[0])
+    $accessor.resources.set(resources)
 
     const data = await asyncData(context)
     return data

@@ -128,7 +128,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { makeErrorCatchable, makeStoreReady } from '@/lib/AsyncData'
+import {
+  createErrorCatchableAsyncData,
+  createStoreReadyAsyncData,
+} from '@/lib/AsyncData'
 import { FormEvent, submitPostRequest } from '@/lib/FormEvent'
 import { wait } from '@/lib/Milliseconds'
 import { Page } from '~/lib/Page'
@@ -150,8 +153,8 @@ type Props = {}
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'IndexPage',
 
-  asyncData: makeErrorCatchable(
-    makeStoreReady(async ({ app, route, $config }) => {
+  asyncData: createErrorCatchableAsyncData(
+    createStoreReadyAsyncData(async ({ app, route, $config }) => {
       const { items: pageEntryList } =
         await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
           { content_type: 'page', 'fields.path': '/' }

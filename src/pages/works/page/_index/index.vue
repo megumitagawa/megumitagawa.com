@@ -41,7 +41,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { makeErrorCatchable, makeStoreReady } from '@/lib/AsyncData'
+import {
+  createErrorCatchableAsyncData,
+  createStoreReadyAsyncData,
+} from '@/lib/AsyncData'
 import { Page } from '~/lib/Page'
 import { createPage } from '@/lib/PageEntry'
 import { PageFields } from '@/lib/PageFields'
@@ -62,8 +65,8 @@ type Props = {}
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'WorksPageIndexPage',
 
-  asyncData: makeErrorCatchable(
-    makeStoreReady(async ({ app, params, route, $config }) => {
+  asyncData: createErrorCatchableAsyncData(
+    createStoreReadyAsyncData(async ({ app, params, route, $config }) => {
       const { items: pageEntryList } =
         await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
           { content_type: 'page', 'fields.path': '/works' }

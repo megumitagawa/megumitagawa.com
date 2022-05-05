@@ -5,9 +5,9 @@ import { ResourcesFields } from '@/lib/ResourcesFields'
 
 type AsyncData = Exclude<ComponentOptions<Vue>['asyncData'], undefined>
 
-type MakeErrorCatchable = (asyncData: AsyncData) => AsyncData
+type CreateErrorCatchableAsyncData = (asyncData: AsyncData) => AsyncData
 
-export const makeErrorCatchable: MakeErrorCatchable =
+export const createErrorCatchableAsyncData: CreateErrorCatchableAsyncData =
   (asyncData) => async (context) => {
     try {
       const data = await asyncData(context)
@@ -17,9 +17,9 @@ export const makeErrorCatchable: MakeErrorCatchable =
     }
   }
 
-type MakeStoreReady = (asyncData: AsyncData) => AsyncData
+type CreateStoreReadyAsyncData = (asyncData: AsyncData) => AsyncData
 
-export const makeStoreReady: MakeStoreReady =
+export const createStoreReadyAsyncData: CreateStoreReadyAsyncData =
   (asyncData) => async (context) => {
     const { app, $accessor } = context
 

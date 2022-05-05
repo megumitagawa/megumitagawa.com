@@ -82,30 +82,51 @@
       <div>
         {{ pageData.shortTextMap.get('index-page-contact-section-heading') }}
       </div>
-      <div>
-        {{
-          pageData.shortTextMap.get(
-            'index-page-contact-section-name-input-placeholder'
-          )
-        }}
-      </div>
-      <div>
-        {{
-          pageData.shortTextMap.get(
-            'index-page-contact-section-email-input-placeholder'
-          )
-        }}
-      </div>
-      <div>
-        {{
-          pageData.shortTextMap.get(
-            'index-page-contact-section-message-textarea-placeholder'
-          )
-        }}
-      </div>
-      <div>
-        {{ pageData.shortTextMap.get('index-page-contact-section-button') }}
-      </div>
+      <form
+        :name="$config.netlifyFormName"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        @submit.prevent="handleSubmit"
+      >
+        <input
+          type="hidden"
+          name="form-name"
+          :value="$config.netlifyFormName"
+        />
+        <input name="bot-field" />
+        <input
+          type="text"
+          name="name"
+          required
+          :placeholder="
+            pageData.shortTextMap.get(
+              'index-page-contact-section-name-input-placeholder'
+            )
+          "
+        />
+        <input
+          type="email"
+          name="email"
+          required
+          :placeholder="
+            pageData.shortTextMap.get(
+              'index-page-contact-section-email-input-placeholder'
+            )
+          "
+        />
+        <textarea
+          name="message"
+          required
+          :placeholder="
+            pageData.shortTextMap.get(
+              'index-page-contact-section-message-textarea-placeholder'
+            )
+          "
+        />
+        <button type="submit">
+          {{ pageData.shortTextMap.get('index-page-contact-section-button') }}
+        </button>
+      </form>
     </div>
   </div>
 </template>
@@ -113,6 +134,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { makeErrorCatchable, makeStoreReady } from '@/lib/AsyncData'
+import { FormEvent, submitPostRequest } from '@/lib/FormEvent'
+import { wait } from '@/lib/Milliseconds'
 import { PageData } from '@/lib/PageData'
 import { createPageData, createPageHead } from '@/lib/PageEntry'
 import { PageFields } from '@/lib/PageFields'
@@ -126,7 +149,9 @@ type Data = {
   pageData: PageData
   workDataList: WorkData[]
 }
-type Methods = {}
+type Methods = {
+  handleSubmit: (formEvent: FormEvent<HTMLFormElement>) => Promise<void>
+}
 type Computed = {}
 type Props = {}
 
@@ -162,6 +187,16 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   head() {
     return this.pageHead
+  },
+
+  methods: {
+    async handleSubmit(formEvent) {
+      this.$accessor.backdrop.set({ open: true, status: 'sending' })
+      const { ok } = await submitPostRequest(formEvent)
+      this.$accessor.backdrop.set({ status: ok ? 'succeeded' : 'failed' })
+      await wait(this.$config.globalBackdropDelay)
+      this.$accessor.backdrop.set({ open: false })
+    },
   },
 })
 </script>

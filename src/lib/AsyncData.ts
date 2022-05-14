@@ -1,5 +1,6 @@
 import Vue, { ComponentOptions } from 'vue'
-import { createHandleError } from '@/lib/ContextError'
+import { isErrorLike } from '@/lib/ErrorLike'
+import { createHandleServerError } from '@/lib/HandleNuxtError'
 import { createResources } from '@/lib/ResourcesEntry'
 import { ResourcesFields } from '@/lib/ResourcesFields'
 
@@ -13,7 +14,8 @@ export const createErrorCatchableAsyncData: CreateErrorCatchableAsyncData =
       const data = await asyncData(context)
       return data
     } catch (error) {
-      createHandleError(context.error)()
+      const serverError = isErrorLike(error) ? error : new Error(`${error}`)
+      createHandleServerError(context.error, context.isDev)(serverError)
     }
   }
 

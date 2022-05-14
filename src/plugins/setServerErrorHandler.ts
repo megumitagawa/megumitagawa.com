@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
-import { createHandleError } from '@/lib/ContextError'
+import { createHandleServerError } from '@/lib/HandleNuxtError'
 
-const setServerErrorHandler: Plugin = ({ error }) => {
-  const handleError = createHandleError(error)
-  Vue.config.errorHandler = handleError
-  process.on('uncaughtException', handleError)
-  process.on('unhandledRejection', handleError)
+const setServerErrorHandler: Plugin = ({ error, isDev }) => {
+  const handleServerError = createHandleServerError(error, isDev)
+  Vue.config.errorHandler = handleServerError
+  process.on('uncaughtException', handleServerError)
+  process.on('unhandledRejection', handleServerError)
 }
 
 export default setServerErrorHandler

@@ -1,5 +1,5 @@
 import { NuxtError } from '@nuxt/types'
-import { ErrorLike } from '~/models/ErrorLike'
+import { ErrorLike } from '@/models/ErrorLike'
 
 export type ServerError =
   | Error

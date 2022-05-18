@@ -45,11 +45,11 @@ import {
   createErrorCatchableAsyncData,
   createStoreReadyAsyncData,
 } from '@/models/AsyncData'
-import { Page } from '~/models/Page'
+import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
-import { Pager } from '~/models/Pager'
-import { Work } from '~/models/Work'
+import { Pager } from '@/models/Pager'
+import { Work } from '@/models/Work'
 import { createPager } from '@/models/WorkEntries'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'

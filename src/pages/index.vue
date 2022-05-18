@@ -134,10 +134,10 @@ import {
 } from '@/models/AsyncData'
 import { FormEvent, submitPostRequest } from '@/models/FormEvent'
 import { wait } from '@/models/Milliseconds'
-import { Page } from '~/models/Page'
+import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
-import { Work } from '~/models/Work'
+import { Work } from '@/models/Work'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'
 

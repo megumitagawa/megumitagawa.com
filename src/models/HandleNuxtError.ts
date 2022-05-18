@@ -2,11 +2,11 @@ import { NuxtError } from '@nuxt/types'
 import {
   ClientError,
   createNuxtErrorFromClientError,
-} from '~/models/ClientError'
+} from '@/models/ClientError'
 import {
   ServerError,
   createNuxtErrorFromServerError,
-} from '~/models/ServerError'
+} from '@/models/ServerError'
 
 type HandleNuxtError = (nuxtError: NuxtError) => void
 

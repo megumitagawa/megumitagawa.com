@@ -1,7 +1,7 @@
 import * as Contentful from 'contentful'
-import { Page } from '~/models/Page'
-import { PageFields } from '~/models/PageFields'
-import { createResources } from '~/models/ResourcesEntry'
+import { Page } from '@/models/Page'
+import { PageFields } from '@/models/PageFields'
+import { createResources } from '@/models/ResourcesEntry'
 
 export type PageEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<PageFields>

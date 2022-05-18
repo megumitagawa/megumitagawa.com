@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
-import { createHandleClientError } from '@/lib/HandleNuxtError'
+import { createHandleClientError } from '@/models/HandleNuxtError'
 
 const setClientErrorHandler: Plugin = ({ isDev }) => {
   const handleClientError = createHandleClientError(({ message }) => {

@@ -1,5 +1,5 @@
 import * as Contentful from 'contentful'
-import { MediaFields } from '@/lib/MediaFields'
+import { MediaFields } from '@/models/MediaFields'
 
 export type MediaEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<MediaFields>

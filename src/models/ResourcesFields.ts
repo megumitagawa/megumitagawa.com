@@ -4,10 +4,10 @@
  */
 
 import * as Contentful from 'contentful'
-import { ShortTextFields } from '@/lib/ShortTextFields'
-import { LongTextFields } from '@/lib/LongTextFields'
-import { RichTextFields } from '@/lib/RichTextFields'
-import { MediaFields } from '@/lib/MediaFields'
+import { ShortTextFields } from '~/models/ShortTextFields'
+import { LongTextFields } from '~/models/LongTextFields'
+import { RichTextFields } from '~/models/RichTextFields'
+import { MediaFields } from '~/models/MediaFields'
 
 export interface ResourcesFields {
   entryTitle: Contentful.EntryFields.Symbol

@@ -4,7 +4,7 @@
  */
 
 import * as Contentful from 'contentful'
-import { ResourcesFields } from '@/lib/ResourcesFields'
+import { ResourcesFields } from '@/models/ResourcesFields'
 
 export interface PageFields {
   entryTitle: Contentful.EntryFields.Symbol

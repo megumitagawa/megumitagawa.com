@@ -131,15 +131,15 @@ import Vue from 'vue'
 import {
   createErrorCatchableAsyncData,
   createStoreReadyAsyncData,
-} from '@/lib/AsyncData'
-import { FormEvent, submitPostRequest } from '@/lib/FormEvent'
-import { wait } from '@/lib/Milliseconds'
-import { Page } from '~/lib/Page'
-import { createPage } from '@/lib/PageEntry'
-import { PageFields } from '@/lib/PageFields'
-import { Work } from '~/lib/Work'
-import { createWork } from '@/lib/WorkEntry'
-import { WorkFields } from '@/lib/WorkFields'
+} from '@/models/AsyncData'
+import { FormEvent, submitPostRequest } from '@/models/FormEvent'
+import { wait } from '@/models/Milliseconds'
+import { Page } from '~/models/Page'
+import { createPage } from '@/models/PageEntry'
+import { PageFields } from '@/models/PageFields'
+import { Work } from '~/models/Work'
+import { createWork } from '@/models/WorkEntry'
+import { WorkFields } from '@/models/WorkFields'
 
 type Data = Page & {
   workList: Work[]

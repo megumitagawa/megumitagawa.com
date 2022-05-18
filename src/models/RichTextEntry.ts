@@ -1,5 +1,5 @@
 import * as Contentful from 'contentful'
-import { RichTextFields } from '@/lib/RichTextFields'
+import { RichTextFields } from '~/models/RichTextFields'
 
 export type RichTextEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<RichTextFields>

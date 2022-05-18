@@ -1,7 +1,7 @@
 import * as Contentful from 'contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { Work } from '@/lib/Work'
-import { WorkFields } from '@/lib/WorkFields'
+import { Work } from '~/models/Work'
+import { WorkFields } from '~/models/WorkFields'
 
 export type WorkEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<WorkFields>

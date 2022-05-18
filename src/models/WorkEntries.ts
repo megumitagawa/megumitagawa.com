@@ -1,6 +1,6 @@
 import * as Contentful from 'contentful'
-import { Pager } from '@/lib/Pager'
-import { WorkFields } from '@/lib/WorkFields'
+import { Pager } from '~/models/Pager'
+import { WorkFields } from '~/models/WorkFields'
 
 export type WorkEntries =
   Contentful.EntryCollectionWithLinkResolutionAndWithoutUnresolvableLinks<WorkFields>

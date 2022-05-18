@@ -1,8 +1,8 @@
 import { createClient } from 'contentful'
 import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRuntimeConfig } from '@nuxt/types/config/runtime'
-import { createNuxtOptionsGenerateRoute } from './src/lib/WorkEntries'
-import { WorkFields } from './src/lib/WorkFields'
+import { createNuxtOptionsGenerateRoute } from './src/models/WorkEntries'
+import { WorkFields } from './src/models/WorkFields'
 
 const {
   NODE_ENV = 'production',

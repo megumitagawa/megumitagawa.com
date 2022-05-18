@@ -1,5 +1,5 @@
 import * as Contentful from 'contentful'
-import { ShortTextFields } from '@/lib/ShortTextFields'
+import { ShortTextFields } from '~/models/ShortTextFields'
 
 export type ShortTextEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<ShortTextFields>

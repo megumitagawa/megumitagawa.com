@@ -1,8 +1,8 @@
 import Vue, { ComponentOptions } from 'vue'
-import { isErrorLike } from '@/lib/ErrorLike'
-import { createHandleServerError } from '@/lib/HandleNuxtError'
-import { createResources } from '@/lib/ResourcesEntry'
-import { ResourcesFields } from '@/lib/ResourcesFields'
+import { isErrorLike } from '~/models/ErrorLike'
+import { createHandleServerError } from '~/models/HandleNuxtError'
+import { createResources } from '~/models/ResourcesEntry'
+import { ResourcesFields } from '~/models/ResourcesFields'
 
 type AsyncData = Exclude<ComponentOptions<Vue>['asyncData'], undefined>
 

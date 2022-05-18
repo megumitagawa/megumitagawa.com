@@ -1,7 +1,7 @@
 import * as Contentful from 'contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { Resources } from '@/lib/Resources'
-import { ResourcesFields } from '@/lib/ResourcesFields'
+import { Resources } from '~/models/Resources'
+import { ResourcesFields } from '~/models/ResourcesFields'
 
 export type ResourcesEntry =
   Contentful.EntryWithLinkResolutionAndWithoutUnresolvableLinks<ResourcesFields>

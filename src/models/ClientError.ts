@@ -1,5 +1,5 @@
 import { NuxtError } from '@nuxt/types'
-import { ErrorLike } from '@/lib/ErrorLike'
+import { ErrorLike } from '~/models/ErrorLike'
 
 export type ClientError = Error | ErrorLike | ErrorEvent | PromiseRejectionEvent
 

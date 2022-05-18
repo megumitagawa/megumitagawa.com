@@ -44,15 +44,15 @@ import Vue from 'vue'
 import {
   createErrorCatchableAsyncData,
   createStoreReadyAsyncData,
-} from '@/lib/AsyncData'
-import { Page } from '~/lib/Page'
-import { createPage } from '@/lib/PageEntry'
-import { PageFields } from '@/lib/PageFields'
-import { Pager } from '~/lib/Pager'
-import { Work } from '~/lib/Work'
-import { createPager } from '@/lib/WorkEntries'
-import { createWork } from '@/lib/WorkEntry'
-import { WorkFields } from '@/lib/WorkFields'
+} from '@/models/AsyncData'
+import { Page } from '~/models/Page'
+import { createPage } from '@/models/PageEntry'
+import { PageFields } from '@/models/PageFields'
+import { Pager } from '~/models/Pager'
+import { Work } from '~/models/Work'
+import { createPager } from '@/models/WorkEntries'
+import { createWork } from '@/models/WorkEntry'
+import { WorkFields } from '@/models/WorkFields'
 
 type Data = Page & {
   workList: Work[]

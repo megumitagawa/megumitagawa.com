@@ -1,7 +1,7 @@
 <template>
-  <div class="default-layout">
+  <div class="grid grid-rows-layout grid-cols-layout w-full h-full">
     <GlobalHeader />
-    <main class="main">
+    <main class="block overflow-auto">
       <Nuxt />
     </main>
     <GlobalFooter />
@@ -21,18 +21,3 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'DefalutLayout',
 })
 </script>
-
-<style lang="postcss" scoped>
-.default-layout {
-  display: grid;
-  grid-template-rows: 4.4rem 1fr 4.4rem 0;
-  grid-template-columns: 100%;
-  width: 100%;
-  height: 100%;
-}
-
-.main {
-  display: block;
-  overflow: auto;
-}
-</style>

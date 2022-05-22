@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-hidden">
     <NuxtLink to="/">
       {{ $accessor.resources.shortTextMap.get('global-header-ja') }} |
       {{ $accessor.resources.shortTextMap.get('global-header-en') }}

@@ -58,7 +58,7 @@ const nuxtConfig: NuxtConfig = {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/css/globals.css'],
+  css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -83,13 +83,22 @@ const nuxtConfig: NuxtConfig = {
     '@nuxt/image',
     // https://typed-vuex.roe.dev/
     'nuxt-typed-vuex',
+    // https://github.com/nuxt/postcss8
+    '@nuxt/postcss8',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
+  },
 
   // Source directory: https://nuxtjs.org/docs/configuration-glossary/configuration-srcdir
   srcDir: 'src/',

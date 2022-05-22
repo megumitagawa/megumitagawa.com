@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-hidden">
     <div>
       <NuxtLink to="/#works">
         {{ $accessor.resources.shortTextMap.get('global-footer-works-link') }}

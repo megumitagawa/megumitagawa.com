@@ -4,7 +4,10 @@ https://mui.com/material-ui/api/backdrop/
 -->
 
 <template>
-  <div v-if="open" class="base-backdrop">
+  <div
+    v-if="open"
+    class="absolute inset-0 z-10 flex justify-center items-center overflow-hidden bg-white/75"
+  >
     <slot />
   </div>
 </template>
@@ -27,18 +30,3 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 })
 </script>
-
-<style lang="postcss" scoped>
-.base-backdrop {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(255 255 255 / 75%);
-}
-</style>

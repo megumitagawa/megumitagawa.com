@@ -3,16 +3,11 @@ import { ErrorLike } from '@/models/ErrorLike'
 
 export type ClientError = Error | ErrorLike | ErrorEvent | PromiseRejectionEvent
 
-type CreateNuxtError = (
-  clientError: ClientError,
-  showingDetails: boolean
-) => NuxtError
+type CreateNuxtError = (clientError: ClientError) => NuxtError
 
 export const createNuxtErrorFromClientError: CreateNuxtError = (
-  clientError,
-  showingDetails
+  clientError
 ) => {
-  if (!showingDetails) return { message: 'Client Error' }
   const message =
     'message' in clientError ? clientError.message : `${clientError.reason}`
   return { message }

@@ -18,7 +18,7 @@ export const createErrorCatchableAsyncData: CreateErrorCatchableAsyncData =
       const handleServerError = createHandleServerError((nuxtError) => {
         context.$sentry.captureException(nuxtError)
         context.error(nuxtError)
-      }, context.isDev)
+      })
       handleServerError(serverError)
     }
   }

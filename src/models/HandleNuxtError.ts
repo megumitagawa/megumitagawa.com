@@ -11,21 +11,19 @@ import {
 type HandleNuxtError = (nuxtError: NuxtError) => void
 
 type CreateHandleClientError = (
-  handleNuxtError: HandleNuxtError,
-  showingDetails: boolean
+  handleNuxtError: HandleNuxtError
 ) => (clientError: ClientError) => void
 
 export const createHandleClientError: CreateHandleClientError =
-  (handleNuxtError, showingDetails) => (clientError) => {
-    handleNuxtError(createNuxtErrorFromClientError(clientError, showingDetails))
+  (handleNuxtError) => (clientError) => {
+    handleNuxtError(createNuxtErrorFromClientError(clientError))
   }
 
 type CreateHandleServerError = (
-  handleNuxtError: HandleNuxtError,
-  showingDetails: boolean
+  handleNuxtError: HandleNuxtError
 ) => (serverError: ServerError) => void
 
 export const createHandleServerError: CreateHandleServerError =
-  (handleNuxtError, showingDetails) => (serverError) => {
-    handleNuxtError(createNuxtErrorFromServerError(serverError, showingDetails))
+  (handleNuxtError) => (serverError) => {
+    handleNuxtError(createNuxtErrorFromServerError(serverError))
   }

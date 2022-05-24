@@ -6,16 +6,11 @@ export type ServerError =
   | ErrorLike
   | Parameters<NodeJS.UnhandledRejectionListener>[0]
 
-type CreateNuxtError = (
-  serverError: ServerError,
-  showingDetails: boolean
-) => NuxtError
+type CreateNuxtError = (serverError: ServerError) => NuxtError
 
 export const createNuxtErrorFromServerError: CreateNuxtError = (
-  serverError,
-  showingDetails
+  serverError
 ) => {
-  if (!showingDetails) return { message: 'Server Error' }
   const message =
     serverError && 'message' in serverError
       ? serverError.message

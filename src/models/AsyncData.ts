@@ -15,7 +15,11 @@ export const createErrorCatchableAsyncData: CreateErrorCatchableAsyncData =
       return data
     } catch (error) {
       const serverError = isErrorLike(error) ? error : new Error(`${error}`)
-      createHandleServerError(context.error, context.isDev)(serverError)
+      const handleServerError = createHandleServerError((nuxtError) => {
+        context.$sentry.captureException(nuxtError)
+        context.error(nuxtError)
+      }, context.isDev)
+      handleServerError(serverError)
     }
   }
 

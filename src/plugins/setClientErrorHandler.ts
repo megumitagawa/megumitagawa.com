@@ -2,10 +2,11 @@ import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import { createHandleClientError } from '@/models/HandleNuxtError'
 
-const setClientErrorHandler: Plugin = ({ isDev }) => {
-  const handleClientError = createHandleClientError(({ message }) => {
+const setClientErrorHandler: Plugin = ({ isDev, $sentry }) => {
+  const handleClientError = createHandleClientError((nuxtError) => {
+    $sentry.captureException(nuxtError)
     // eslint-disable-next-line no-console
-    console.error(message)
+    console.error(nuxtError.message)
   }, isDev)
   Vue.config.errorHandler = handleClientError
   window.addEventListener('error', handleClientError)

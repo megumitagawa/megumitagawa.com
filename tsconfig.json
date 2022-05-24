@@ -14,7 +14,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["@nuxt/types", "@nuxt/image", "@types/node"]
+    "types": ["@nuxt/types", "@nuxt/image", "@nuxtjs/sentry", "@types/node"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

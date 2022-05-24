@@ -91,11 +91,21 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    // https://sentry.nuxtjs.org/
+    '@nuxtjs/sentry',
+  ],
 
   // Image optimization: https://image.nuxtjs.org/api/options/
   image: {
     domains: ['images.ctfassets.net'],
+  },
+
+  // Sentry: https://sentry.nuxtjs.org/sentry/options
+  sentry: {
+    disabled: !productionMode,
+    lazy: true,
+    sourceMapStyle: 'hidden-source-map',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

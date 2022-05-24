@@ -40,6 +40,12 @@ const nuxtConfig: NuxtConfig = {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // Source directory: https://nuxtjs.org/docs/configuration-glossary/configuration-srcdir
+  srcDir: 'src/',
+
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'megumitagawa.com',
@@ -70,9 +76,6 @@ const nuxtConfig: NuxtConfig = {
     },
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
@@ -90,6 +93,11 @@ const nuxtConfig: NuxtConfig = {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
 
+  // Image optimization: https://image.nuxtjs.org/api/options/
+  image: {
+    domains: ['images.ctfassets.net'],
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {
@@ -98,14 +106,6 @@ const nuxtConfig: NuxtConfig = {
         autoprefixer: {},
       },
     },
-  },
-
-  // Source directory: https://nuxtjs.org/docs/configuration-glossary/configuration-srcdir
-  srcDir: 'src/',
-
-  // Image optimization: https://image.nuxtjs.org/api/options/
-  image: {
-    domains: ['images.ctfassets.net'],
   },
 
   // Public environment variables: https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config

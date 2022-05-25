@@ -1,8 +1,8 @@
 import Vue, { ComponentOptions } from 'vue'
 import { isErrorLike } from '@/models/ErrorLike'
-import { createHandleServerError } from '@/models/HandleNuxtError'
 import { createResources } from '@/models/ResourcesEntry'
 import { ResourcesFields } from '@/models/ResourcesFields'
+import { createNuxtErrorFromServerError } from '@/models/ServerError'
 
 type AsyncData = Exclude<ComponentOptions<Vue>['asyncData'], undefined>
 
@@ -15,11 +15,9 @@ export const createErrorCatchableAsyncData: CreateErrorCatchableAsyncData =
       return data
     } catch (error) {
       const serverError = isErrorLike(error) ? error : new Error(`${error}`)
-      const handleServerError = createHandleServerError((nuxtError) => {
-        context.$sentry.captureException(nuxtError)
-        context.error(nuxtError)
-      })
-      handleServerError(serverError)
+      context.$sentry.captureException(serverError)
+      const nuxtError = createNuxtErrorFromServerError(serverError)
+      context.error(nuxtError)
     }
   }
 

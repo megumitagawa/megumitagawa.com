@@ -25,10 +25,10 @@ type CreateStoreReadyAsyncData = (asyncData: AsyncData) => AsyncData
 
 export const createStoreReadyAsyncData: CreateStoreReadyAsyncData =
   (asyncData) => async (context) => {
-    const { app, $accessor } = context
+    const { $contentfulClientApi, $accessor } = context
 
     const { items: ResourcesEntryList } =
-      await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<ResourcesFields>(
+      await $contentfulClientApi.withoutUnresolvableLinks.getEntries<ResourcesFields>(
         { content_type: 'resources', 'fields.slug': 'global-components' }
       )
     if (ResourcesEntryList.length < 1)

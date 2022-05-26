@@ -154,28 +154,30 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'IndexPage',
 
   asyncData: createErrorCatchableAsyncData(
-    createStoreReadyAsyncData(async ({ app, route, $config }) => {
-      const { items: pageEntryList } =
-        await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
-          { content_type: 'page', 'fields.path': '/' }
-        )
-      if (pageEntryList.length < 1) throw new Error('No page entry')
+    createStoreReadyAsyncData(
+      async ({ route, $config, $contentfulClientApi }) => {
+        const { items: pageEntryList } =
+          await $contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
+            { content_type: 'page', 'fields.path': '/' }
+          )
+        if (pageEntryList.length < 1) throw new Error('No page entry')
 
-      const { items: workEntryList } =
-        await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
-          { content_type: 'work', limit: $config.indexPageWorkListLength }
-        )
+        const { items: workEntryList } =
+          await $contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
+            { content_type: 'work', limit: $config.indexPageWorkListLength }
+          )
 
-      const pageEntry = pageEntryList[0]
-      const ogUrl = `${$config.siteUrl}${route.path}`
-      const page = createPage(pageEntry, ogUrl)
-      const workList = workEntryList.map(createWork)
+        const pageEntry = pageEntryList[0]
+        const ogUrl = `${$config.siteUrl}${route.path}`
+        const page = createPage(pageEntry, ogUrl)
+        const workList = workEntryList.map(createWork)
 
-      return {
-        ...page,
-        workList,
+        return {
+          ...page,
+          workList,
+        }
       }
-    })
+    )
   ),
 
   head() {

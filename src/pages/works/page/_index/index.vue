@@ -66,35 +66,37 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'WorksPageIndexPage',
 
   asyncData: createErrorCatchableAsyncData(
-    createStoreReadyAsyncData(async ({ app, params, route, $config }) => {
-      const { items: pageEntryList } =
-        await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
-          { content_type: 'page', 'fields.path': '/works' }
-        )
-      if (pageEntryList.length < 1) throw new Error('No page entry')
+    createStoreReadyAsyncData(
+      async ({ params, route, $config, $contentfulClientApi }) => {
+        const { items: pageEntryList } =
+          await $contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
+            { content_type: 'page', 'fields.path': '/works' }
+          )
+        if (pageEntryList.length < 1) throw new Error('No page entry')
 
-      const indexNumber = +params.index
-      if (!(indexNumber > 0)) throw new Error('Not found')
-      const limit = $config.worksPageWorkListLength
-      const workEntries =
-        await app.$contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
-          { content_type: 'work', limit, skip: limit * (indexNumber - 1) }
-        )
-      const { items: workEntryList } = workEntries
-      if (workEntryList.length < 1) throw new Error('Not found')
+        const indexNumber = +params.index
+        if (!(indexNumber > 0)) throw new Error('Not found')
+        const limit = $config.worksPageWorkListLength
+        const workEntries =
+          await $contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
+            { content_type: 'work', limit, skip: limit * (indexNumber - 1) }
+          )
+        const { items: workEntryList } = workEntries
+        if (workEntryList.length < 1) throw new Error('Not found')
 
-      const pageEntry = pageEntryList[0]
-      const ogUrl = `${$config.siteUrl}${route.path}`
-      const page = createPage(pageEntry, ogUrl)
-      const workList = workEntryList.map(createWork)
-      const pager = createPager(workEntries, indexNumber)
+        const pageEntry = pageEntryList[0]
+        const ogUrl = `${$config.siteUrl}${route.path}`
+        const page = createPage(pageEntry, ogUrl)
+        const workList = workEntryList.map(createWork)
+        const pager = createPager(workEntries, indexNumber)
 
-      return {
-        ...page,
-        workList,
-        pager,
+        return {
+          ...page,
+          workList,
+          pager,
+        }
       }
-    })
+    )
   ),
 
   head() {

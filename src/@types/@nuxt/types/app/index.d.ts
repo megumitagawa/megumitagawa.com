@@ -8,6 +8,7 @@ declare module '@nuxt/types/app' {
   }
 
   interface Context {
+    $contentfulClientApi: ContentfulClientApi
     $accessor: typeof accessorType
   }
 }

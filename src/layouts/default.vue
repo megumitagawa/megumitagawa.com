@@ -1,12 +1,17 @@
 <template>
-  <div class="grid grid-rows-layout grid-cols-layout w-full h-full">
-    <GlobalHeader />
-    <main class="block overflow-auto">
-      <Nuxt />
-    </main>
-    <GlobalFooter />
+  <BaseBox component="div" class="w-full h-full">
+    <BaseBox
+      component="div"
+      class="grid grid-rows-default-layout grid-cols-default-layout w-full h-full"
+    >
+      <GlobalHeader />
+      <BaseBox component="main" class="overflow-auto">
+        <Nuxt />
+      </BaseBox>
+      <GlobalFooter />
+    </BaseBox>
     <GlobalBackdrop />
-  </div>
+  </BaseBox>
 </template>
 
 <script lang="ts">

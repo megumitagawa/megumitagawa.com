@@ -10,10 +10,12 @@ module.exports = {
   ],
   theme: {
     gridTemplateRows: {
-      layout: '4.4rem 1fr 4.4rem',
+      'default-layout': '4.4rem 1fr 4.4rem',
+      'global-footer': '1fr 1fr 1fr 4.4rem',
     },
     gridTemplateColumns: {
-      layout: '100%',
+      'default-layout': '100%',
+      'global-footer': '100%',
     },
     spacing: {
       0: '0',

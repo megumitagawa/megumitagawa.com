@@ -1,12 +1,26 @@
+<template>
+  <component :is="component" class="block w-full">
+    <slot />
+  </component>
+</template>
+
 <script lang="ts">
 import Vue from 'vue'
 
 type Data = {}
 type Methods = {}
 type Computed = {}
-type Props = {}
+type Props = {
+  component: string
+}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'SecondaryHeading',
+
+  inheritAttrs: false,
+
+  props: {
+    component: { type: String, default: 'span' },
+  },
 })
 </script>

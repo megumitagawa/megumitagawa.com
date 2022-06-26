@@ -1,20 +1,20 @@
 <template>
-  <BaseBackdrop :open="$accessor.backdrop.open">
-    <div v-show="$accessor.backdrop.sending">...</div>
-    <div v-show="$accessor.backdrop.succeeded">
+  <BaseBackdrop component="div" :open="$accessor.backdrop.open">
+    <BaseBox v-show="$accessor.backdrop.sending" component="p">...</BaseBox>
+    <BaseBox v-show="$accessor.backdrop.succeeded" component="p">
       {{
         $accessor.resources.longTextMap.get(
           'global-backdrop-submission-success'
         )
       }}
-    </div>
-    <div v-show="$accessor.backdrop.failed">
+    </BaseBox>
+    <BaseBox v-show="$accessor.backdrop.failed" component="p">
       {{
         $accessor.resources.longTextMap.get(
           'global-backdrop-submission-failure'
         )
       }}
-    </div>
+    </BaseBox>
   </BaseBackdrop>
 </template>
 
@@ -28,5 +28,7 @@ type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'GlobalBackdrop',
+
+  inheritAttrs: false,
 })
 </script>

@@ -1,21 +1,15 @@
 <template>
-  <div class="overflow-hidden">
-    <div>
-      <NuxtLink to="/#works">
-        {{ $accessor.resources.shortTextMap.get('global-footer-works-link') }}
-      </NuxtLink>
-    </div>
-    <div>
-      <NuxtLink to="/#profile">
-        {{ $accessor.resources.shortTextMap.get('global-footer-profile-link') }}
-      </NuxtLink>
-    </div>
-    <div>
-      <NuxtLink to="/#contact">
-        {{ $accessor.resources.shortTextMap.get('global-footer-contact-link') }}
-      </NuxtLink>
-    </div>
-  </div>
+  <BaseStack component="footer" direction="row">
+    <BaseButton component="NuxtLink" to="/#works">
+      {{ $accessor.resources.shortTextMap.get('global-footer-works-link') }}
+    </BaseButton>
+    <BaseButton component="NuxtLink" to="/#profile">
+      {{ $accessor.resources.shortTextMap.get('global-footer-profile-link') }}
+    </BaseButton>
+    <BaseButton component="NuxtLink" to="/#contact">
+      {{ $accessor.resources.shortTextMap.get('global-footer-contact-link') }}
+    </BaseButton>
+  </BaseStack>
 </template>
 
 <script lang="ts">
@@ -28,5 +22,7 @@ type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'GlobalFooter',
+
+  inheritAttrs: false,
 })
 </script>

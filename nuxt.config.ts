@@ -74,6 +74,7 @@ const nuxtConfig: NuxtConfig = {
       src: '@/plugins/injectContentfulClientApi.ts',
       mode: productionMode ? 'server' : 'all',
     },
+    { src: '@/plugins/injectStartingFromIndexPage.ts', mode: 'all' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

@@ -1,5 +1,10 @@
+<!--
+Inspired by MUI
+https://mui.com/material-ui/api/box/
+-->
+
 <template>
-  <component :is="component" class="block w-full">
+  <component :is="component" v-bind="$attrs" v-on="$listeners">
     <slot />
   </component>
 </template>
@@ -15,7 +20,7 @@ type Props = {
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
-  name: 'PrimaryBody',
+  name: 'BaseBox',
 
   inheritAttrs: false,
 

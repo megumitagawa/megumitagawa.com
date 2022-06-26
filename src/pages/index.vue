@@ -1,129 +1,153 @@
 <template>
-  <div>
-    <div id="works">
-      <div>
-        {{ shortTextMap.get('index-page-works-section-heading') }}
-      </div>
-      <div v-for="work of workList" :key="work.id">
-        <div
-          v-for="featuredMedia of work.featuredMediaList"
-          :key="featuredMedia.sys.id"
+  <BaseStack component="div">
+    <BaseBox />
+    <BaseStack component="div">
+      <BaseStack component="section">
+        <PrimaryHeading id="works" component="h2">
+          {{ shortTextMap.get('index-page-works-section-heading') }}
+        </PrimaryHeading>
+        <PrimaryBody
+          v-for="work of workList"
+          :key="work.id"
+          component="article"
         >
-          <NuxtPicture
-            :src="`https:${featuredMedia.fields.file.url}`"
-            :width="featuredMedia.fields.file.details.image.width"
-            :height="featuredMedia.fields.file.details.image.height"
-            :alt="featuredMedia.fields.description || ''"
-          />
-        </div>
-        <div>
-          {{ work.title }}
-        </div>
-        <!-- eslint-disable vue/no-v-html -->
-        <div v-html="work.htmlStringContent" />
-        <!-- eslint-enable vue/no-v-html -->
-      </div>
-      <div v-if="workList.length">
-        <NuxtLink to="/works">
+          <BaseStack component="div">
+            <BaseImage
+              v-for="featuredMedia of work.featuredMediaList"
+              :key="featuredMedia.sys.id"
+              :src="`https:${featuredMedia.fields.file.url}`"
+              :width="featuredMedia.fields.file.details.image.width"
+              :height="featuredMedia.fields.file.details.image.height"
+              :alt="featuredMedia.fields.description || ''"
+            />
+            <SecondaryHeading component="h3">
+              {{ work.title }}
+            </SecondaryHeading>
+            <SecondaryBody :content="work.htmlStringContent" component="div" />
+          </BaseStack>
+        </PrimaryBody>
+        <BaseButton v-if="workList.length" component="NuxtLink" to="/works">
           {{ shortTextMap.get('index-page-works-section-link') }}
-        </NuxtLink>
-      </div>
-      <div v-if="!workList.length">
-        {{ shortTextMap.get('index-page-no-entry-message') }}
-      </div>
-    </div>
+        </BaseButton>
+        <PrimaryBody v-else component="p">
+          {{ shortTextMap.get('index-page-no-entry-message') }}
+        </PrimaryBody>
+      </BaseStack>
 
-    <div id="profile">
-      <div>
-        {{ shortTextMap.get('index-page-profile-section-heading') }}
-      </div>
-      <div>
-        <NuxtPicture
-          :src="`https:${
-            mediaMap.get('index-page-profile-section').fields.file.url
-          }`"
-          :width="
-            mediaMap.get('index-page-profile-section').fields.file.details.image
-              .width
-          "
-          :height="
-            mediaMap.get('index-page-profile-section').fields.file.details.image
-              .height
-          "
-          :alt="
-            mediaMap.get('index-page-profile-section').fields.description || ''
-          "
-        />
-      </div>
-      <div>
-        {{ shortTextMap.get('index-page-profile-section-name-ja') }}
-      </div>
-      <!-- eslint-disable vue/no-v-html -->
-      <div
-        v-html="htmlStringRichTextMap.get('index-page-profile-section-ja')"
-      />
-      <!-- eslint-enable vue/no-v-html -->
-      <div>
-        {{ shortTextMap.get('index-page-profile-section-name-en') }}
-      </div>
-      <!-- eslint-disable vue/no-v-html -->
-      <div
-        v-html="htmlStringRichTextMap.get('index-page-profile-section-en')"
-      />
-      <!-- eslint-enable vue/no-v-html -->
-    </div>
+      <BaseStack component="section">
+        <PrimaryHeading id="profile" component="h2">
+          {{ shortTextMap.get('index-page-profile-section-heading') }}
+        </PrimaryHeading>
+        <PrimaryBody component="div">
+          <BaseStack component="div">
+            <BaseImage
+              :src="`https:${
+                mediaMap.get('index-page-profile-section').fields.file.url
+              }`"
+              :width="
+                mediaMap.get('index-page-profile-section').fields.file.details
+                  .image.width
+              "
+              :height="
+                mediaMap.get('index-page-profile-section').fields.file.details
+                  .image.height
+              "
+              :alt="
+                mediaMap.get('index-page-profile-section').fields.description ||
+                ''
+              "
+            />
+            <SecondaryHeading component="h3">
+              {{ shortTextMap.get('index-page-profile-section-name-ja') }}
+            </SecondaryHeading>
+            <SecondaryBody
+              :content="
+                htmlStringRichTextMap.get('index-page-profile-section-ja')
+              "
+              component="div"
+            />
+            <SecondaryHeading component="h3">
+              {{ shortTextMap.get('index-page-profile-section-name-en') }}
+            </SecondaryHeading>
+            <SecondaryBody
+              :content="
+                htmlStringRichTextMap.get('index-page-profile-section-en')
+              "
+              component="div"
+            />
+          </BaseStack>
+        </PrimaryBody>
+      </BaseStack>
 
-    <div id="contact">
-      <div>
-        {{ shortTextMap.get('index-page-contact-section-heading') }}
-      </div>
-      <form
-        :name="$config.netlifyFormName"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        @submit.prevent="handleSubmit"
-      >
-        <input
-          type="hidden"
-          name="form-name"
-          :value="$config.netlifyFormName"
-        />
-        <input name="bot-field" />
-        <input
-          type="text"
-          name="name"
-          required
-          :placeholder="
-            shortTextMap.get(
-              'index-page-contact-section-name-input-placeholder'
-            )
-          "
-        />
-        <input
-          type="email"
-          name="email"
-          required
-          :placeholder="
-            shortTextMap.get(
-              'index-page-contact-section-email-input-placeholder'
-            )
-          "
-        />
-        <textarea
-          name="message"
-          required
-          :placeholder="
-            shortTextMap.get(
-              'index-page-contact-section-message-textarea-placeholder'
-            )
-          "
-        />
-        <button type="submit">
-          {{ shortTextMap.get('index-page-contact-section-button') }}
-        </button>
-      </form>
-    </div>
-  </div>
+      <BaseStack component="section">
+        <PrimaryHeading id="contact" component="h2">
+          {{ shortTextMap.get('index-page-contact-section-heading') }}
+        </PrimaryHeading>
+        <PrimaryBody component="div">
+          <BaseBox
+            :name="$config.netlifyFormName"
+            component="form"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            @submit.prevent="postAndReport"
+          >
+            <BaseStack component="div">
+              <BaseInput
+                type="hidden"
+                name="form-name"
+                :value="$config.netlifyFormName"
+              />
+              <BaseInput
+                type="text"
+                name="bot-field"
+                :value="contactFormValue.botField"
+                @input="updateContactFormBotFieldValue"
+              />
+              <BaseInput
+                type="text"
+                name="name"
+                required
+                :value="contactFormValue.name"
+                :placeholder="
+                  shortTextMap.get(
+                    'index-page-contact-section-name-input-placeholder'
+                  )
+                "
+                @input="updateContactFormNameValue"
+              />
+              <BaseInput
+                type="email"
+                name="email"
+                required
+                :value="contactFormValue.email"
+                :placeholder="
+                  shortTextMap.get(
+                    'index-page-contact-section-email-input-placeholder'
+                  )
+                "
+                @input="updateContactFormEmailValue"
+              />
+              <BaseTextarea
+                name="message"
+                required
+                :value="contactFormValue.message"
+                :placeholder="
+                  shortTextMap.get(
+                    'index-page-contact-section-message-textarea-placeholder'
+                  )
+                "
+                @input="updateContactFormMessageValue"
+              />
+              <BaseBox />
+              <BaseButton type="submit">
+                {{ shortTextMap.get('index-page-contact-section-button') }}
+              </BaseButton>
+            </BaseStack>
+          </BaseBox>
+        </PrimaryBody>
+      </BaseStack>
+    </BaseStack>
+  </BaseStack>
 </template>
 
 <script lang="ts">
@@ -132,7 +156,12 @@ import {
   createErrorCatchableAsyncData,
   createStoreReadyAsyncData,
 } from '@/models/AsyncData'
-import { FormEvent, submitPostRequest } from '@/models/FormEvent'
+import { FormEvent } from '@/models/FormEvent'
+import {
+  ContactFormValue,
+  createURLSearchParams,
+} from '@/models/ContactFormValue'
+import { post } from '@/models/RequestInfo'
 import { wait } from '@/models/Milliseconds'
 import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
@@ -143,9 +172,14 @@ import { WorkFields } from '@/models/WorkFields'
 
 type Data = Page & {
   workList: Work[]
+  contactFormValue: ContactFormValue
 }
 type Methods = {
-  handleSubmit: (formEvent: FormEvent<HTMLFormElement>) => Promise<void>
+  postAndReport(formEvent: FormEvent<HTMLFormElement>): Promise<void>
+  updateContactFormBotFieldValue(formEvent: FormEvent<HTMLInputElement>): void
+  updateContactFormNameValue(formEvent: FormEvent<HTMLInputElement>): void
+  updateContactFormEmailValue(formEvent: FormEvent<HTMLInputElement>): void
+  updateContactFormMessageValue(formEvent: FormEvent<HTMLTextAreaElement>): void
 }
 type Computed = {}
 type Props = {}
@@ -167,14 +201,19 @@ export default Vue.extend<Data, Methods, Computed, Props>({
             { content_type: 'work', limit: $config.indexPageWorkListLength }
           )
 
-        const pageEntry = pageEntryList[0]
         const ogUrl = `${$config.siteUrl}${route.path}`
-        const page = createPage(pageEntry, ogUrl)
+        const page = createPage(pageEntryList[0], ogUrl)
         const workList = workEntryList.map(createWork)
 
         return {
           ...page,
           workList,
+          contactFormValue: {
+            botField: '',
+            name: '',
+            email: '',
+            message: '',
+          },
         }
       }
     )
@@ -188,12 +227,29 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 
   methods: {
-    async handleSubmit(formEvent) {
+    async postAndReport({ target }) {
       this.$accessor.backdrop.set({ open: true, status: 'sending' })
-      const { ok } = await submitPostRequest(formEvent)
+      const urlSearchParams = createURLSearchParams(this.contactFormValue)
+      const { ok } = await post(target.action, urlSearchParams)
       this.$accessor.backdrop.set({ status: ok ? 'succeeded' : 'failed' })
       await wait(this.$config.globalBackdropDelay)
       this.$accessor.backdrop.set({ open: false })
+    },
+
+    updateContactFormBotFieldValue({ target }) {
+      this.contactFormValue.botField = target.value
+    },
+
+    updateContactFormNameValue({ target }) {
+      this.contactFormValue.name = target.value
+    },
+
+    updateContactFormEmailValue({ target }) {
+      this.contactFormValue.email = target.value
+    },
+
+    updateContactFormMessageValue({ target }) {
+      this.contactFormValue.message = target.value
     },
   },
 })

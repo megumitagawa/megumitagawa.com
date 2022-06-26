@@ -4,12 +4,15 @@ https://mui.com/material-ui/api/backdrop/
 -->
 
 <template>
-  <div
-    v-if="open"
+  <component
+    :is="component"
+    v-show="open"
     class="absolute inset-0 z-10 flex justify-center items-center overflow-hidden bg-white/75"
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <slot />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -19,13 +22,17 @@ type Data = {}
 type Methods = {}
 type Computed = {}
 type Props = {
+  component: string
   open: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'BaseBackdrop',
 
+  inheritAttrs: false,
+
   props: {
+    component: { type: String, default: 'span' },
     open: { type: Boolean, default: false },
   },
 })

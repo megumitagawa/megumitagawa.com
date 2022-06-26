@@ -6,19 +6,3 @@
 export interface FormEvent<T = Element> {
   target: T
 }
-
-type SubmitPostRequest = (
-  formEvent: FormEvent<HTMLFormElement>
-) => Promise<Response>
-
-export const submitPostRequest: SubmitPostRequest = async (formEvent) => {
-  const { target } = formEvent
-  const formData = new FormData(target) as URLSearchParams
-  const urlSearchParams = new URLSearchParams(formData).toString()
-  const response = await fetch(target.action, {
-    method: 'post',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: urlSearchParams,
-  })
-  return response
-}

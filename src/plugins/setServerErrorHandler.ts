@@ -6,14 +6,14 @@ import {
 } from '@/models/ServerError'
 
 const setServerErrorHandler: Plugin = ({ error, $sentry }) => {
-  const handleServerError = (serverError: ServerError): void => {
+  const reportServerError = (serverError: ServerError): void => {
     $sentry.captureException(serverError)
     const nuxtError = createNuxtErrorFromServerError(serverError)
     error(nuxtError)
   }
-  Vue.config.errorHandler = handleServerError
-  process.on('uncaughtException', handleServerError)
-  process.on('unhandledRejection', handleServerError)
+  Vue.config.errorHandler = reportServerError
+  process.on('uncaughtException', reportServerError)
+  process.on('unhandledRejection', reportServerError)
 }
 
 export default setServerErrorHandler

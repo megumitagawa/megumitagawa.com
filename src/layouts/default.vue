@@ -5,7 +5,7 @@
       class="grid grid-rows-default-layout grid-cols-default-layout w-full h-full"
     >
       <GlobalHeader />
-      <BaseBox component="main" class="overflow-auto">
+      <BaseBox component="main" class="relative overflow-auto">
         <Nuxt />
       </BaseBox>
       <GlobalFooter />

@@ -166,6 +166,7 @@ import { wait } from '@/models/Milliseconds'
 import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
+import { scrollOffsetParentTo } from '@/models/Selectors'
 import { Work } from '@/models/Work'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'
@@ -186,6 +187,11 @@ type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'IndexPage',
+
+  beforeRouteUpdate(to, from, next) {
+    scrollOffsetParentTo(to.hash, true)
+    next()
+  },
 
   asyncData: createErrorCatchableAsyncData(
     createStoreReadyAsyncData(
@@ -224,6 +230,10 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       title: this.title,
       meta: this.meta,
     }
+  },
+
+  mounted() {
+    scrollOffsetParentTo(this.$route.hash)
   },
 
   methods: {

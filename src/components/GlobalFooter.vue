@@ -9,6 +9,14 @@
     <BaseButton component="NuxtLink" to="/#contact">
       {{ $accessor.resources.shortTextMap.get('global-footer-contact-link') }}
     </BaseButton>
+    <BaseIconButton
+      component="a"
+      href="https://soundcloud.com/megumi-tagawa"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <SoundListIcon />
+    </BaseIconButton>
   </BaseStack>
 </template>
 

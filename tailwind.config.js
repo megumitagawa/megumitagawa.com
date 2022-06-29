@@ -9,6 +9,9 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
+    fontSize: {
+      inherit: 'inherit',
+    },
     gridTemplateRows: {
       'default-layout': '4.4rem 1fr 4.4rem',
       'global-footer': '1fr 1fr 1fr 4.4rem',
@@ -19,6 +22,12 @@ module.exports = {
     },
     spacing: {
       0: '0',
+    },
+    width: {
+      em: '1em',
+    },
+    height: {
+      em: '1em',
     },
     extend: {},
   },

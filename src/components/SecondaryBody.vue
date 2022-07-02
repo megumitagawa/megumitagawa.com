@@ -1,7 +1,7 @@
 <template>
-  <component :is="component" class="block w-full">
+  <BaseBox :component="component" class="block w-full">
     <RichText :document="document" />
-  </component>
+  </BaseBox>
 </template>
 
 <script lang="ts">

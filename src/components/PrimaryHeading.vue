@@ -1,7 +1,7 @@
 <template>
-  <component :is="component" :id="id" class="block w-full">
+  <BaseBox :id="id" :component="component" class="block w-full">
     <slot />
-  </component>
+  </BaseBox>
 </template>
 
 <script lang="ts">

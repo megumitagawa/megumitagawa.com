@@ -9,27 +9,23 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
-    fontSize: {
-      inherit: 'inherit',
+    extend: {
+      fontSize: {
+        inherit: 'inherit',
+      },
+      gridTemplateRows: {
+        'default-layout': '4.4rem 1fr 4.4rem',
+      },
+      gridTemplateColumns: {
+        'default-layout': '100%',
+      },
+      width: {
+        em: '1em',
+      },
+      height: {
+        em: '1em',
+      },
     },
-    gridTemplateRows: {
-      'default-layout': '4.4rem 1fr 4.4rem',
-      'global-footer': '1fr 1fr 1fr 4.4rem',
-    },
-    gridTemplateColumns: {
-      'default-layout': '100%',
-      'global-footer': '100%',
-    },
-    spacing: {
-      0: '0',
-    },
-    width: {
-      em: '1em',
-    },
-    height: {
-      em: '1em',
-    },
-    extend: {},
   },
   plugins: [],
 }

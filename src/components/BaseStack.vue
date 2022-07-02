@@ -11,10 +11,16 @@ Don't use gap for spacing for old iOS
     :class="[
       'flex w-full',
       {
-        'flex-row': rowDirection,
-        'flex-col': columnDirection,
-        [`space-x-${spacing}`]: rowDirection,
-        [`space-y-${spacing}`]: columnDirection,
+        'flex-row': flexRow,
+        'flex-col': flexColumn,
+        'justify-start': justifyStart,
+        'justify-center': justifyCenter,
+        'justify-end': justifyEnd,
+        'items-start': itemsStart,
+        'items-center': itemsCenter,
+        'items-end': itemsEnd,
+        [`space-x-${spacing}`]: flexRow,
+        [`space-y-${spacing}`]: flexColumn,
       },
     ]"
     v-bind="$attrs"
@@ -30,12 +36,20 @@ import Vue from 'vue'
 type Data = {}
 type Methods = {}
 type Computed = {
-  rowDirection: boolean
-  columnDirection: boolean
+  flexRow: boolean
+  flexColumn: boolean
+  justifyStart: boolean
+  justifyCenter: boolean
+  justifyEnd: boolean
+  itemsStart: boolean
+  itemsCenter: boolean
+  itemsEnd: boolean
 }
 type Props = {
   component: string
   direction: 'column' | 'row'
+  justifyContent: 'flex-start' | 'center' | 'flex-end'
+  alignItems: 'flex-start' | 'center' | 'flex-end'
   spacing: string
 }
 
@@ -50,15 +64,43 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       validator: (value) => ['column', 'row'].includes(value),
       default: 'column',
     },
+    justifyContent: {
+      validator: (value) =>
+        ['flex-start', 'center', 'flex-end'].includes(value),
+      default: 'flex-start',
+    },
+    alignItems: {
+      validator: (value) =>
+        ['flex-start', 'center', 'flex-end'].includes(value),
+      default: 'flex-start',
+    },
     spacing: { type: String, default: '0' },
   },
 
   computed: {
-    rowDirection() {
+    flexRow() {
       return this.direction === 'row'
     },
-    columnDirection() {
+    flexColumn() {
       return this.direction === 'column'
+    },
+    justifyStart() {
+      return this.justifyContent === 'flex-start'
+    },
+    justifyCenter() {
+      return this.justifyContent === 'center'
+    },
+    justifyEnd() {
+      return this.justifyContent === 'flex-end'
+    },
+    itemsStart() {
+      return this.alignItems === 'flex-start'
+    },
+    itemsCenter() {
+      return this.alignItems === 'center'
+    },
+    itemsEnd() {
+      return this.alignItems === 'flex-end'
     },
   },
 })

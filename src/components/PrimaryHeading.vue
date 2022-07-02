@@ -1,6 +1,10 @@
 <template>
   <BaseBox :id="id" :component="component" class="block w-full">
-    <slot />
+    <BaseStack direction="row" justify-content="center" align-items="center">
+      <LeftTripleDotsIcon />
+      <slot />
+      <RightTripleDotsIcon />
+    </BaseStack>
   </BaseBox>
 </template>
 

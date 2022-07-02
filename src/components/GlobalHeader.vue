@@ -1,9 +1,15 @@
 <template>
-  <BaseBox :component="rootComponent" class="w-full">
-    <BaseButton component="NuxtLink" to="/">
-      {{ $accessor.resources.shortTextMap.get('global-header-ja') }} |
+  <BaseBox component="NuxtLink" to="/">
+    <BaseStack
+      :component="rootComponent"
+      direction="row"
+      justify-content="center"
+      align-items="center"
+    >
+      {{ $accessor.resources.shortTextMap.get('global-header-ja') }}
+      <SingleDotIcon />
       {{ $accessor.resources.shortTextMap.get('global-header-en') }}
-    </BaseButton>
+    </BaseStack>
   </BaseBox>
 </template>
 

@@ -1,18 +1,19 @@
 <template>
-  <!-- eslint-disable vue/no-v-html -->
-  <component :is="component" class="block w-full" v-html="content" />
-  <!-- eslint-enable vue/no-v-html -->
+  <component :is="component" class="block w-full">
+    <RichText :document="document" />
+  </component>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import * as CFRichTextTypes from '@contentful/rich-text-types'
 
 type Data = {}
 type Methods = {}
 type Computed = {}
 type Props = {
   component: string
-  content: string
+  document: CFRichTextTypes.Document
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -22,7 +23,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   props: {
     component: { type: String, default: 'span' },
-    content: { type: String, default: '' },
+    document: { type: Object, required: true },
   },
 })
 </script>

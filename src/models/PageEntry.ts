@@ -1,4 +1,5 @@
 import * as Contentful from 'contentful'
+import * as CFRichTextTypes from '@contentful/rich-text-types'
 import { Page } from '@/models/Page'
 import { PageFields } from '@/models/PageFields'
 import { createResources } from '@/models/ResourcesEntry'
@@ -47,7 +48,7 @@ export const createPage: CreatePage = (pageEntry, ogUrl) => {
     : {
         shortTextMap: new Map<string, string>(),
         longTextMap: new Map<string, string>(),
-        htmlStringRichTextMap: new Map<string, string>(),
+        richTextMap: new Map<string, CFRichTextTypes.Document>(),
         mediaMap: new Map<string, Contentful.Asset>(),
       }
 

@@ -1,5 +1,4 @@
 import * as Contentful from 'contentful'
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { Resources } from '@/models/Resources'
 import { ResourcesFields } from '@/models/ResourcesFields'
 
@@ -21,11 +20,8 @@ export const createResources: CreateResources = (resourcesEntry) => {
   const longTextMap = new Map(
     longTextList.map(({ fields }) => [fields.slug, fields.value])
   )
-  const htmlStringRichTextMap = new Map(
-    richTextList.map(({ fields }) => [
-      fields.slug,
-      documentToHtmlString(fields.value),
-    ])
+  const richTextMap = new Map(
+    richTextList.map(({ fields }) => [fields.slug, fields.value])
   )
   const mediaMap = new Map(
     mediaList.map(({ fields }) => [fields.slug, fields.value])
@@ -34,7 +30,7 @@ export const createResources: CreateResources = (resourcesEntry) => {
   return {
     shortTextMap,
     longTextMap,
-    htmlStringRichTextMap,
+    richTextMap,
     mediaMap,
   }
 }

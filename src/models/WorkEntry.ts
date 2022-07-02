@@ -1,5 +1,5 @@
 import * as Contentful from 'contentful'
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import { EMPTY_DOCUMENT } from '@contentful/rich-text-types'
 import { Work } from '@/models/Work'
 import { WorkFields } from '@/models/WorkFields'
 
@@ -15,7 +15,7 @@ export const createWork: CreateWork = (workEntry) => {
   return {
     id,
     title,
-    htmlStringContent: content ? documentToHtmlString(content) : '',
+    content: content || EMPTY_DOCUMENT,
     featuredMediaList,
   }
 }

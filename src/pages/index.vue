@@ -23,7 +23,7 @@
             <SecondaryHeading component="h3">
               {{ work.title }}
             </SecondaryHeading>
-            <SecondaryBody :content="work.htmlStringContent" component="div" />
+            <SecondaryBody :document="work.content" component="div" />
           </BaseStack>
         </PrimaryBody>
         <BaseButton v-if="workList.length" component="NuxtLink" to="/works">
@@ -64,18 +64,14 @@
               {{ shortTextMap.get('index-page-profile-section-name-ja') }}
             </SecondaryHeading>
             <SecondaryBody
-              :content="
-                htmlStringRichTextMap.get('index-page-profile-section-ja')
-              "
+              :document="richTextMap.get('index-page-profile-section-ja')"
               component="div"
             />
             <SecondaryHeading component="h3">
               {{ shortTextMap.get('index-page-profile-section-name-en') }}
             </SecondaryHeading>
             <SecondaryBody
-              :content="
-                htmlStringRichTextMap.get('index-page-profile-section-en')
-              "
+              :document="richTextMap.get('index-page-profile-section-en')"
               component="div"
             />
           </BaseStack>

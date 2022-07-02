@@ -16,7 +16,7 @@
         <SecondaryHeading component="h2">
           {{ work.title }}
         </SecondaryHeading>
-        <SecondaryBody :content="work.htmlStringContent" component="div" />
+        <SecondaryBody :document="work.content" component="div" />
       </BaseStack>
     </PrimaryBody>
     <PrimaryBody v-if="!workList.length" component="p">

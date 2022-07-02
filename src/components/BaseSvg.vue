@@ -1,10 +1,7 @@
 <template>
   <svg
     :viewBox="viewBox"
-    :class="[
-      'inline-block w-em h-em grow-0 shrink-0',
-      { [`text-${size}`]: true },
-    ]"
+    :class="`block w-em h-em grow-0 shrink-0 text-${size}`"
     xmlns="http://www.w3.org/2000/svg"
     v-bind="$attrs"
     v-on="$listeners"

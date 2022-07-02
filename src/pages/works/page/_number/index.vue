@@ -33,6 +33,9 @@
           :to="`/works/page/${previousPageNumber || ''}`"
           :disabled="!previousPageNumber"
         >
+          <template #startIcon>
+            <LeftChevonIcon />
+          </template>
           {{ shortTextMap.get('works-page-pager-previous-link') }}
         </BaseButton>
       </template>
@@ -59,6 +62,9 @@
           :disabled="!nextPageNumber"
         >
           {{ shortTextMap.get('works-page-pager-next-link') }}
+          <template #endIcon>
+            <RightChevonIcon />
+          </template>
         </BaseButton>
       </template>
     </BasePager>

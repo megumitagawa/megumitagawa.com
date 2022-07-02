@@ -2,11 +2,17 @@
   <component
     :is="disableableComponent"
     :disabled="nullableDisabled"
-    class="block w-full"
+    class="relative flex justify-center items-center w-full"
     v-bind="$attrs"
     v-on="$listeners"
   >
+    <span class="absolute top-1/2 left-0 -translate-y-1/2">
+      <slot name="startIcon" />
+    </span>
     <slot />
+    <span class="absolute top-1/2 right-0 -translate-y-1/2">
+      <slot name="endIcon" />
+    </span>
   </component>
 </template>
 

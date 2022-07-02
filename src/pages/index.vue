@@ -28,6 +28,9 @@
         </PrimaryBody>
         <BaseButton v-if="workList.length" component="NuxtLink" to="/works">
           {{ shortTextMap.get('index-page-works-section-link') }}
+          <template #endIcon>
+            <RightChevonIcon />
+          </template>
         </BaseButton>
         <PrimaryBody v-else component="p">
           {{ shortTextMap.get('index-page-no-entry-message') }}

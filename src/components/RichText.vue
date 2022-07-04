@@ -13,8 +13,6 @@ https://github.com/paramander/contentful-rich-text-vue-renderer
 
 <script lang="ts">
 import Vue from 'vue'
-// eslint-disable-next-line import/named
-import { Fragment } from 'vue-frag'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import * as CFRichTextTypes from '@contentful/rich-text-types'
 
@@ -29,10 +27,6 @@ type Props = {
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'RichText',
-
-  components: {
-    Fragment,
-  },
 
   inheritAttrs: false,
 

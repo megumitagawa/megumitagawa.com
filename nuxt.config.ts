@@ -96,6 +96,8 @@ const nuxtConfig: NuxtConfig = {
   modules: [
     // https://sentry.nuxtjs.org/
     '@nuxtjs/sentry',
+    // https://portal-vue.linusb.org/
+    'portal-vue/nuxt',
   ],
 
   // Image optimization: https://image.nuxtjs.org/api/options/

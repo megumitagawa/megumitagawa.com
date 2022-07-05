@@ -1,16 +1,13 @@
 <template>
-  <BaseBox component="div" class="w-full h-full">
-    <BaseBox
-      component="div"
-      class="grid grid-rows-default-layout grid-cols-default-layout w-full h-full"
-    >
-      <GlobalHeader />
-      <BaseBox component="main" class="relative overflow-auto">
-        <Nuxt />
-      </BaseBox>
-      <GlobalFooter />
+  <BaseBox
+    component="div"
+    class="grid grid-rows-default-layout grid-cols-default-layout w-full h-full"
+  >
+    <GlobalHeader />
+    <BaseBox component="main" class="relative overflow-auto">
+      <Nuxt />
     </BaseBox>
-    <GlobalBackdrop />
+    <GlobalFooter />
   </BaseBox>
 </template>
 

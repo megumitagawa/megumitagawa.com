@@ -1,5 +1,5 @@
 <template>
-  <BaseStack component="div">
+  <BaseStack component="main">
     <PrimaryHeading component="h1">
       {{ shortTextMap.get('works-page-heading') }}
     </PrimaryHeading>

@@ -13,12 +13,6 @@ module.exports = {
       fontSize: {
         inherit: 'inherit',
       },
-      gridTemplateRows: {
-        'default-layout': '4.4rem 1fr 4.4rem',
-      },
-      gridTemplateColumns: {
-        'default-layout': '100%',
-      },
       width: {
         em: '1em',
       },

@@ -1,6 +1,6 @@
 <template>
   <Fragment>
-    <BaseStack component="div">
+    <BaseStack component="main">
       <BaseBox />
       <BaseStack component="div">
         <BaseStack component="section">

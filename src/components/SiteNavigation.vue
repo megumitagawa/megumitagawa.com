@@ -1,5 +1,5 @@
 <template>
-  <BaseStack component="footer" direction="row">
+  <BaseStack component="nav" direction="row">
     <BaseButton component="NuxtLink" to="/#works">
       {{ $accessor.resources.shortTextMap.get('global-footer-works-link') }}
     </BaseButton>

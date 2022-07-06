@@ -29,7 +29,7 @@ type Computed = {}
 type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
-  name: 'GlobalFooter',
+  name: 'SiteNavigation',
 
   inheritAttrs: false,
 })

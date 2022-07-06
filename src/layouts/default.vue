@@ -3,11 +3,11 @@
     component="div"
     class="grid grid-rows-default-layout grid-cols-default-layout w-full h-full"
   >
-    <GlobalHeader />
+    <SiteTitle />
     <BaseBox component="main" class="relative overflow-auto">
       <Nuxt />
     </BaseBox>
-    <GlobalFooter />
+    <SiteNavigation />
   </BaseBox>
 </template>
 

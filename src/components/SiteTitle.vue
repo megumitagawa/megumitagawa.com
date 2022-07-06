@@ -24,7 +24,7 @@ type Computed = {
 type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
-  name: 'GlobalHeader',
+  name: 'SiteTitle',
 
   inheritAttrs: false,
 

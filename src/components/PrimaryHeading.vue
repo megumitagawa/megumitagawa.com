@@ -16,7 +16,7 @@ type Methods = {}
 type Computed = {}
 type Props = {
   component: string
-  id: string
+  id: string | null
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({

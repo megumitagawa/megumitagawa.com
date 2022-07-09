@@ -1,6 +1,7 @@
 import { createClient } from 'contentful'
 import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRuntimeConfig } from '@nuxt/types/config/runtime'
+import { theme } from './tailwind.config'
 import { createNuxtOptionsGenerateRoute } from './src/models/WorkEntries'
 import { WorkFields } from './src/models/WorkFields'
 
@@ -35,6 +36,14 @@ const globalBackdropDelayNumber = +NUXT_PUBLIC_GLOBAL_BACKDROP_DELAY
 const globalBackdropDelay = globalBackdropDelayNumber || 0
 
 const metaRobotsNone = NUXT_PRIVATE_META_ROBOTS_NONE.toLowerCase() === 'on'
+
+// For NuxtImage, convert Tailwind breakpoints settings to unit-less
+const screensWithoutUnits = Object.fromEntries(
+  Object.entries(theme.screens).map(([key, value]) => [
+    key,
+    parseInt(value, 10),
+  ])
+)
 
 const nuxtConfig: NuxtConfig = {
   // Target: https://go.nuxtjs.dev/config-target
@@ -103,6 +112,7 @@ const nuxtConfig: NuxtConfig = {
   // Image optimization: https://image.nuxtjs.org/api/options/
   image: {
     domains: ['images.ctfassets.net'],
+    screens: screensWithoutUnits,
   },
 
   // Sentry: https://sentry.nuxtjs.org/sentry/options

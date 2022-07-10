@@ -85,6 +85,8 @@ const nuxtConfig: NuxtConfig = {
       mode: productionMode ? 'server' : 'all',
     },
     { src: '@/plugins/injectStartingFromIndexPage.ts', mode: 'all' },
+    { src: '@/plugins/injectMediaQueries.ts', mode: 'all' },
+    { src: '@/plugins/injectDefaultImgSizes.ts', mode: 'all' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

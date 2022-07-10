@@ -19,8 +19,8 @@ Don't use gap for spacing for old iOS
         'items-start': itemsStart,
         'items-center': itemsCenter,
         'items-end': itemsEnd,
-        [`space-x-${spacing}`]: flexRow,
-        [`space-y-${spacing}`]: flexColumn,
+        'space-x-0': flexRow && spacing0,
+        'space-y-0': flexColumn && spacing0,
       },
     ]"
     v-bind="$attrs"
@@ -44,6 +44,7 @@ type Computed = {
   itemsStart: boolean
   itemsCenter: boolean
   itemsEnd: boolean
+  spacing0: boolean
 }
 type Props = {
   component: string
@@ -101,6 +102,9 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     itemsEnd() {
       return this.alignItems === 'flex-end'
+    },
+    spacing0() {
+      return this.spacing === '0'
     },
   },
 })

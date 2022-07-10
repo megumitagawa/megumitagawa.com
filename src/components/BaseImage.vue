@@ -13,19 +13,21 @@ https://github.com/nuxt/image/issues/309
     :height="height"
     :alt="alt"
     :class="[
-      'block w-full',
+      'block',
       {
-        'h-full': objectCover || objectContain,
+        'w-full': fullWidth,
+        'h-full': objectCover || objectContain || fullHeight,
       },
     ]"
     :img-attrs="{
       class: [
         'block w-full',
         {
+          'w-full': fullWidth,
+          'h-full': objectCover || objectContain || fullHeight,
           'object-fill': objectFill,
           'object-cover': objectCover,
           'object-contain': objectContain,
-          'h-full': objectCover || objectContain,
         },
       ],
     }"
@@ -58,6 +60,8 @@ type Props = {
   alt: string
   objectFit: 'fill' | 'cover' | 'contain'
   mediaQuery: string | null
+  fullWidth: boolean
+  fullHeight: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -75,6 +79,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: 'fill',
     },
     mediaQuery: { type: String, default: null },
+    fullWidth: { type: Boolean, default: true },
+    fullHeight: { type: Boolean, default: false },
   },
 
   data() {

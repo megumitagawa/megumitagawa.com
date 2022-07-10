@@ -18,6 +18,18 @@
         :media-query="$mediaQueries.md"
       />
     </BaseBox>
+    <BaseBox
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2/3"
+    >
+      <BaseImage
+        src="/full_body.png"
+        :width="550"
+        :height="1635"
+        alt=""
+        :full-width="false"
+        full-height
+      />
+    </BaseBox>
     <BaseBox component="div" class="absolute top-0 left-1/2 -translate-x-1/2">
       <SiteTitle />
     </BaseBox>

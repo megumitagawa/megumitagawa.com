@@ -152,18 +152,10 @@
     <BaseBackdrop component="div" :open="backdropOpen">
       <BaseBox v-show="contactFormSending" component="p">...</BaseBox>
       <BaseBox v-show="contactFormSucceeded" component="p">
-        {{
-          $accessor.resources.longTextMap.get(
-            'global-backdrop-submission-success'
-          )
-        }}
+        {{ longTextMap.get('index-page-backdrop-submission-success') }}
       </BaseBox>
       <BaseBox v-show="contactFormFailed" component="p">
-        {{
-          $accessor.resources.longTextMap.get(
-            'global-backdrop-submission-failure'
-          )
-        }}
+        {{ longTextMap.get('index-page-backdrop-submission-failure') }}
       </BaseBox>
     </BaseBackdrop>
   </Fragment>
@@ -278,7 +270,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       const urlSearchParams = createURLSearchParams(this.contactFormValue)
       const { ok } = await post(target.action, urlSearchParams)
       this.contactFormStatus = ok ? 'succeeded' : 'failed'
-      await wait(this.$config.globalBackdropDelay)
+      await wait(this.$config.indexPageBackdropDelay)
       this.backdropOpen = false
     },
 

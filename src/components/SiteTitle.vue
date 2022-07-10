@@ -6,9 +6,9 @@
       justify-content="center"
       align-items="center"
     >
-      {{ $accessor.resources.shortTextMap.get('global-header-ja') }}
+      {{ $accessor.resources.shortTextMap.get('site-title-ja') }}
       <SingleDotIcon />
-      {{ $accessor.resources.shortTextMap.get('global-header-en') }}
+      {{ $accessor.resources.shortTextMap.get('site-title-en') }}
     </BaseStack>
   </BaseBox>
 </template>

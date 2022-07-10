@@ -6,7 +6,7 @@ declare module '@nuxt/types/config/runtime' {
     indexPageWorkListLength: number
     worksPageWorkListLength: number
     netlifyFormName: string
-    globalBackdropDelay: number
+    indexPageBackdropDelay: number
     createClientParams?: CreateClientParams
   }
 }

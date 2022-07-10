@@ -1,13 +1,13 @@
 <template>
   <BaseStack component="nav" direction="row">
     <BaseButton component="NuxtLink" to="/#works">
-      {{ $accessor.resources.shortTextMap.get('global-footer-works-link') }}
+      {{ $accessor.resources.shortTextMap.get('site-navigation-works-link') }}
     </BaseButton>
     <BaseButton component="NuxtLink" to="/#profile">
-      {{ $accessor.resources.shortTextMap.get('global-footer-profile-link') }}
+      {{ $accessor.resources.shortTextMap.get('site-navigation-profile-link') }}
     </BaseButton>
     <BaseButton component="NuxtLink" to="/#contact">
-      {{ $accessor.resources.shortTextMap.get('global-footer-contact-link') }}
+      {{ $accessor.resources.shortTextMap.get('site-navigation-contact-link') }}
     </BaseButton>
     <BaseIconButton
       component="a"

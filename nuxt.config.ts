@@ -11,7 +11,7 @@ const {
   NUXT_PUBLIC_INDEX_PAGE_WORK_LIST_LENGTH = '',
   NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH = '',
   NUXT_PUBLIC_NETLIFY_FORM_NAME = '',
-  NUXT_PUBLIC_GLOBAL_BACKDROP_DELAY = '',
+  NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY = '',
   NUXT_PRIVATE_CTF_SPACE_ID = '',
   NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN = '',
   NUXT_PRIVATE_META_ROBOTS_NONE = 'off',
@@ -32,8 +32,8 @@ const createClientParams = {
   accessToken: NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN,
 }
 
-const globalBackdropDelayNumber = +NUXT_PUBLIC_GLOBAL_BACKDROP_DELAY
-const globalBackdropDelay = globalBackdropDelayNumber || 0
+const indexPageBackdropDelayNumber = +NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY
+const indexPageBackdropDelay = indexPageBackdropDelayNumber || 0
 
 const metaRobotsNone = NUXT_PRIVATE_META_ROBOTS_NONE.toLowerCase() === 'on'
 
@@ -140,7 +140,7 @@ const nuxtConfig: NuxtConfig = {
     indexPageWorkListLength,
     worksPageWorkListLength,
     netlifyFormName: NUXT_PUBLIC_NETLIFY_FORM_NAME,
-    globalBackdropDelay,
+    indexPageBackdropDelay,
     ...(productionMode ? {} : { createClientParams }),
   } as NuxtOptionsRuntimeConfig,
 

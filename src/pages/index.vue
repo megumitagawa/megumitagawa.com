@@ -211,7 +211,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       async ({ route, $config, $contentfulClientApi }) => {
         const { items: pageEntryList } =
           await $contentfulClientApi.withoutUnresolvableLinks.getEntries<PageFields>(
-            { content_type: 'page', 'fields.path': '/' }
+            { content_type: 'page', 'fields.path': '/', include: 2 }
           )
         if (pageEntryList.length < 1) throw new Error('No page entry')
 

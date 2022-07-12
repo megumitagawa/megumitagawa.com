@@ -21,6 +21,9 @@ module.exports = {
       '2xl': '1920px',
     },
     extend: {
+      fontFamily: {
+        sans: ['Quicksand', 'Kiwi Maru', 'serif'],
+      },
       fontSize: {
         inherit: 'inherit',
       },

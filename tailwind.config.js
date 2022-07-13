@@ -26,6 +26,27 @@ module.exports = {
       },
       fontSize: {
         inherit: 'inherit',
+        xs: [
+          '0.75rem', // 12px
+          {
+            lineHeight: '1.5',
+            letterSpacing: '0.05em', // 5%
+          },
+        ],
+        base: [
+          '1rem', // 16px
+          {
+            lineHeight: '1.5',
+            letterSpacing: '0.05em', // 5%
+          },
+        ],
+        xl: [
+          '1.25rem', // 20px
+          {
+            lineHeight: '1.5',
+            letterSpacing: '0.05em', // 5%
+          },
+        ],
       },
       width: {
         em: '1em',

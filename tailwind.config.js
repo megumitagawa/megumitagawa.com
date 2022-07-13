@@ -47,6 +47,20 @@ module.exports = {
             letterSpacing: '0.05em', // 5%
           },
         ],
+        '2.5xl': [
+          '1.75rem', // 28px
+          {
+            lineHeight: '1.5',
+            letterSpacing: '0.05em', // 5%
+          },
+        ],
+        '3.5xl': [
+          '2.0625rem', // 33px
+          {
+            lineHeight: '1.5',
+            letterSpacing: '0.05em', // 5%
+          },
+        ],
       },
       width: {
         em: '1em',

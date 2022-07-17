@@ -1,3 +1,13 @@
+const screens = {
+  xs: '428px',
+  sm: '640px',
+  md: '720px',
+  lg: '1024px',
+  xl: '1280px',
+  xxl: '1920px',
+  '2xl': '1920px',
+}
+
 module.exports = {
   content: [
     './src/components/**/*.vue',
@@ -11,15 +21,7 @@ module.exports = {
   theme: {
     // Share settings between Tailwind and NuxtImage
     // Overwrite default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
-    screens: {
-      xs: '428px',
-      sm: '640px',
-      md: '720px',
-      lg: '1024px',
-      xl: '1280px',
-      xxl: '1920px',
-      '2xl': '1920px',
-    },
+    screens,
     extend: {
       fontFamily: {
         sans: ['Quicksand', 'Kiwi Maru', 'serif'],
@@ -64,9 +66,19 @@ module.exports = {
       },
       width: {
         em: '1em',
+        'screens.xs': screens.xs,
+      },
+      minWidth: {
+        'screens.xs': screens.xs,
       },
       height: {
         em: '1em',
+      },
+      spacing: {
+        21: '5.25rem', // 84px
+      },
+      colors: {
+        black: 'rgb(51 51 51)',
       },
     },
   },

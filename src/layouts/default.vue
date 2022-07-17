@@ -1,5 +1,5 @@
 <template>
-  <BaseBox component="div" class="relative w-full h-full py-10">
+  <BaseBox component="div" class="relative w-full h-full py-21">
     <BaseBox class="absolute top-0 left-0 w-full h-full">
       <BaseImage
         src="/background_xs.jpg"
@@ -30,8 +30,11 @@
         full-height
       />
     </BaseBox>
-    <BaseBox component="div" class="absolute top-0 left-1/2 -translate-x-1/2">
-      <SiteTitle />
+    <BaseBox
+      component="div"
+      class="absolute top-5 left-1/2 -translate-x-1/2 w-screens.xs h-11 px-5"
+    >
+      <SiteTitle full-height />
     </BaseBox>
     <BaseBox component="div" class="relative w-full h-full overflow-auto">
       <Nuxt />

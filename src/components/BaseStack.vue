@@ -21,6 +21,10 @@ Don't use gap for spacing for old iOS
         'items-end': itemsEnd,
         'space-x-0': flexRow && spacing0,
         'space-y-0': flexColumn && spacing0,
+        'space-x-4': flexRow && spacingSm,
+        'space-y-4': flexColumn && spacingSm,
+        'space-x-5': flexRow && spacingMd,
+        'space-y-5': flexColumn && spacingMd,
       },
     ]"
     v-bind="$attrs"
@@ -45,13 +49,15 @@ type Computed = {
   itemsCenter: boolean
   itemsEnd: boolean
   spacing0: boolean
+  spacingSm: boolean
+  spacingMd: boolean
 }
 type Props = {
   component: string
   direction: 'column' | 'row'
   justifyContent: 'flex-start' | 'center' | 'flex-end'
   alignItems: 'flex-start' | 'center' | 'flex-end'
-  spacing: string
+  spacing: 0 | 'sm' | 'md'
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -75,7 +81,10 @@ export default Vue.extend<Data, Methods, Computed, Props>({
         ['flex-start', 'center', 'flex-end'].includes(value),
       default: 'flex-start',
     },
-    spacing: { type: String, default: '0' },
+    spacing: {
+      validator: (value) => [0, 'sm', 'md'].includes(value),
+      default: 0,
+    },
   },
 
   computed: {
@@ -104,7 +113,13 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       return this.alignItems === 'flex-end'
     },
     spacing0() {
-      return this.spacing === '0'
+      return this.spacing === 0
+    },
+    spacingSm() {
+      return this.spacing === 'sm'
+    },
+    spacingMd() {
+      return this.spacing === 'md'
     },
   },
 })

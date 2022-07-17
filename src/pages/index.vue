@@ -27,7 +27,12 @@
               <SecondaryBody :document="work.content" component="div" />
             </BaseStack>
           </PrimaryBody>
-          <BaseButton v-if="workList.length" component="NuxtLink" to="/works">
+          <BaseButton
+            v-if="workList.length"
+            component="NuxtLink"
+            to="/works"
+            full-width
+          >
             {{ shortTextMap.get('index-page-works-section-link') }}
             <template #endIcon>
               <RightChevonIcon />
@@ -139,7 +144,7 @@
                   @input="updateContactFormMessageValue"
                 />
                 <BaseBox />
-                <BaseButton type="submit">
+                <BaseButton type="submit" full-width>
                   {{ shortTextMap.get('index-page-contact-section-button') }}
                 </BaseButton>
               </BaseStack>

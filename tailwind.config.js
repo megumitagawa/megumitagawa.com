@@ -27,7 +27,6 @@ module.exports = {
         sans: ['Quicksand', 'Kiwi Maru', 'serif'],
       },
       fontSize: {
-        inherit: 'inherit',
         xs: [
           '0.75rem', // 12px
           {
@@ -50,7 +49,7 @@ module.exports = {
           },
         ],
         '2.5xl': [
-          '1.75rem', // 28px
+          '1.6875rem', // 27px
           {
             lineHeight: '1.5',
             letterSpacing: '0.05em', // 5%
@@ -78,7 +77,10 @@ module.exports = {
         21: '5.25rem', // 84px
       },
       colors: {
+        inherit: 'inherit',
+        white: 'rgb(250 250 250)',
         black: 'rgb(51 51 51)',
+        lime: 'rgb(0 238 0)',
       },
     },
   },

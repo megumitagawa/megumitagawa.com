@@ -44,9 +44,9 @@
     </BaseBox>
     <BaseBox
       component="div"
-      class="absolute bottom-0 left-1/2 -translate-x-1/2"
+      class="absolute bottom-5 left-1/2 -translate-x-1/2 w-screens.xs h-11 px-5"
     >
-      <SiteNavigation />
+      <SiteNavigation full-height />
     </BaseBox>
   </BaseBox>
 </template>

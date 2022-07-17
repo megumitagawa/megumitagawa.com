@@ -2,13 +2,19 @@
   <svg
     :viewBox="viewBox"
     :class="[
-      'block w-em h-em grow-0 shrink-0',
+      'block grow-0 shrink-0',
       {
-        'text-inherit': sizeInherit,
+        'w-em': !fullWidth,
+        'w-full': fullWidth,
+        'h-em': !fullHeight,
+        'h-full': fullHeight,
         'text-xs': sizeXs,
         'text-xl': sizeXl,
         'text-2.5xl': size2hXl,
         'text-3.5xl': size3hXl,
+        'text-white': colorInvert,
+        'text-inherit': colorInherit,
+        'text-black': colorDefault,
       },
     ]"
     xmlns="http://www.w3.org/2000/svg"
@@ -25,15 +31,20 @@ import Vue from 'vue'
 type Data = {}
 type Methods = {}
 type Computed = {
-  sizeInherit: boolean
   sizeXs: boolean
   sizeXl: boolean
   size2hXl: boolean
   size3hXl: boolean
+  colorInvert: boolean
+  colorInherit: boolean
+  colorDefault: boolean
 }
 type Props = {
   viewBox: string
-  size: 'inherit' | 'xs' | 'xl' | '2.5xl' | '3.5xl'
+  fullWidth: boolean
+  fullHeight: boolean
+  size: 'xs' | 'xl' | '2.5xl' | '3.5xl'
+  color: 'invert' | 'inherit' | 'default'
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -43,17 +54,19 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   props: {
     viewBox: { type: String, required: true },
+    fullWidth: { type: Boolean, default: false },
+    fullHeight: { type: Boolean, default: false },
     size: {
-      validator: (value) =>
-        ['inherit', 'xs', 'xl', '2.5xl', '3.5xl'].includes(value),
+      validator: (value) => ['xs', 'xl', '2.5xl', '3.5xl'].includes(value),
+      default: 'xs',
+    },
+    color: {
+      validator: (value) => ['invert', 'inherit', 'default'].includes(value),
       default: 'inherit',
     },
   },
 
   computed: {
-    sizeInherit() {
-      return this.size === 'inherit'
-    },
     sizeXs() {
       return this.size === 'xs'
     },
@@ -65,6 +78,15 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     size3hXl() {
       return this.size === '3.5xl'
+    },
+    colorInvert() {
+      return this.color === 'invert'
+    },
+    colorInherit() {
+      return this.color === 'inherit'
+    },
+    colorDefault() {
+      return this.color === 'default'
     },
   },
 })

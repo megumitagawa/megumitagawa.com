@@ -2,7 +2,20 @@
   <component
     :is="disableableComponent"
     :disabled="nullableDisabled"
-    class="relative flex justify-center items-center w-full"
+    :class="[
+      'relative flex justify-center items-center rounded',
+      {
+        'w-full': fullWidth,
+        'h-full': fullHeight,
+        'p-2.5': sizeXl,
+        'bg-lime': colorInfo,
+        'bg-inherit': colorInherit,
+        'bg-white/75': colorDefault,
+        'backdrop-blur': colorDefault,
+        'text-white': colorInfo,
+        'text-black': colorDefault || colorInherit,
+      },
+    ]"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -24,10 +37,18 @@ type Methods = {}
 type Computed = {
   disableableComponent: string
   nullableDisabled: boolean | null
+  sizeXl: boolean
+  colorInfo: boolean
+  colorInherit: boolean
+  colorDefault: boolean
 }
 type Props = {
   component: string
+  fullWidth: boolean
+  fullHeight: boolean
   disabled: boolean
+  size: 'xl'
+  color: 'info' | 'inherit' | 'default'
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -37,7 +58,17 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   props: {
     component: { type: String, default: 'button' },
+    fullWidth: { type: Boolean, default: false },
+    fullHeight: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
+    size: {
+      validator: (value) => ['xl'].includes(value),
+      default: 'xl',
+    },
+    color: {
+      validator: (value) => ['info', 'inherit', 'default'].includes(value),
+      default: 'default',
+    },
   },
 
   computed: {
@@ -48,6 +79,18 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     // Don't set disabled if not disabled
     nullableDisabled() {
       return this.disabled || null
+    },
+    sizeXl() {
+      return this.size === 'xl'
+    },
+    colorInfo() {
+      return this.color === 'info'
+    },
+    colorInherit() {
+      return this.color === 'inherit'
+    },
+    colorDefault() {
+      return this.color === 'default'
     },
   },
 })

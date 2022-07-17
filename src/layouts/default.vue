@@ -36,7 +36,10 @@
     >
       <SiteTitle full-height />
     </BaseBox>
-    <BaseBox component="div" class="relative w-full h-full overflow-auto">
+    <BaseBox
+      component="div"
+      class="relative w-screens.xs h-full mx-auto px-5 overflow-auto"
+    >
       <Nuxt />
     </BaseBox>
     <BaseBox

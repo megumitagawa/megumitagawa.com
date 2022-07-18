@@ -21,10 +21,12 @@ Don't use gap for spacing for old iOS
         'items-end': itemsEnd,
         'space-x-0': flexRow && spacing0,
         'space-y-0': flexColumn && spacing0,
-        'space-x-4': flexRow && spacingSm,
-        'space-y-4': flexColumn && spacingSm,
-        'space-x-5': flexRow && spacingMd,
-        'space-y-5': flexColumn && spacingMd,
+        'space-x-4': flexRow && !emSizing && spacingSm,
+        'space-y-4': flexColumn && !emSizing && spacingSm,
+        'space-x-5': flexRow && !emSizing && spacingMd,
+        'space-y-5': flexColumn && !emSizing && spacingMd,
+        'space-x-em-1/5': flexRow && emSizing && spacingSm,
+        'space-y-em-1/5': flexColumn && emSizing && spacingSm,
       },
     ]"
     v-bind="$attrs"
@@ -58,6 +60,7 @@ type Props = {
   justifyContent: 'flex-start' | 'center' | 'flex-end'
   alignItems: 'flex-start' | 'center' | 'flex-end'
   spacing: 0 | 'sm' | 'md'
+  emSizing: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -85,6 +88,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       validator: (value) => [0, 'sm', 'md'].includes(value),
       default: 0,
     },
+    emSizing: { type: Boolean, default: false },
   },
 
   computed: {

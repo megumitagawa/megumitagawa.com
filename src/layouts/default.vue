@@ -34,7 +34,14 @@
     </BaseBox>
     <BaseBox
       component="div"
-      class="absolute top-5 left-1/2 -translate-x-1/2 w-screens.xs h-11 px-5"
+      :class="[
+        'absolute top-5 right-1/2 translate-x-1/2 w-screens.xs h-11 px-5',
+        'lg:top-1/2',
+        'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
+        'lg:translate-x-3.5 lg:-translate-y-44 lg:w-auto lg:h-auto lg:px-0',
+        '2lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
+        '2lg:translate-x-5',
+      ]"
     >
       <SiteTitle full-height />
     </BaseBox>

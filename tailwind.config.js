@@ -3,6 +3,7 @@ const screens = {
   sm: '640px',
   md: '720px',
   lg: '1024px',
+  '2lg': '1152px',
   xl: '1280px',
   xxl: '1536px',
   '2xl': '1536px',
@@ -49,6 +50,13 @@ module.exports = {
             letterSpacing: '0.05em', // 5%
           },
         ],
+        '2xl': [
+          '1.5rem', // 24px
+          {
+            lineHeight: '1.5',
+            letterSpacing: '0.05em', // 5%
+          },
+        ],
         '2.5xl': [
           '1.6875rem', // 27px
           {
@@ -78,6 +86,7 @@ module.exports = {
         em: '1em',
       },
       spacing: {
+        'em-1/5': '0.2em',
         21: '5.25rem', // 84px
       },
       colors: {

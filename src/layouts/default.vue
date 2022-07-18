@@ -1,5 +1,8 @@
 <template>
-  <BaseBox component="div" class="relative w-full h-full py-21 overflow-hidden">
+  <BaseBox
+    component="div"
+    :class="['relative w-full h-full py-21 overflow-hidden', 'lg:py-5']"
+  >
     <BaseBox class="absolute top-0 left-0 w-full h-full">
       <BaseImage
         src="/background_xs.jpg"

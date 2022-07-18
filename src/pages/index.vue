@@ -1,7 +1,13 @@
 <template>
   <Fragment>
     <BaseStack component="main">
-      <BaseBox class="h-[calc(var(--vh,100vh)*100_-_theme(spacing.21)*2)]" />
+      <BaseBox
+        component="div"
+        :class="[
+          'w-full h-[calc(var(--vh,100vh)*100_-_theme(spacing.21)*2)]',
+          'lg:h-0',
+        ]"
+      />
       <BaseStack component="div">
         <BaseStack component="section">
           <PrimaryHeading id="works" component="h2">

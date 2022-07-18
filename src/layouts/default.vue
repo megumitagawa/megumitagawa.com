@@ -1,5 +1,5 @@
 <template>
-  <BaseBox component="div" class="relative w-full h-full py-21">
+  <BaseBox component="div" class="relative w-full h-full py-21 overflow-hidden">
     <BaseBox class="absolute top-0 left-0 w-full h-full">
       <BaseImage
         src="/background_xs.jpg"
@@ -20,8 +20,11 @@
     </BaseBox>
     <BaseBox
       :class="[
-        'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+        'absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
         'w-[calc((var(--vh,100vh)*100_-_theme(spacing.21)*2)*0.9*(550/1635))]',
+        'lg:right-[calc((100%_-_theme(screens.xs))/2/2)] lg:w-46',
+        '2xl:w-57',
+        '3xl:w-68',
       ]"
     >
       <BaseImage src="/full_body.png" :width="550" :height="1635" alt="" />

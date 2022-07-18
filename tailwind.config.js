@@ -4,8 +4,9 @@ const screens = {
   md: '720px',
   lg: '1024px',
   xl: '1280px',
-  xxl: '1920px',
-  '2xl': '1920px',
+  xxl: '1536px',
+  '2xl': '1536px',
+  '3xl': '1920px',
 }
 
 module.exports = {
@@ -66,6 +67,9 @@ module.exports = {
       width: {
         em: '1em',
         'screens.xs': screens.xs,
+        46: '11.5rem',
+        57: '13.75rem',
+        68: '17rem',
       },
       minWidth: {
         'screens.xs': screens.xs,

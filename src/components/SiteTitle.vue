@@ -5,8 +5,8 @@
     :class="[
       'flex justify-center items-center rounded bg-white/75 backdrop-blur text-base',
       'lg:block lg:rounded-none lg:bg-transparent lg:backdrop-blur-none lg:text-xl',
-      '2xl:text-2xl',
-      '3xl:text-2.5xl',
+      '3xl:text-2xl',
+      '4xl:text-2.5xl',
       {
         'w-full': fullWidth,
         'h-full': fullHeight,

@@ -26,8 +26,8 @@
         'absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
         'w-[calc((var(--vh,100vh)*100_-_theme(spacing.21)*2)*0.9*(550/1635))]',
         'lg:right-[calc((100%_-_theme(screens.xs))/2/2)] lg:w-46',
-        '2xl:w-57',
-        '3xl:w-68',
+        '3xl:w-57',
+        '4xl:w-68',
       ]"
     >
       <BaseImage src="/full_body.png" :width="550" :height="1635" alt="" />
@@ -39,8 +39,8 @@
         'lg:top-1/2',
         'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
         'lg:translate-x-3.5 lg:-translate-y-44 lg:w-auto lg:h-auto lg:px-0',
-        '2lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
-        '2lg:translate-x-5',
+        'xl:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
+        'xl:translate-x-5',
       ]"
     >
       <SiteTitle full-height />

@@ -1,13 +1,14 @@
+// Share settings between Tailwind and NuxtImage
+// Overwrite default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
 const screens = {
   xs: '428px',
   sm: '640px',
   md: '720px',
   lg: '1024px',
-  '2lg': '1152px',
-  xl: '1280px',
-  xxl: '1536px',
-  '2xl': '1536px',
-  '3xl': '1920px',
+  xl: '1152px',
+  '2xl': '1280px',
+  '3xl': '1536px',
+  '4xl': '1920px',
 }
 
 module.exports = {
@@ -21,8 +22,6 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
-    // Share settings between Tailwind and NuxtImage
-    // Overwrite default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
     screens,
     extend: {
       fontFamily: {

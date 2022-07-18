@@ -21,7 +21,7 @@ https://github.com/nuxt/image/issues/309
     ]"
     :img-attrs="{
       class: [
-        'block w-full',
+        'block',
         {
           'w-full': fullWidth,
           'h-full': objectCover || objectContain || fullHeight,

@@ -1,7 +1,7 @@
 <template>
   <Fragment>
     <BaseStack component="main">
-      <BaseBox />
+      <BaseBox class="h-[calc(var(--vh,100vh)*100_-_theme(spacing.21)*2)]" />
       <BaseStack component="div">
         <BaseStack component="section">
           <PrimaryHeading id="works" component="h2">

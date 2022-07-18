@@ -100,6 +100,7 @@ const nuxtConfig: NuxtConfig = {
     { src: '@/plugins/injectMediaQueries.ts', mode: 'all' },
     { src: '@/plugins/injectDefaultImgSizes.ts', mode: 'all' },
     { src: '@/plugins/updateViewportMeta.ts', mode: 'client' },
+    { src: '@/plugins/setViewportHeight.ts', mode: 'client' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

@@ -19,16 +19,12 @@
       />
     </BaseBox>
     <BaseBox
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2/3"
+      :class="[
+        'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+        'w-[calc((var(--vh,100vh)*100_-_theme(spacing.21)*2)*0.9*(550/1635))]',
+      ]"
     >
-      <BaseImage
-        src="/full_body.png"
-        :width="550"
-        :height="1635"
-        alt=""
-        :full-width="false"
-        full-height
-      />
+      <BaseImage src="/full_body.png" :width="550" :height="1635" alt="" />
     </BaseBox>
     <BaseBox
       component="div"

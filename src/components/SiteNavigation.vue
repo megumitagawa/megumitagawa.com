@@ -3,7 +3,7 @@
     component="footer"
     :class="[
       'text-base',
-      'lg:text-base',
+      'lg:text-base lg:text-gray',
       '3xl:text-xl',
       '4xl:text-2xl',
       {
@@ -30,6 +30,7 @@
         <BaseButton
           component="NuxtLink"
           to="/#works"
+          color="inherit"
           :full-width="!$accessor.currentScreen.overLg"
           :text="$accessor.currentScreen.overLg"
         >
@@ -40,6 +41,7 @@
         <BaseButton
           component="NuxtLink"
           to="/#profile"
+          color="inherit"
           :full-width="!$accessor.currentScreen.overLg"
           :text="$accessor.currentScreen.overLg"
         >
@@ -50,6 +52,7 @@
         <BaseButton
           component="NuxtLink"
           to="/#contact"
+          color="inherit"
           :full-width="!$accessor.currentScreen.overLg"
           :text="$accessor.currentScreen.overLg"
         >
@@ -65,6 +68,7 @@
         rel="noopener noreferrer"
         :size="$accessor.currentScreen.over4xl ? '3.5xl' : '2.5xl'"
         color="info"
+        :blurred="false"
       >
         <SoundListIcon
           :size="$accessor.currentScreen.over4xl ? '3.5xl' : '2.5xl'"

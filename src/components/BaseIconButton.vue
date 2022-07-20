@@ -16,12 +16,13 @@ https://mui.com/material-ui/api/icon-button/
         'p-2': sizeXl,
         'p-2.5': size2hXl,
         'p-3.5': size3hXl,
-        'bg-lime': colorInfo,
         'bg-inherit': colorInherit,
+        'bg-lime': colorInfo,
         'bg-white/75': colorDefault,
-        'backdrop-blur': colorDefault,
+        'backdrop-blur': blurred,
+        'text-inherit': colorInherit,
         'text-white': colorInfo,
-        'text-black': colorDefault || colorInherit,
+        'text-black': colorDefault,
       },
     ]"
     v-bind="$attrs"
@@ -54,6 +55,7 @@ type Props = {
   disabled: boolean
   size: 'xs' | 'xl' | '2.5xl' | '3.5xl'
   color: 'info' | 'inherit' | 'default'
+  blurred: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -74,6 +76,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       validator: (value) => ['info', 'inherit', 'default'].includes(value),
       default: 'default',
     },
+    blurred: { type: Boolean, default: true },
   },
 
   computed: {

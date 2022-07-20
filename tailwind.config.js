@@ -91,8 +91,8 @@ module.exports = {
         21: '5.25rem', // 84px
       },
       colors: {
-        inherit: 'inherit',
         white: 'rgb(250 250 250)',
+        gray: 'rgb(118 118 118)',
         black: 'rgb(51 51 51)',
         lime: 'rgb(0 238 0)',
       },

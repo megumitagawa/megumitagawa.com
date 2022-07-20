@@ -9,12 +9,13 @@
         'h-full': fullHeight,
         'p-2.5': !text && sizeXl,
         rounded: !text,
-        'bg-lime': !text && colorInfo,
         'bg-inherit': !text && colorInherit,
+        'bg-lime': !text && colorInfo,
         'bg-white/75': !text && colorDefault,
-        'backdrop-blur': !text && colorDefault,
+        'backdrop-blur': !text && blurred,
+        'text-inherit': colorInherit,
         'text-white': colorInfo,
-        'text-black': colorDefault || colorInherit,
+        'text-black': colorDefault,
       },
     ]"
     v-bind="$attrs"
@@ -50,6 +51,7 @@ type Props = {
   disabled: boolean
   size: 'xl'
   color: 'info' | 'inherit' | 'default'
+  blurred: boolean
   text: boolean
 }
 
@@ -71,6 +73,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       validator: (value) => ['info', 'inherit', 'default'].includes(value),
       default: 'default',
     },
+    blurred: { type: Boolean, default: true },
     text: { type: Boolean, default: false },
   },
 

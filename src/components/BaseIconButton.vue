@@ -8,7 +8,7 @@ https://mui.com/material-ui/api/icon-button/
     :is="disableableComponent"
     :disabled="nullableDisabled"
     :class="[
-      'flex justify-center items-center grow-0 shrink-0 rounded-full',
+      'flex justify-center items-center grow-0 shrink-0 rounded-full shadow-md',
       {
         'w-full': fullWidth,
         'h-full': fullHeight,

@@ -25,6 +25,7 @@
       :class="[
         'absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
         'w-[calc((var(--vh,100vh)*100_-_theme(spacing.21)*2)*0.9*(550/1635))]',
+        'drop-shadow-2xl',
         'lg:right-[calc((100%_-_theme(screens.xs))/2/2)] lg:w-46',
         '3xl:w-57',
         '4xl:w-68',

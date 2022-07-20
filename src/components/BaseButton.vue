@@ -16,6 +16,8 @@
         'text-inherit': colorInherit,
         'text-white': colorInfo,
         'text-black': colorDefault,
+        'shadow-md': !text,
+        'drop-shadow-md': text,
       },
     ]"
     v-bind="$attrs"

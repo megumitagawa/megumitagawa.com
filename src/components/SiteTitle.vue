@@ -3,8 +3,11 @@
     component="NuxtLink"
     to="/"
     :class="[
-      'flex justify-center items-center rounded bg-white/75 backdrop-blur text-base',
-      'lg:block lg:rounded-none lg:bg-transparent lg:backdrop-blur-none lg:text-xl lg:text-gray',
+      'flex justify-center items-center rounded text-base',
+      'bg-white/75 backdrop-blur shadow-md',
+      'lg:block lg:rounded-none lg:text-xl lg:text-gray',
+      'lg:bg-transparent lg:backdrop-blur-none',
+      'lg:shadow-none lg:drop-shadow-md',
       '3xl:text-2xl',
       '4xl:text-2.5xl',
       {

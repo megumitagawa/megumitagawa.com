@@ -9,8 +9,10 @@ Don't use gap for spacing for old iOS
   <component
     :is="component"
     :class="[
-      'flex w-full',
+      'flex',
       {
+        'w-full': fullWidth,
+        'h-full': fullHeight,
         'flex-row': flexRow,
         'flex-col': flexColumn,
         'justify-start': justifyStart,
@@ -27,6 +29,10 @@ Don't use gap for spacing for old iOS
         'space-y-5': flexColumn && !emSizing && spacingMd,
         'space-x-em-1/5': flexRow && emSizing && spacingSm,
         'space-y-em-1/5': flexColumn && emSizing && spacingSm,
+        'space-x-em-1/2': flexRow && emSizing && spacingMd,
+        'space-y-em-1/2': flexColumn && emSizing && spacingMd,
+        'space-x-em': flexRow && emSizing && spacingLg,
+        'space-y-em': flexColumn && emSizing && spacingLg,
       },
     ]"
     v-bind="$attrs"
@@ -53,13 +59,16 @@ type Computed = {
   spacing0: boolean
   spacingSm: boolean
   spacingMd: boolean
+  spacingLg: boolean
 }
 type Props = {
   component: string
+  fullWidth: boolean
+  fullHeight: boolean
   direction: 'column' | 'row'
   justifyContent: 'flex-start' | 'center' | 'flex-end'
   alignItems: 'flex-start' | 'center' | 'flex-end'
-  spacing: 0 | 'sm' | 'md'
+  spacing: 0 | 'sm' | 'md' | 'lg'
   emSizing: boolean
 }
 
@@ -70,6 +79,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   props: {
     component: { type: String, default: 'span' },
+    fullWidth: { type: Boolean, default: true },
+    fullHeight: { type: Boolean, default: false },
     direction: {
       validator: (value) => ['column', 'row'].includes(value),
       default: 'column',
@@ -85,7 +96,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: 'flex-start',
     },
     spacing: {
-      validator: (value) => [0, 'sm', 'md'].includes(value),
+      validator: (value) => [0, 'sm', 'md', 'lg'].includes(value),
       default: 0,
     },
     emSizing: { type: Boolean, default: false },
@@ -124,6 +135,9 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     spacingMd() {
       return this.spacing === 'md'
+    },
+    spacingLg() {
+      return this.spacing === 'lg'
     },
   },
 })

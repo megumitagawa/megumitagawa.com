@@ -15,7 +15,7 @@ https://mui.com/material-ui/api/icon-button/
         'p-1': sizeXs,
         'p-2': sizeXl,
         'p-2.5': size2hXl,
-        'p-3': size3hXl,
+        'p-3.5': size3hXl,
         'bg-lime': colorInfo,
         'bg-inherit': colorInherit,
         'bg-white/75': colorDefault,

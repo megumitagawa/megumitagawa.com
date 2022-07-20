@@ -86,6 +86,8 @@ module.exports = {
       },
       spacing: {
         'em-1/5': '0.2em',
+        'em-1/2': '0.5em',
+        em: '1em',
         21: '5.25rem', // 84px
       },
       colors: {

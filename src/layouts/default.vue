@@ -36,9 +36,9 @@
       component="div"
       :class="[
         'absolute top-5 right-1/2 translate-x-1/2 w-screens.xs h-11 px-5',
-        'lg:top-1/2',
+        'lg:top-auto lg:bottom-1/2',
         'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
-        'lg:translate-x-3.5 lg:-translate-y-44 lg:w-auto lg:h-auto lg:px-0',
+        'lg:translate-x-3.5 lg:-translate-y-28 lg:w-auto lg:h-auto lg:px-0',
         'xl:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
         'xl:translate-x-5',
       ]"
@@ -53,7 +53,14 @@
     </BaseBox>
     <BaseBox
       component="div"
-      class="absolute bottom-5 left-1/2 -translate-x-1/2 w-screens.xs h-11 px-5"
+      :class="[
+        'absolute bottom-5 right-1/2 translate-x-1/2 w-screens.xs h-11 px-5',
+        'lg:top-1/2 lg:bottom-auto',
+        'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
+        'lg:translate-x-3.5 lg:translate-y-0 lg:w-auto lg:h-auto lg:px-0',
+        'xl:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
+        'xl:translate-x-5',
+      ]"
     >
       <SiteNavigation full-height />
     </BaseBox>

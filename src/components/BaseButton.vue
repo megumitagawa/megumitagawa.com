@@ -3,15 +3,16 @@
     :is="disableableComponent"
     :disabled="nullableDisabled"
     :class="[
-      'relative flex justify-center items-center rounded',
+      'relative flex justify-center items-center',
       {
         'w-full': fullWidth,
         'h-full': fullHeight,
-        'p-2.5': sizeXl,
-        'bg-lime': colorInfo,
-        'bg-inherit': colorInherit,
-        'bg-white/75': colorDefault,
-        'backdrop-blur': colorDefault,
+        'p-2.5': !text && sizeXl,
+        rounded: !text,
+        'bg-lime': !text && colorInfo,
+        'bg-inherit': !text && colorInherit,
+        'bg-white/75': !text && colorDefault,
+        'backdrop-blur': !text && colorDefault,
         'text-white': colorInfo,
         'text-black': colorDefault || colorInherit,
       },
@@ -49,6 +50,7 @@ type Props = {
   disabled: boolean
   size: 'xl'
   color: 'info' | 'inherit' | 'default'
+  text: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -69,6 +71,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       validator: (value) => ['info', 'inherit', 'default'].includes(value),
       default: 'default',
     },
+    text: { type: Boolean, default: false },
   },
 
   computed: {

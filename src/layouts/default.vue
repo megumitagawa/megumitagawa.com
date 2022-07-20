@@ -10,15 +10,15 @@
         :height="1618"
         alt=""
         object-fit="cover"
-        :media-query="$mediaQueries.notMd"
+        :media-query="$mediaQueries.notLg"
       />
       <BaseImage
-        src="/background_md.jpg"
+        src="/background_lg.jpg"
         :width="3840"
         :height="2160"
         alt=""
         object-fit="cover"
-        :media-query="$mediaQueries.md"
+        :media-query="$mediaQueries.lg"
       />
     </BaseBox>
     <BaseBox

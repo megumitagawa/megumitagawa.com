@@ -12,8 +12,8 @@
         'text-xl': sizeXl,
         'text-2.5xl': size2hXl,
         'text-3.5xl': size3hXl,
-        'text-white': colorInvert,
         'text-inherit': colorInherit,
+        'text-white': colorInvert,
         'text-black': colorDefault,
       },
     ]"
@@ -62,7 +62,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     color: {
       validator: (value) => ['invert', 'inherit', 'default'].includes(value),
-      default: 'inherit',
+      default: 'default',
     },
   },
 

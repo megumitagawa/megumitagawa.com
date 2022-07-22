@@ -72,6 +72,7 @@
       >
         <SoundListIcon
           :size="$accessor.currentScreen.over4xl ? '3.5xl' : '2.5xl'"
+          color="inherit"
         />
       </BaseIconButton>
     </BaseStack>

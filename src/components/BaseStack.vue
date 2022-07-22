@@ -27,6 +27,8 @@ Don't use gap for spacing for old iOS
         'space-y-4': flexColumn && !emSizing && spacingSm,
         'space-x-5': flexRow && !emSizing && spacingMd,
         'space-y-5': flexColumn && !emSizing && spacingMd,
+        'space-x-6': flexRow && !emSizing && spacingLg,
+        'space-y-6': flexColumn && !emSizing && spacingLg,
         'space-x-em-1/5': flexRow && emSizing && spacingSm,
         'space-y-em-1/5': flexColumn && emSizing && spacingSm,
         'space-x-em-1/2': flexRow && emSizing && spacingMd,

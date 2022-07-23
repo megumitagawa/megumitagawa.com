@@ -3,17 +3,13 @@
     component="NuxtLink"
     to="/"
     :class="[
-      'flex justify-center items-center rounded text-base',
+      'flex justify-center items-center w-full p-2.5 rounded text-base',
       'bg-white/75 backdrop-blur shadow-md',
-      'lg:block lg:rounded-none lg:text-xl lg:text-gray',
+      'lg:block lg:p-0 lg:rounded-none lg:text-xl lg:text-gray',
       'lg:bg-transparent lg:backdrop-blur-none',
       'lg:shadow-none lg:drop-shadow-md',
       '3xl:text-2xl',
       '4xl:text-2.5xl',
-      {
-        'w-full': fullWidth,
-        'h-full': fullHeight,
-      },
     ]"
   >
     <BaseStack
@@ -43,20 +39,12 @@ type Methods = {}
 type Computed = {
   component: string
 }
-type Props = {
-  fullWidth: boolean
-  fullHeight: boolean
-}
+type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'SiteTitle',
 
   inheritAttrs: false,
-
-  props: {
-    fullWidth: { type: Boolean, default: true },
-    fullHeight: { type: Boolean, default: false },
-  },
 
   computed: {
     component() {

@@ -1,16 +1,7 @@
 <template>
   <BaseBox
     component="footer"
-    :class="[
-      'text-base',
-      'lg:text-base lg:text-gray',
-      '3xl:text-xl',
-      '4xl:text-2xl',
-      {
-        'w-full': fullWidth,
-        'h-full': fullHeight,
-      },
-    ]"
+    :class="['w-full text-base', 'lg:text-gray', '3xl:text-xl', '4xl:text-2xl']"
   >
     <BaseStack
       component="nav"
@@ -18,7 +9,6 @@
       :align-items="$accessor.currentScreen.overLg ? 'flex-end' : 'center'"
       :spacing="$accessor.currentScreen.overLg ? 'lg' : 'md'"
       :em-sizing="$accessor.currentScreen.overLg"
-      full-height
     >
       <BaseStack
         component="div"
@@ -85,19 +75,11 @@ import Vue from 'vue'
 type Data = {}
 type Methods = {}
 type Computed = {}
-type Props = {
-  fullWidth: boolean
-  fullHeight: boolean
-}
+type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'SiteNavigation',
 
   inheritAttrs: false,
-
-  props: {
-    fullWidth: { type: Boolean, default: true },
-    fullHeight: { type: Boolean, default: false },
-  },
 })
 </script>

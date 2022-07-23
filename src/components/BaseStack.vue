@@ -29,6 +29,8 @@ Don't use gap for spacing for old iOS
         'space-y-5': flexColumn && !emSizing && spacingMd,
         'space-x-6': flexRow && !emSizing && spacingLg,
         'space-y-6': flexColumn && !emSizing && spacingLg,
+        'space-x-30': flexRow && !emSizing && spacingXl,
+        'space-y-30': flexColumn && !emSizing && spacingXl,
         'space-x-em-1/5': flexRow && emSizing && spacingSm,
         'space-y-em-1/5': flexColumn && emSizing && spacingSm,
         'space-x-em-1/2': flexRow && emSizing && spacingMd,
@@ -62,6 +64,7 @@ type Computed = {
   spacingSm: boolean
   spacingMd: boolean
   spacingLg: boolean
+  spacingXl: boolean
 }
 type Props = {
   component: string
@@ -70,7 +73,7 @@ type Props = {
   direction: 'column' | 'row'
   justifyContent: 'flex-start' | 'center' | 'flex-end'
   alignItems: 'flex-start' | 'center' | 'flex-end'
-  spacing: 0 | 'sm' | 'md' | 'lg'
+  spacing: 0 | 'sm' | 'md' | 'lg' | 'xl'
   emSizing: boolean
 }
 
@@ -98,7 +101,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: 'flex-start',
     },
     spacing: {
-      validator: (value) => [0, 'sm', 'md', 'lg'].includes(value),
+      validator: (value) => [0, 'sm', 'md', 'lg', 'xl'].includes(value),
       default: 0,
     },
     emSizing: { type: Boolean, default: false },
@@ -140,6 +143,9 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     spacingLg() {
       return this.spacing === 'lg'
+    },
+    spacingXl() {
+      return this.spacing === 'xl'
     },
   },
 })

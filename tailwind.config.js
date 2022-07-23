@@ -90,6 +90,7 @@ module.exports = {
         em: '1em',
         10.5: '2.625rem', // 42px
         21: '5.25rem', // 84px
+        30: '7.5rem', // 120px
       },
       colors: {
         white: 'rgb(250 250 250)',

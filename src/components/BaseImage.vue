@@ -13,10 +13,11 @@ https://github.com/nuxt/image/issues/309
     :height="height"
     :alt="alt"
     :class="[
-      'block',
+      'block overflow-hidden',
       {
         'w-full': fullWidth,
         'h-full': objectCover || objectContain || fullHeight,
+        rounded: rounded,
       },
     ]"
     :img-attrs="{
@@ -62,6 +63,7 @@ type Props = {
   mediaQuery: string | null
   fullWidth: boolean
   fullHeight: boolean
+  rounded: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -81,6 +83,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     mediaQuery: { type: String, default: null },
     fullWidth: { type: Boolean, default: true },
     fullHeight: { type: Boolean, default: false },
+    rounded: { type: Boolean, default: true },
   },
 
   data() {

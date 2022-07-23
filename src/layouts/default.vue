@@ -11,6 +11,7 @@
         alt=""
         object-fit="cover"
         :media-query="$mediaQueries.notLg"
+        :rounded="false"
       />
       <BaseImage
         src="/background_lg.jpg"
@@ -19,6 +20,7 @@
         alt=""
         object-fit="cover"
         :media-query="$mediaQueries.lg"
+        :rounded="false"
       />
     </BaseBox>
     <BaseBox
@@ -31,7 +33,13 @@
         '4xl:w-68',
       ]"
     >
-      <BaseImage src="/full_body.png" :width="550" :height="1635" alt="" />
+      <BaseImage
+        src="/full_body.png"
+        :width="550"
+        :height="1635"
+        alt=""
+        :rounded="false"
+      />
     </BaseBox>
     <BaseBox
       component="div"

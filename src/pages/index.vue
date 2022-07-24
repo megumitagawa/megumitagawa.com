@@ -53,7 +53,7 @@
           {{ shortTextMap.get('index-page-profile-section-heading') }}
         </PrimaryHeading>
         <PrimaryBody component="div">
-          <BaseStack component="div">
+          <BaseStack component="div" spacing="md">
             <BaseImage
               :src="`https:${
                 mediaMap.get('index-page-profile-section').fields.file.url
@@ -77,6 +77,13 @@
             <SecondaryBody
               :document="richTextMap.get('index-page-profile-section-ja')"
               component="div"
+            />
+            <BaseBox
+              component="hr"
+              :class="[
+                'box-content block w-full h-1.5 border-t-0 py-5',
+                'bg-quintuple-dots-icon bg-no-repeat bg-center',
+              ]"
             />
             <SecondaryHeading component="h3">
               {{ shortTextMap.get('index-page-profile-section-name-en') }}

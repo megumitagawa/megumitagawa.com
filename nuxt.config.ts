@@ -175,6 +175,12 @@ const nuxtConfig: NuxtConfig = {
       return createNuxtOptionsGenerateRoute(workEntries, '/works/page/')
     },
   },
+
+  // Loading: https://nuxtjs.org/docs/features/loading/
+  loading: {
+    color: theme.extend.colors.lime,
+    height: '4px',
+  },
 }
 
 export default nuxtConfig

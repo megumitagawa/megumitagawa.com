@@ -17,12 +17,14 @@ https://mui.com/material-ui/api/icon-button/
         'p-2.5': size2hXl,
         'p-3.5': size3hXl,
         'bg-inherit': colorInherit,
-        'bg-lime': colorInfo,
+        'bg-lime': colorInfo && !disabled,
+        'bg-lightgray': colorInfo && disabled,
         'bg-white/75': colorDefault,
         'backdrop-blur': blurred,
         'text-inherit': colorInherit,
         'text-white': colorInfo,
-        'text-black': colorDefault,
+        'text-black': colorDefault && !disabled,
+        'text-lightgray': colorDefault && disabled,
       },
     ]"
     v-bind="$attrs"

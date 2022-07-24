@@ -92,10 +92,14 @@ module.exports = {
       height: {
         em: '1em',
       },
+      minHeight: {
+        11: '2.75rem', // 44px
+      },
       spacing: {
         'em-1/5': '0.2em',
         'em-1/2': '0.5em',
         em: '1em',
+        2.25: '0.5625rem', // 9px
         4.5: '1.125rem', // 18px
         10.5: '2.625rem', // 42px
         21: '5.25rem', // 84px
@@ -103,6 +107,7 @@ module.exports = {
       },
       colors: {
         white: 'rgb(250 250 250)',
+        lightgray: 'rgb(184, 184, 184)',
         gray: 'rgb(118 118 118)',
         black: 'rgb(51 51 51)',
         lime: 'rgb(0 238 0)',
@@ -112,6 +117,9 @@ module.exports = {
       },
       backgroundImage: {
         'quintuple-dots-icon': 'url("@/assets/images/quintuple-dots-icon.svg")',
+      },
+      outlineOffset: {
+        '-1': '-1px',
       },
     },
   },

@@ -5,7 +5,16 @@
     :value="value"
     :placeholder="placeholder"
     :required="required"
-    class="block w-full"
+    :class="[
+      'block w-full border-black px-5 rounded text-base bg-transparent',
+      'text-black placeholder:text-lightgray',
+      {
+        'h-0': invisible,
+        'opacity-0': invisible,
+        border: !invisible,
+        'py-2.25': !invisible,
+      },
+    ]"
     @input="emitInput"
   />
 </template>
@@ -25,6 +34,7 @@ type Props = {
   value: string
   placeholder: string
   required: boolean
+  invisible: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -41,6 +51,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     value: { type: String, required: true },
     placeholder: { type: String, default: '' },
     required: { type: Boolean, default: false },
+    invisible: { type: Boolean, default: false },
   },
 
   methods: {

@@ -12,3 +12,7 @@ body,
 html {
   @apply min-w-screens.xs text-black;
 }
+
+:focus-visible {
+  @apply outline outline-2 -outline-offset-1 outline-lime;
+}

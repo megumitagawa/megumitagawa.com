@@ -108,18 +108,19 @@
             data-netlify-honeypot="bot-field"
             @submit.prevent="postAndReport"
           >
-            <BaseStack component="div">
-              <BaseInput
-                type="hidden"
-                name="form-name"
-                :value="$config.netlifyFormName"
-              />
-              <BaseInput
-                type="text"
-                name="bot-field"
-                :value="contactFormValue.botField"
-                @input="updateContactFormBotFieldValue"
-              />
+            <BaseInput
+              type="hidden"
+              name="form-name"
+              :value="$config.netlifyFormName"
+            />
+            <BaseInput
+              type="text"
+              name="bot-field"
+              invisible
+              :value="contactFormValue.botField"
+              @input="updateContactFormBotFieldValue"
+            />
+            <BaseStack component="div" spacing="md">
               <BaseInput
                 type="text"
                 name="name"
@@ -156,7 +157,7 @@
                 @input="updateContactFormMessageValue"
               />
               <BaseBox />
-              <BaseButton type="submit" full-width>
+              <BaseButton type="submit" color="info" full-width>
                 {{ shortTextMap.get('index-page-contact-section-button') }}
               </BaseButton>
             </BaseStack>

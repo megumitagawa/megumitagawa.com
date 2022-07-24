@@ -5,7 +5,7 @@
   >
     <BaseBox class="absolute top-0 left-0 w-full h-full">
       <BaseImage
-        src="/background_xs.jpg"
+        src="/background-xs.jpg"
         :width="856"
         :height="1618"
         alt=""
@@ -14,7 +14,7 @@
         :rounded="false"
       />
       <BaseImage
-        src="/background_lg.jpg"
+        src="/background-lg.jpg"
         :width="3840"
         :height="2160"
         alt=""
@@ -34,7 +34,7 @@
       ]"
     >
       <BaseImage
-        src="/full_body.png"
+        src="/full-body.png"
         :width="550"
         :height="1635"
         alt=""

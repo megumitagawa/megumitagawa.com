@@ -109,7 +109,7 @@ module.exports = {
         35: '.35',
       },
       backgroundImage: {
-        'quintuple-dots-icon': 'url("@/assets/images/quintuple_dots_icon.svg")',
+        'quintuple-dots-icon': 'url("@/assets/images/quintuple-dots-icon.svg")',
       },
     },
   },

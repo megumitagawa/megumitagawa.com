@@ -57,7 +57,10 @@
     </BaseBox>
     <BaseBox
       component="div"
-      class="relative w-screens.xs h-full mx-auto px-5 pb-2 overflow-auto"
+      :class="[
+        'relative w-screens.xs h-full mx-auto px-5 pb-2',
+        'overflow-auto scrollbar-none',
+      ]"
     >
       <Nuxt />
     </BaseBox>

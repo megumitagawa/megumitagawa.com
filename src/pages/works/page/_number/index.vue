@@ -4,7 +4,7 @@
       {{ shortTextMap.get('works-page-heading') }}
     </PrimaryHeading>
     <PrimaryBody v-for="work of workList" :key="work.id" component="article">
-      <BaseStack component="div">
+      <BaseStack component="div" spacing="md">
         <BaseImage
           v-for="featuredMedia of work.featuredMediaList"
           :key="featuredMedia.sys.id"

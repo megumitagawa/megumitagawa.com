@@ -1,5 +1,8 @@
 <template>
-  <BaseBox :component="component" class="block w-full">
+  <BaseBox
+    :component="component"
+    class="block w-full text-xs whitespace-pre-wrap"
+  >
     <RichText :document="document" />
   </BaseBox>
 </template>
@@ -27,3 +30,22 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 })
 </script>
+
+<style lang="postcss" scoped>
+::v-deep a {
+  @apply text-lime underline;
+}
+
+::v-deep i {
+  @apply italic;
+}
+
+::v-deep u {
+  @apply underline -underline-offset-6 decoration-6 decoration-lime/35;
+}
+
+::v-deep hr {
+  @apply block w-full h-1.5 my-10 border-t-0;
+  @apply bg-quintuple-dots-icon bg-no-repeat bg-center;
+}
+</style>

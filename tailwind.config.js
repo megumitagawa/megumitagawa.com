@@ -71,6 +71,12 @@ module.exports = {
           },
         ],
       },
+      textDecorationThickness: {
+        6: '6px',
+      },
+      textUnderlineOffset: {
+        '-6': '-6px',
+      },
       width: {
         em: '1em',
         'screens.xs': screens.xs,
@@ -98,6 +104,12 @@ module.exports = {
         gray: 'rgb(118 118 118)',
         black: 'rgb(51 51 51)',
         lime: 'rgb(0 238 0)',
+      },
+      opacity: {
+        35: '.35',
+      },
+      backgroundImage: {
+        'quintuple-dots-icon': 'url("@/assets/images/quintuple_dots_icon.svg")',
       },
     },
   },

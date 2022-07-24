@@ -17,7 +17,7 @@
           :key="work.id"
           component="article"
         >
-          <BaseStack component="div">
+          <BaseStack component="div" spacing="md">
             <BaseImage
               v-for="featuredMedia of work.featuredMediaList"
               :key="featuredMedia.sys.id"

@@ -101,67 +101,73 @@
           {{ shortTextMap.get('index-page-contact-section-heading') }}
         </PrimaryHeading>
         <PrimaryBody component="div">
-          <BaseBox
+          <BaseForm
             :name="$config.netlifyFormName"
-            component="form"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
-            @submit.prevent="postAndReport"
+            @submit="postAndReport"
           >
-            <BaseInput
-              type="hidden"
-              name="form-name"
-              :value="$config.netlifyFormName"
-            />
-            <BaseInput
-              type="text"
-              name="bot-field"
-              invisible
-              :value="contactFormValue.botField"
-              @input="updateContactFormBotFieldValue"
-            />
-            <BaseStack component="div" spacing="md">
+            <template #default="{ valid }">
+              <BaseInput
+                type="hidden"
+                name="form-name"
+                :value="$config.netlifyFormName"
+              />
               <BaseInput
                 type="text"
-                name="name"
-                required
-                :value="contactFormValue.name"
-                :placeholder="
-                  shortTextMap.get(
-                    'index-page-contact-section-name-input-placeholder'
-                  )
-                "
-                @input="updateContactFormNameValue"
+                name="bot-field"
+                invisible
+                :value="contactFormValue.botField"
+                @input="updateContactFormBotFieldValue"
               />
-              <BaseInput
-                type="email"
-                name="email"
-                required
-                :value="contactFormValue.email"
-                :placeholder="
-                  shortTextMap.get(
-                    'index-page-contact-section-email-input-placeholder'
-                  )
-                "
-                @input="updateContactFormEmailValue"
-              />
-              <BaseTextarea
-                name="message"
-                required
-                :value="contactFormValue.message"
-                :placeholder="
-                  shortTextMap.get(
-                    'index-page-contact-section-message-textarea-placeholder'
-                  )
-                "
-                @input="updateContactFormMessageValue"
-              />
-              <BaseBox />
-              <BaseButton type="submit" color="info" full-width>
-                {{ shortTextMap.get('index-page-contact-section-button') }}
-              </BaseButton>
-            </BaseStack>
-          </BaseBox>
+              <BaseStack component="div" spacing="md">
+                <BaseInput
+                  type="text"
+                  name="name"
+                  required
+                  :value="contactFormValue.name"
+                  :placeholder="
+                    shortTextMap.get(
+                      'index-page-contact-section-name-input-placeholder'
+                    )
+                  "
+                  @input="updateContactFormNameValue"
+                />
+                <BaseInput
+                  type="email"
+                  name="email"
+                  required
+                  :value="contactFormValue.email"
+                  :placeholder="
+                    shortTextMap.get(
+                      'index-page-contact-section-email-input-placeholder'
+                    )
+                  "
+                  @input="updateContactFormEmailValue"
+                />
+                <BaseTextarea
+                  name="message"
+                  required
+                  :value="contactFormValue.message"
+                  :placeholder="
+                    shortTextMap.get(
+                      'index-page-contact-section-message-textarea-placeholder'
+                    )
+                  "
+                  @input="updateContactFormMessageValue"
+                />
+                <BaseBox />
+                <BaseButton
+                  type="submit"
+                  color="info"
+                  full-width
+                  :disabled="!valid"
+                >
+                  {{ shortTextMap.get('index-page-contact-section-button') }}
+                </BaseButton>
+              </BaseStack>
+            </template>
+          </BaseForm>
         </PrimaryBody>
       </BaseStack>
     </BaseStack>

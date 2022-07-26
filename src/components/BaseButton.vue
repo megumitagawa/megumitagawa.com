@@ -17,12 +17,12 @@
         rounded: !text,
         'bg-lime': !text && colorInfo && !disabled,
         'bg-lightgray': !text && colorInfo && disabled,
-        'bg-white/75': !text && (colorDefault || colorInherit),
+        'bg-white/75': !text && (colorBase || colorInherit),
         'backdrop-blur': !text && blurred,
         'text-inherit': colorInherit,
         'text-white': colorInfo,
-        'text-black': colorDefault && !disabled,
-        'text-lightgray': colorDefault && disabled,
+        'text-black': colorBase && !disabled,
+        'text-lightgray': colorBase && disabled,
         'shadow-md': !text,
         'drop-shadow-md': text,
       },
@@ -52,7 +52,7 @@ type Computed = {
   sizeXs: boolean
   colorInfo: boolean
   colorInherit: boolean
-  colorDefault: boolean
+  colorBase: boolean
 }
 type Props = {
   component: string
@@ -60,7 +60,7 @@ type Props = {
   fullHeight: boolean
   disabled: boolean
   size: 'auto' | 'xs'
-  color: 'info' | 'inherit' | 'default'
+  color: 'info' | 'inherit' | 'base'
   blurred: boolean
   text: boolean
   inheritedFontSize: boolean
@@ -81,8 +81,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: 'auto',
     },
     color: {
-      validator: (value) => ['info', 'inherit', 'default'].includes(value),
-      default: 'default',
+      validator: (value) => ['info', 'inherit', 'base'].includes(value),
+      default: 'base',
     },
     blurred: { type: Boolean, default: true },
     text: { type: Boolean, default: false },
@@ -110,8 +110,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     colorInherit() {
       return this.color === 'inherit'
     },
-    colorDefault() {
-      return this.color === 'default'
+    colorBase() {
+      return this.color === 'base'
     },
   },
 })

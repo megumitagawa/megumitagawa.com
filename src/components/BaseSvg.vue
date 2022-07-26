@@ -14,7 +14,7 @@
         'text-3.5xl': size3hXl,
         'text-inherit': colorInherit,
         'text-white': colorInvert,
-        'text-black': colorDefault,
+        'text-black': colorBase,
       },
     ]"
     xmlns="http://www.w3.org/2000/svg"
@@ -37,14 +37,14 @@ type Computed = {
   size3hXl: boolean
   colorInvert: boolean
   colorInherit: boolean
-  colorDefault: boolean
+  colorBase: boolean
 }
 type Props = {
   viewBox: string
   fullWidth: boolean
   fullHeight: boolean
   size: 'xs' | 'xl' | '2.5xl' | '3.5xl'
-  color: 'invert' | 'inherit' | 'default'
+  color: 'invert' | 'inherit' | 'base'
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -61,8 +61,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: 'xs',
     },
     color: {
-      validator: (value) => ['invert', 'inherit', 'default'].includes(value),
-      default: 'default',
+      validator: (value) => ['invert', 'inherit', 'base'].includes(value),
+      default: 'base',
     },
   },
 
@@ -85,8 +85,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     colorInherit() {
       return this.color === 'inherit'
     },
-    colorDefault() {
-      return this.color === 'default'
+    colorBase() {
+      return this.color === 'base'
     },
   },
 })

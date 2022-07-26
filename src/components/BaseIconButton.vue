@@ -16,12 +16,12 @@ https://mui.com/material-ui/api/icon-button/
         'p-3.5': size3hXl,
         'bg-lime': colorInfo && !disabled,
         'bg-lightgray': colorInfo && disabled,
-        'bg-white/75': colorDefault || colorInherit,
+        'bg-white/75': colorBase || colorInherit,
         'backdrop-blur': blurred,
         'text-inherit': colorInherit,
         'text-white': colorInfo,
-        'text-black': colorDefault && !disabled,
-        'text-lightgray': colorDefault && disabled,
+        'text-black': colorBase && !disabled,
+        'text-lightgray': colorBase && disabled,
       },
     ]"
     v-bind="$attrs"
@@ -43,7 +43,7 @@ type Computed = {
   size3hXl: boolean
   colorInfo: boolean
   colorInherit: boolean
-  colorDefault: boolean
+  colorBase: boolean
 }
 type Props = {
   component: string
@@ -51,7 +51,7 @@ type Props = {
   fullHeight: boolean
   disabled: boolean
   size: '2.5xl' | '3.5xl'
-  color: 'info' | 'inherit' | 'default'
+  color: 'info' | 'inherit' | 'base'
   blurred: boolean
 }
 
@@ -70,8 +70,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: '2.5xl',
     },
     color: {
-      validator: (value) => ['info', 'inherit', 'default'].includes(value),
-      default: 'default',
+      validator: (value) => ['info', 'inherit', 'base'].includes(value),
+      default: 'base',
     },
     blurred: { type: Boolean, default: true },
   },
@@ -97,8 +97,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     colorInherit() {
       return this.color === 'inherit'
     },
-    colorDefault() {
-      return this.color === 'default'
+    colorBase() {
+      return this.color === 'base'
     },
   },
 })

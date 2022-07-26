@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin')
 
 // Share settings between Tailwind and NuxtImage
-// Overwrite default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
+// Override default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
 const screens = {
   xs: '428px',
   sm: '640px',
@@ -89,10 +89,10 @@ module.exports = {
       width: {
         em: '1em',
         'screens.xs': screens.xs,
-        25: '6.25rem',
-        46: '11.5rem',
-        57: '13.75rem',
-        68: '17rem',
+        25: '6.25rem', // 100px
+        46: '11.5rem', // 184px
+        57: '13.75rem', // 220px
+        68: '17rem', // 272px
       },
       minWidth: {
         'screens.xs': screens.xs,

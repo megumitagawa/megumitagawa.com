@@ -6,8 +6,12 @@
       'relative flex justify-center items-center',
       {
         'w-full': fullWidth,
+        'w-auto': !fullWidth && sizeAuto,
+        'w-25': !fullWidth && sizeXs,
         'h-full': fullHeight,
-        'p-2.5': !text && sizeXl,
+        'p-2.5': !text,
+        'grow-0': !fullWidth,
+        'shrink-0': !fullWidth,
         rounded: !text,
         'bg-inherit': !text && colorInherit,
         'bg-lime': !text && colorInfo && !disabled,
@@ -43,7 +47,8 @@ type Methods = {}
 type Computed = {
   disableableComponent: string
   nullableDisabled: boolean | null
-  sizeXl: boolean
+  sizeAuto: boolean
+  sizeXs: boolean
   colorInfo: boolean
   colorInherit: boolean
   colorDefault: boolean
@@ -53,7 +58,7 @@ type Props = {
   fullWidth: boolean
   fullHeight: boolean
   disabled: boolean
-  size: 'xl'
+  size: 'auto' | 'xs'
   color: 'info' | 'inherit' | 'default'
   blurred: boolean
   text: boolean
@@ -70,8 +75,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     fullHeight: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     size: {
-      validator: (value) => ['xl'].includes(value),
-      default: 'xl',
+      validator: (value) => ['auto', 'xs'].includes(value),
+      default: 'auto',
     },
     color: {
       validator: (value) => ['info', 'inherit', 'default'].includes(value),
@@ -90,8 +95,11 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     nullableDisabled() {
       return this.disabled || null
     },
-    sizeXl() {
-      return this.size === 'xl'
+    sizeAuto() {
+      return this.size === 'auto'
+    },
+    sizeXs() {
+      return this.size === 'xs'
     },
     colorInfo() {
       return this.color === 'info'

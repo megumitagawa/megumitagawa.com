@@ -12,8 +12,6 @@ https://mui.com/material-ui/api/icon-button/
       {
         'w-full': fullWidth,
         'h-full': fullHeight,
-        'p-1': sizeXs,
-        'p-2': sizeXl,
         'p-2.5': size2hXl,
         'p-3.5': size3hXl,
         'bg-inherit': colorInherit,
@@ -42,8 +40,6 @@ type Methods = {}
 type Computed = {
   disableableComponent: string
   nullableDisabled: boolean | null
-  sizeXs: boolean
-  sizeXl: boolean
   size2hXl: boolean
   size3hXl: boolean
   colorInfo: boolean
@@ -55,7 +51,7 @@ type Props = {
   fullWidth: boolean
   fullHeight: boolean
   disabled: boolean
-  size: 'xs' | 'xl' | '2.5xl' | '3.5xl'
+  size: '2.5xl' | '3.5xl'
   color: 'info' | 'inherit' | 'default'
   blurred: boolean
 }
@@ -71,8 +67,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     fullHeight: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     size: {
-      validator: (value) => ['xs', 'xl', '2.5xl', '3.5xl'].includes(value),
-      default: 'xl',
+      validator: (value) => ['2.5xl', '3.5xl'].includes(value),
+      default: '2.5xl',
     },
     color: {
       validator: (value) => ['info', 'inherit', 'default'].includes(value),
@@ -89,12 +85,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     // Don't set disabled if not disabled
     nullableDisabled() {
       return this.disabled || null
-    },
-    sizeXs() {
-      return this.size === 'xs'
-    },
-    sizeXl() {
-      return this.size === 'xl'
     },
     size2hXl() {
       return this.size === '2.5xl'

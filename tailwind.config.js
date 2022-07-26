@@ -82,6 +82,7 @@ module.exports = {
       width: {
         em: '1em',
         'screens.xs': screens.xs,
+        25: '6.25rem',
         46: '11.5rem',
         57: '13.75rem',
         68: '17rem',

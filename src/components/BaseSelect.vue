@@ -4,13 +4,23 @@ https://mui.com/material-ui/api/select/
 -->
 
 <template>
-  <component :is="component" class="relative block w-full" v-bind="$attrs">
-    <span class="block w-full">{{ label }}</span>
+  <component
+    :is="component"
+    :class="[
+      'relative flex justify-center items-center w-full p-2.5 rounded',
+      'text-base bg-white/75 backdrop-blur shadow-md',
+    ]"
+    v-bind="$attrs"
+  >
+    {{ label }}
     <select
       ref="select"
       :name="name"
       :value="value"
-      class="absolute top-0 left-0 block w-full h-full opacity-0"
+      :class="[
+        'absolute top-0 left-0 block w-full h-full opacity-0',
+        'cursor-pointer',
+      ]"
       @input="updateLabelAndEmitInput"
     >
       <slot />

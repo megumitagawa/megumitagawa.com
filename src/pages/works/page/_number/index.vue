@@ -23,15 +23,19 @@
       {{ shortTextMap.get('works-page-no-entry-message') }}
     </PrimaryBody>
     <BasePager
+      component="BaseStack"
+      direction="row"
+      spacing="md"
       :current-page-number="currentPageNumber"
       :total-page-number="totalPageNumber"
-      component="div"
     >
       <template #previous="{ previousPageNumber }">
         <BaseButton
           component="NuxtLink"
           :to="`/works/page/${previousPageNumber || ''}`"
           :disabled="!previousPageNumber"
+          :full-width="false"
+          size="xs"
         >
           <template #startIcon>
             <LeftChevonIcon />
@@ -60,6 +64,8 @@
           component="NuxtLink"
           :to="`/works/page/${nextPageNumber || ''}`"
           :disabled="!nextPageNumber"
+          :full-width="false"
+          size="xs"
         >
           {{ shortTextMap.get('works-page-pager-next-link') }}
           <template #endIcon>

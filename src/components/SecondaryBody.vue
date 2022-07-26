@@ -32,6 +32,10 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 </script>
 
 <style lang="postcss" scoped>
+::v-deep p:not(:first-child) {
+  @apply mt-em-1.5;
+}
+
 ::v-deep a {
   @apply text-lime underline;
 }

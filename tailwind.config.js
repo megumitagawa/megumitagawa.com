@@ -125,7 +125,7 @@ module.exports = {
         35: '.35',
       },
       backgroundImage: {
-        'quintuple-dots-icon': 'url("@/assets/images/quintuple-dots-icon.svg")',
+        'quintuple-dots-icon': 'url("@/assets/img/quintuple-dots-icon.svg")',
       },
       outlineOffset: {
         '-1': '-1px',

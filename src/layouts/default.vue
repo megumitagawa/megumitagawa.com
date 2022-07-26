@@ -10,7 +10,7 @@
         :height="1618"
         alt=""
         object-fit="cover"
-        :media-query="$mediaQueries.notLg"
+        :media="$mediaQueries.notLg"
         :rounded="false"
       />
       <BaseImage
@@ -19,7 +19,7 @@
         :height="2160"
         alt=""
         object-fit="cover"
-        :media-query="$mediaQueries.lg"
+        :media="$mediaQueries.lg"
         :rounded="false"
       />
     </BaseBox>

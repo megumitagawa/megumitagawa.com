@@ -60,7 +60,7 @@ type Props = {
   height: number
   alt: string
   objectFit: 'fill' | 'cover' | 'contain'
-  mediaQuery: string | null
+  media: string | null
   fullWidth: boolean
   fullHeight: boolean
   rounded: boolean
@@ -80,7 +80,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       validator: (value) => ['fill', 'cover', 'contain'].includes(value),
       default: 'fill',
     },
-    mediaQuery: { type: String, default: null },
+    media: { type: String, default: null },
     fullWidth: { type: Boolean, default: true },
     fullHeight: { type: Boolean, default: false },
     rounded: { type: Boolean, default: true },
@@ -106,8 +106,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 
   mounted() {
-    if (this.mediaQuery) {
-      this.mediaQueryList = window.matchMedia(this.mediaQuery)
+    if (this.media) {
+      this.mediaQueryList = window.matchMedia(this.media)
       addChangeEventListener(this.mediaQueryList, this.updateExisting)
       this.existing = this.mediaQueryList.matches
     } else {

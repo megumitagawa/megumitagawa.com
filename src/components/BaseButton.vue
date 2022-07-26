@@ -12,11 +12,12 @@
         'p-2.5': !text,
         'grow-0': !fullWidth,
         'shrink-0': !fullWidth,
+        'text-base': !inheritedFontSize,
+        'text-inherited-size': inheritedFontSize,
         rounded: !text,
-        'bg-inherit': !text && colorInherit,
         'bg-lime': !text && colorInfo && !disabled,
         'bg-lightgray': !text && colorInfo && disabled,
-        'bg-white/75': !text && colorDefault,
+        'bg-white/75': !text && (colorDefault || colorInherit),
         'backdrop-blur': !text && blurred,
         'text-inherit': colorInherit,
         'text-white': colorInfo,
@@ -29,11 +30,11 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    <span class="absolute top-1/2 left-0 -translate-y-1/2">
+    <span class="absolute top-1/2 left-4 -translate-y-1/2">
       <slot name="startIcon" />
     </span>
     <slot />
-    <span class="absolute top-1/2 right-0 -translate-y-1/2">
+    <span class="absolute top-1/2 right-4 -translate-y-1/2">
       <slot name="endIcon" />
     </span>
   </component>
@@ -62,6 +63,7 @@ type Props = {
   color: 'info' | 'inherit' | 'default'
   blurred: boolean
   text: boolean
+  inheritedFontSize: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -84,6 +86,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     blurred: { type: Boolean, default: true },
     text: { type: Boolean, default: false },
+    inheritedFontSize: { type: Boolean, default: false },
   },
 
   computed: {

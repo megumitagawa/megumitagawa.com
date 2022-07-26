@@ -30,6 +30,13 @@ module.exports = {
         sans: ['Quicksand', 'Kiwi Maru', 'serif'],
       },
       fontSize: {
+        'inherited-size': [
+          'inherit',
+          {
+            lineHeight: 'inherit',
+            letterSpacing: 'inherit',
+          },
+        ],
         xs: [
           '0.75rem', // 12px
           {

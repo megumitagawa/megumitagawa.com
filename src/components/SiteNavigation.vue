@@ -23,6 +23,7 @@
           color="inherit"
           :full-width="!$accessor.currentScreen.overLg"
           :text="$accessor.currentScreen.overLg"
+          inherited-font-size
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-works-link')
@@ -34,6 +35,7 @@
           color="inherit"
           :full-width="!$accessor.currentScreen.overLg"
           :text="$accessor.currentScreen.overLg"
+          inherited-font-size
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-profile-link')
@@ -45,6 +47,7 @@
           color="inherit"
           :full-width="!$accessor.currentScreen.overLg"
           :text="$accessor.currentScreen.overLg"
+          inherited-font-size
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-contact-link')

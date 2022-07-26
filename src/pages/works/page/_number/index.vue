@@ -38,9 +38,11 @@
           size="xs"
         >
           <template #startIcon>
-            <LeftChevonIcon />
+            <LeftChevonIcon color="inherit" />
           </template>
-          {{ shortTextMap.get('works-page-pager-previous-link') }}
+          <BaseBox class="translate-x-2.5">
+            {{ shortTextMap.get('works-page-pager-previous-link') }}
+          </BaseBox>
         </BaseButton>
       </template>
       <template #current="{ currentPageNumber, totalPageNumber }">
@@ -67,9 +69,11 @@
           :full-width="false"
           size="xs"
         >
-          {{ shortTextMap.get('works-page-pager-next-link') }}
+          <BaseBox class="-translate-x-2.5">
+            {{ shortTextMap.get('works-page-pager-next-link') }}
+          </BaseBox>
           <template #endIcon>
-            <RightChevonIcon />
+            <RightChevonIcon color="inherit" />
           </template>
         </BaseButton>
       </template>

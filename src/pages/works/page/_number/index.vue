@@ -12,6 +12,7 @@
           :width="featuredMedia.fields.file.details.image.width"
           :height="featuredMedia.fields.file.details.image.height"
           :alt="featuredMedia.fields.description || ''"
+          loading="lazy"
         />
         <SecondaryHeading component="h2">
           {{ work.title }}

@@ -25,6 +25,7 @@
               :width="featuredMedia.fields.file.details.image.width"
               :height="featuredMedia.fields.file.details.image.height"
               :alt="featuredMedia.fields.description || ''"
+              loading="lazy"
             />
             <SecondaryHeading component="h3">
               {{ work.title }}
@@ -70,6 +71,7 @@
                 mediaMap.get('index-page-profile-section').fields.description ||
                 ''
               "
+              loading="lazy"
             />
             <SecondaryHeading component="h3">
               {{ shortTextMap.get('index-page-profile-section-name-ja') }}

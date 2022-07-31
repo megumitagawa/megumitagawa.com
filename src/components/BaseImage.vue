@@ -12,6 +12,7 @@ https://github.com/nuxt/image/issues/309
     :width="width"
     :height="height"
     :alt="alt"
+    :loading="loading"
     :class="[
       'block overflow-hidden',
       {
@@ -59,6 +60,7 @@ type Props = {
   width: number
   height: number
   alt: string
+  loading: 'eager' | 'lazy'
   objectFit: 'fill' | 'cover' | 'contain'
   media: string | null
   fullWidth: boolean
@@ -76,6 +78,10 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     width: { type: Number, required: true },
     height: { type: Number, required: true },
     alt: { type: String, default: '' },
+    loading: {
+      validator: (value) => ['eager', 'lazy'].includes(value),
+      default: 'eager',
+    },
     objectFit: {
       validator: (value) => ['fill', 'cover', 'contain'].includes(value),
       default: 'fill',

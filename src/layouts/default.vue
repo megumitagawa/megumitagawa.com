@@ -86,6 +86,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { theme } from '@/../tailwind.config'
 
 type Data = {}
 type Methods = {}
@@ -94,5 +95,15 @@ type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'DefalutLayout',
+
+  created() {
+    this.$accessor.currentLayout.set({
+      pageContentWidth:
+        parseFloat(theme.extend.width['screens.xs']) -
+        parseFloat(theme.extend.fontSize['px-base']) *
+          parseFloat(theme.extend.spacing[5]) *
+          2,
+    })
+  },
 })
 </script>

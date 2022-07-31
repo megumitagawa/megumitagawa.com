@@ -30,6 +30,7 @@ module.exports = {
         sans: ['Quicksand', 'Kiwi Maru', 'serif'],
       },
       fontSize: {
+        'px-base': '16px', // to know font size set to body
         'inherited-size': [
           'inherit',
           {
@@ -110,6 +111,7 @@ module.exports = {
         'em-1.5': '1.5em',
         2.25: '0.5625rem', // 9px
         4.5: '1.125rem', // 18px
+        5: '1.25rem', // 20px: to make importing easy
         10.5: '2.625rem', // 42px
         21: '5.25rem', // 84px
         30: '7.5rem', // 120px

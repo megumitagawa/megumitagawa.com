@@ -9,8 +9,12 @@
           v-for="featuredMedia of work.featuredMediaList"
           :key="featuredMedia.sys.id"
           :src="`https:${featuredMedia.fields.file.url}`"
-          :width="featuredMedia.fields.file.details.image.width"
-          :height="featuredMedia.fields.file.details.image.height"
+          :width="primaryContentWidth"
+          :height="
+            primaryContentWidth *
+            (featuredMedia.fields.file.details.image.height /
+              featuredMedia.fields.file.details.image.width)
+          "
           :alt="featuredMedia.fields.description || ''"
           loading="lazy"
         />
@@ -84,6 +88,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { theme } from '@/../tailwind.config'
 import {
   createErrorCatchableAsyncData,
   createStoreReadyAsyncData,
@@ -102,6 +107,7 @@ type Data = Page & {
   workList: Work[]
   currentPageNumber: PageNumber
   totalPageNumber: PageNumber
+  primaryContentWidth: number
 }
 type Methods = {
   goToWorksPage(formEvent: FormEvent<HTMLSelectElement>): void
@@ -145,6 +151,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
           workList,
           currentPageNumber,
           totalPageNumber,
+          primaryContentWidth: 0,
         }
       }
     )
@@ -155,6 +162,14 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       title: this.title,
       meta: this.meta,
     }
+  },
+
+  created() {
+    this.primaryContentWidth =
+      this.$accessor.currentLayout.pageContentWidth -
+      parseFloat(theme.extend.fontSize['px-base']) *
+        parseFloat(theme.extend.spacing[5]) *
+        2
   },
 
   methods: {

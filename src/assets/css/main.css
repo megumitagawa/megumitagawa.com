@@ -27,7 +27,7 @@ body,
 }
 
 html {
-  @apply min-w-screens.xs text-black;
+  @apply min-w-screens.xs text-px-base text-black;
 }
 
 :focus-visible {

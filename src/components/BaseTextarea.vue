@@ -5,7 +5,7 @@
     :placeholder="placeholder"
     :required="required"
     :class="[
-      'block w-full min-h-11 border border-black px-5 py-2.25',
+      'block w-full min-h-53 border border-black px-5 py-2.25',
       'rounded text-base bg-transparent',
       'text-black placeholder:text-lightgray',
     ]"

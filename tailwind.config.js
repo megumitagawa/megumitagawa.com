@@ -103,6 +103,7 @@ module.exports = {
       },
       minHeight: {
         11: '2.75rem', // 44px
+        53: '13.25rem', // 212px
       },
       spacing: {
         'em-1/5': '0.2em',

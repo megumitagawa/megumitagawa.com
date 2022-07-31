@@ -9,6 +9,8 @@ https://mui.com/material-ui/api/select/
     :class="[
       'relative flex justify-center items-center w-full p-2.5 rounded',
       'text-base bg-white/75 backdrop-blur shadow-md',
+      'transition',
+      'pointer-device:hover:shadow-none pointer-device:hover:translate-y-0.5',
     ]"
     v-bind="$attrs"
   >

@@ -37,7 +37,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 }
 
 ::v-deep a {
-  @apply text-lime underline;
+  @apply text-lime underline brightness-90;
+  @apply transition pointer-device:hover:brightness-125;
 }
 
 ::v-deep i {

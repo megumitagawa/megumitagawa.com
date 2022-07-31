@@ -26,6 +26,9 @@ module.exports = {
   theme: {
     screens,
     extend: {
+      screens: {
+        'pointer-device': { raw: '(hover: hover) and (pointer: fine)' },
+      },
       fontFamily: {
         sans: ['Quicksand', 'Kiwi Maru', 'serif'],
       },

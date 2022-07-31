@@ -3,7 +3,7 @@
     :is="disableableComponent"
     :disabled="nullableDisabled"
     :class="[
-      'relative flex justify-center items-center',
+      'relative flex justify-center items-center transition',
       {
         'w-full': fullWidth,
         'w-auto': !fullWidth && sizeAuto,
@@ -23,8 +23,12 @@
         'text-white': colorInfo,
         'text-black': colorBase && !disabled,
         'text-lightgray': colorBase && disabled,
+        'pointer-device:hover:text-lime': !nullableDisabled && text,
         'shadow-md': !text,
+        'pointer-device:hover:shadow-none': !nullableDisabled && !text,
         'drop-shadow-md': text,
+        'pointer-device:hover:drop-shadow-none': !nullableDisabled && text,
+        'pointer-device:hover:translate-y-0.5': !nullableDisabled && !text,
       },
     ]"
     v-bind="$attrs"

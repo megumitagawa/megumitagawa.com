@@ -9,6 +9,7 @@ https://mui.com/material-ui/api/icon-button/
     :disabled="nullableDisabled"
     :class="[
       'flex justify-center items-center grow-0 shrink-0 rounded-full shadow-md',
+      'transition',
       {
         'w-full': fullWidth,
         'h-full': fullHeight,
@@ -22,6 +23,8 @@ https://mui.com/material-ui/api/icon-button/
         'text-white': colorInfo,
         'text-black': colorBase && !disabled,
         'text-lightgray': colorBase && disabled,
+        'pointer-device:hover:shadow-none': !nullableDisabled,
+        'pointer-device:hover:translate-y-0.5': !nullableDisabled,
       },
     ]"
     v-bind="$attrs"

@@ -5,9 +5,14 @@
     :class="[
       'flex justify-center items-center w-full p-2.5 rounded text-base',
       'bg-white/75 backdrop-blur shadow-md',
+      'transition',
+      'pointer-device:hover:shadow-none pointer-device:hover:translate-y-0.5',
       'lg:block lg:p-0 lg:rounded-none lg:text-xl lg:text-gray',
       'lg:bg-transparent lg:backdrop-blur-none',
       'lg:shadow-none lg:drop-shadow-md',
+      'lg:pointer-device:hover:text-lime',
+      'lg:pointer-device:hover:drop-shadow-none',
+      'lg:pointer-device:hover:translate-y-0',
       '3xl:text-2xl',
       '4xl:text-2.5xl',
     ]"

@@ -88,7 +88,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   data() {
     return {
-      existing: false,
+      existing: !this.media,
       mediaQueryList: null,
     }
   },
@@ -110,8 +110,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       this.mediaQueryList = window.matchMedia(this.media)
       addChangeEventListener(this.mediaQueryList, this.updateExisting)
       this.existing = this.mediaQueryList.matches
-    } else {
-      this.existing = true
     }
   },
 

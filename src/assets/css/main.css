@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /**
+   * Required to enable backdrop blur filter
+   * Because cssnano@^4.1.11 removes empty variables
+   * It can be removed on cssnano@latest
+   * https://github.com/cssnano/cssnano/issues/1165#issuecomment-880284880
+   */
+  --tw-backdrop-brightness: brightness(1);
+  --tw-backdrop-contrast: contrast(1);
+  --tw-backdrop-grayscale: grayscale(0);
+  --tw-backdrop-hue-rotate: hue-rotate(0);
+  --tw-backdrop-invert: invert(0);
+  --tw-backdrop-opacity: opacity(1);
+  --tw-backdrop-saturate: saturate(1);
+  --tw-backdrop-sepia: sepia(0);
+}
+
 html,
 body,
 #__nuxt,

@@ -208,6 +208,7 @@ import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
 import { scrollOffsetParentTo } from '@/models/Selectors'
+import { updateViewportHeight } from '@/models/Window'
 import { Work } from '@/models/Work'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'
@@ -299,8 +300,11 @@ export default Vue.extend<Data, Methods, Computed, Props>({
         2
   },
 
-  mounted() {
+  async mounted() {
     scrollOffsetParentTo(this.$route.hash)
+    // To avoid unnecessary space above native footer in Safari on iOS >= 15
+    await wait(this.$config.viewportUpdateDelay)
+    updateViewportHeight(window)
   },
 
   methods: {

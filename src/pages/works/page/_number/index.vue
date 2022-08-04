@@ -94,10 +94,12 @@ import {
   createStoreReadyAsyncData,
 } from '@/models/AsyncData'
 import { FormEvent } from '@/models/FormEvent'
+import { wait } from '@/models/Milliseconds'
 import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
 import { PageNumber } from '@/models/PageNumber'
+import { updateViewportHeight } from '@/models/Window'
 import { Work } from '@/models/Work'
 import { createTotalPageNumber } from '@/models/WorkEntries'
 import { createWork } from '@/models/WorkEntry'
@@ -170,6 +172,12 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       parseFloat(theme.extend.fontSize['px-base']) *
         parseFloat(theme.extend.spacing[5]) *
         2
+  },
+
+  async mounted() {
+    // To avoid unnecessary space above native footer in Safari on iOS >= 15
+    await wait(this.$config.viewportUpdateDelay)
+    updateViewportHeight(window)
   },
 
   methods: {

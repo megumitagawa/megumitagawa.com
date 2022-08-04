@@ -19,15 +19,23 @@
   --tw-backdrop-sepia: sepia(0);
 }
 
-html,
-body,
+html {
+  @apply w-full min-w-screens.xs text-px-base text-black;
+  /* To update window.innerHeight in Safari on iOS >= 15 */
+  @apply h-screen;
+  /* To avoid unnecessary scrolling outside page content in Safari on iOS >= 15 */
+  @apply overflow-hidden;
+}
+
+body {
+  @apply w-full;
+  /* To avoid unnecessary space above native footer in Safari on iOS >= 15 */
+  @apply h-[calc(var(--vh)*100)];
+}
+
 #__nuxt,
 #__layout {
   @apply w-full h-full;
-}
-
-html {
-  @apply min-w-screens.xs text-px-base text-black;
 }
 
 :focus-visible {

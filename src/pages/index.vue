@@ -3,7 +3,7 @@
     <BaseBox
       component="div"
       :class="[
-        'w-full h-[calc(var(--vh,100vh)*100_-_theme(spacing.21)*2)]',
+        'w-full h-[calc(var(--vh,1vh)*100_-_theme(spacing.21)*2)]',
         'lg:h-0',
       ]"
     />

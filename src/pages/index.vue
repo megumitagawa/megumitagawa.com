@@ -202,13 +202,13 @@ import {
   ContactFormValue,
   createURLSearchParams,
 } from '@/models/ContactFormValue'
+import { scrollOffsetParentTo } from '@/models/HTMLElement'
 import { post } from '@/models/RequestInfo'
 import { wait } from '@/models/Milliseconds'
 import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
-import { scrollOffsetParentTo } from '@/models/Selectors'
-import { updateViewportHeight } from '@/models/Window'
+import { updateViewportHeight, getHTMLElement } from '@/models/Window'
 import { Work } from '@/models/Work'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'
@@ -234,7 +234,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'IndexPage',
 
   beforeRouteUpdate(to, from, next) {
-    scrollOffsetParentTo(to.hash, true)
+    const destinationEl = getHTMLElement(window, to.hash)
+    if (destinationEl) scrollOffsetParentTo(destinationEl, true)
     next()
   },
 
@@ -301,7 +302,8 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 
   async mounted() {
-    scrollOffsetParentTo(this.$route.hash)
+    const destinationEl = getHTMLElement(window, this.$route.hash)
+    if (destinationEl) scrollOffsetParentTo(destinationEl)
     // To avoid unnecessary space above native footer in Safari on iOS >= 15
     await wait(this.$config.viewportUpdateDelay)
     updateViewportHeight(window)

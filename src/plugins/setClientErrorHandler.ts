@@ -4,6 +4,10 @@ import {
   ClientError,
   createNuxtErrorFromClientError,
 } from '@/models/ClientError'
+import {
+  addErrorEventListener,
+  addUnhandledrejectionEventListener,
+} from '@/models/Window'
 
 const setClientErrorHandler: Plugin = ({ $sentry }) => {
   const reportClientError = (clientError: ClientError): void => {
@@ -13,8 +17,8 @@ const setClientErrorHandler: Plugin = ({ $sentry }) => {
     console.error(nuxtError.message)
   }
   Vue.config.errorHandler = reportClientError
-  window.addEventListener('error', reportClientError)
-  window.addEventListener('unhandledrejection', reportClientError)
+  addErrorEventListener(window, reportClientError)
+  addUnhandledrejectionEventListener(window, reportClientError)
 }
 
 export default setClientErrorHandler

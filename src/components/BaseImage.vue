@@ -42,6 +42,7 @@ import {
   addChangeEventListener,
   removeChangeEventListener,
 } from '@/models/MediaQueryList'
+import { createMediaQueryList } from '@/models/Window'
 
 type Data = {
   existing: boolean
@@ -113,7 +114,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   mounted() {
     if (this.media) {
-      this.mediaQueryList = window.matchMedia(this.media)
+      this.mediaQueryList = createMediaQueryList(window, this.media)
       addChangeEventListener(this.mediaQueryList, this.updateExisting)
       this.existing = this.mediaQueryList.matches
     }

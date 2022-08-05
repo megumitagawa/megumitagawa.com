@@ -9,6 +9,7 @@
 
 import { Plugin } from '@nuxt/types'
 import { theme } from '@/../tailwind.config'
+import { getClientWidth } from '@/models/Window'
 
 const updateViewportMeta: Plugin = ({ app }) => {
   if (typeof window === 'undefined') return
@@ -21,7 +22,7 @@ const updateViewportMeta: Plugin = ({ app }) => {
   )
   if (typeof metaProperty?.content !== 'string') return
   const minWidth = parseInt(theme.screens.xs, 10)
-  const documentClientWidth = document.documentElement.clientWidth
+  const documentClientWidth = getClientWidth(window)
   if (documentClientWidth >= minWidth) return
   const initialScale = documentClientWidth / minWidth
   metaProperty.content = `width=${minWidth},initial-scale=${initialScale}`

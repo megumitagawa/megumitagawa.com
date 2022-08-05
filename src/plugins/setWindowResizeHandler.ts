@@ -1,11 +1,11 @@
 import debounce from 'lodash.debounce'
 import { Plugin } from '@nuxt/types'
-import { updateViewportHeight } from '@/models/Window'
+import { updateViewportHeight, addResizeEventListener } from '@/models/Window'
 
 const setWindowResizeHandler: Plugin = ({ $config }) => {
   if (typeof window === 'undefined') return
-  window.addEventListener(
-    'resize',
+  addResizeEventListener(
+    window,
     debounce(updateViewportHeight.bind(null, window), $config.debounceDelay)
   )
 }

@@ -109,10 +109,8 @@ module.exports = {
         53: '13.25rem', // 212px
       },
       spacing: {
-        'em-1/5': '0.2em',
-        'em-1/2': '0.5em',
-        em: '1em',
         'em-1.5': '1.5em',
+        1.25: '0.3125rem', // 5px
         2.25: '0.5625rem', // 9px
         4.5: '1.125rem', // 18px
         5: '1.25rem', // 20px: to make importing easy

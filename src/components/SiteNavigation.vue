@@ -5,17 +5,15 @@
   >
     <BaseStack
       component="nav"
-      :direction="$accessor.currentScreen.overLg ? 'column' : 'row'"
-      :align-items="$accessor.currentScreen.overLg ? 'flex-end' : 'center'"
-      :spacing="$accessor.currentScreen.overLg ? 'lg' : 'md'"
-      :em-sizing="$accessor.currentScreen.overLg"
+      :direction="{ xs: 'row', lg: 'column' }"
+      :align-items="{ xs: 'center', lg: 'flex-end' }"
+      :spacing="{ xs: 'md', lg: 'sm', '3xl': 'md', '4xl': 'lg' }"
     >
       <BaseStack
         component="div"
-        :direction="$accessor.currentScreen.overLg ? 'column' : 'row'"
-        :align-items="$accessor.currentScreen.overLg ? 'flex-end' : 'center'"
-        spacing="md"
-        :em-sizing="$accessor.currentScreen.overLg"
+        :direction="{ xs: 'row', lg: 'column' }"
+        :align-items="{ xs: 'center', lg: 'flex-end' }"
+        :spacing="{ xs: 'md', lg: '3xs', '3xl': '2xs', '4xl': 'xs' }"
       >
         <BaseButton
           component="NuxtLink"

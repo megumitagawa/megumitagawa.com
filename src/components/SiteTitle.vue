@@ -19,11 +19,10 @@
   >
     <BaseStack
       :component="component"
-      :direction="$accessor.currentScreen.overLg ? 'column' : 'row'"
+      :direction="{ xs: 'row', lg: 'column' }"
       justify-content="center"
-      :align-items="$accessor.currentScreen.overLg ? 'flex-end' : 'center'"
-      spacing="sm"
-      :em-sizing="$accessor.currentScreen.overLg"
+      :align-items="{ xs: 'center', lg: 'flex-end' }"
+      :spacing="{ xs: 'sm', lg: '6xs', '3xl': '5xs', '4xl': '4xs' }"
     >
       <BaseBox>
         {{ $accessor.resources.shortTextMap.get('site-title-ja') }}

@@ -57,7 +57,7 @@
         href="https://soundcloud.com/megumi-tagawa"
         target="_blank"
         rel="noopener noreferrer"
-        :size="$accessor.currentScreen.over4xl ? '3.5xl' : '2.5xl'"
+        :size="{ xs: '2.5xl', '4xl': '3.5xl' }"
         color="info"
         :blurred="false"
       >

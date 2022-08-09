@@ -41,7 +41,7 @@
           v-if="workList.length"
           component="NuxtLink"
           to="/works"
-          full-width
+          :full-width="true"
         >
           {{ shortTextMap.get('index-page-works-section-link') }}
           <template #endIcon>
@@ -166,7 +166,7 @@
                 <BaseButton
                   type="submit"
                   color="info"
-                  full-width
+                  :full-width="true"
                   :disabled="!valid"
                 >
                   {{ shortTextMap.get('index-page-contact-section-button') }}

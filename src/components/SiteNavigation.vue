@@ -19,8 +19,8 @@
           component="NuxtLink"
           to="/#works"
           color="inherit"
-          :full-width="!$accessor.currentScreen.overLg"
-          :text="$accessor.currentScreen.overLg"
+          :full-width="{ xs: true, lg: false }"
+          :text="{ xs: false, lg: true }"
           inherited-font-size
         >
           {{
@@ -31,8 +31,8 @@
           component="NuxtLink"
           to="/#profile"
           color="inherit"
-          :full-width="!$accessor.currentScreen.overLg"
-          :text="$accessor.currentScreen.overLg"
+          :full-width="{ xs: true, lg: false }"
+          :text="{ xs: false, lg: true }"
           inherited-font-size
         >
           {{
@@ -43,8 +43,8 @@
           component="NuxtLink"
           to="/#contact"
           color="inherit"
-          :full-width="!$accessor.currentScreen.overLg"
-          :text="$accessor.currentScreen.overLg"
+          :full-width="{ xs: true, lg: false }"
+          :text="{ xs: false, lg: true }"
           inherited-font-size
         >
           {{

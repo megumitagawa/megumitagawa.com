@@ -30,7 +30,7 @@ module.exports = {
         'pointer-device': { raw: '(hover: hover) and (pointer: fine)' },
       },
       fontFamily: {
-        sans: ['Quicksand', 'Kiwi Maru', 'serif'],
+        sans: ['Quicksand', 'Kiwi Maru', 'sans-serif'],
       },
       fontSize: {
         'px-base': '16px', // to know font size set to body

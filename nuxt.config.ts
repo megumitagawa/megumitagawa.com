@@ -107,7 +107,6 @@ const nuxtConfig: NuxtConfig = {
     { src: '@/plugins/injectDefaultImgSizes.ts', mode: 'all' },
     { src: '@/plugins/updateViewportMeta.ts', mode: 'client' },
     { src: '@/plugins/setWindowResizeHandler.ts', mode: 'client' },
-    { src: '@/plugins/setCurrentScreen.ts', mode: 'client' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

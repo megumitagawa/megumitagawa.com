@@ -17,7 +17,7 @@
         'text-base': !textXs || sizeBaseXs, 'lg:text-base': !textLg || sizeBaseLg, '3xl:text-base': !text3xl || sizeBase3xl, '4xl:text-base': !text4xl || sizeBase4xl,
         'text-xl': textXs && sizeXlXs, 'lg:text-xl': textLg && sizeXlLg, '3xl:text-xl': text3xl && sizeXl3xl, '4xl:text-xl': text4xl && sizeXl4xl,
         'text-2xl': textXs && size2xlXs, 'lg:text-2xl': textLg && size2xlLg, '3xl:text-2xl': text3xl && size2xl3xl, '4xl:text-2xl': text4xl && size2xl4xl,
-        'text-2.5xl': textXs && size2hXlXs, 'lg:text-2.5xl': textLg && size2hXlLg, '3xl:text-2.5xl': text3xl && size2hXl3xl, '4xl:text-2.5xl': text4xl && size2hXl4xl,
+        'text-2.5xl': textXs && size2hxlXs, 'lg:text-2.5xl': textLg && size2hxlLg, '3xl:text-2.5xl': text3xl && size2hxl3xl, '4xl:text-2.5xl': text4xl && size2hxl4xl,
         'rounded-none': textXs, 'lg:rounded-none': textLg, '3xl:rounded-none': text3xl, '4xl:rounded-none': text4xl,
         rounded: !textXs, 'lg:rounded': !textLg, '3xl:rounded': !text3xl, '4xl:rounded': !text4xl,
         'bg-transparent': textXs, 'lg:bg-transparent': textLg, '3xl:bg-transparent': text3xl, '4xl:bg-transparent': text4xl,
@@ -75,7 +75,7 @@ type Computed = {
   sizeBase: boolean, sizeBaseXs: boolean, sizeBaseLg: boolean, sizeBase3xl: boolean, sizeBase4xl: boolean
   sizeXl: boolean, sizeXlXs: boolean, sizeXlLg: boolean, sizeXl3xl: boolean, sizeXl4xl: boolean
   size2xl: boolean, size2xlXs: boolean, size2xlLg: boolean, size2xl3xl: boolean, size2xl4xl: boolean
-  size2hXl: boolean, size2hXlXs: boolean, size2hXlLg: boolean, size2hXl3xl: boolean, size2hXl4xl: boolean
+  size2hxl: boolean, size2hxlXs: boolean, size2hxlLg: boolean, size2hxl3xl: boolean, size2hxl4xl: boolean
   colorBase: boolean, colorBaseXs: boolean, colorBaseLg: boolean, colorBase3xl: boolean, colorBase4xl: boolean,
   colorPale: boolean, colorPaleXs: boolean, colorPaleLg: boolean, colorPale3xl: boolean, colorPale4xl: boolean,
   colorInfo: boolean, colorInfoXs: boolean, colorInfoLg: boolean, colorInfo3xl: boolean, colorInfo4xl: boolean,
@@ -182,11 +182,11 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     size2xlLg() { const s = this.size; return typeof s === 'object' ? (s.lg === '2xl' || (!s.lg && this.size2xlXs)) : this.size2xl },
     size2xl3xl() { const s = this.size; return typeof s === 'object' ? (s['3xl'] === '2xl' || (!s['3xl'] && this.size2xlLg)) : this.size2xl },
     size2xl4xl() { const s = this.size; return typeof s === 'object' ? (s['4xl'] === '2xl' || (!s['4xl'] && this.size2xl3xl)) : this.size2xl },
-    size2hXl() { return this.size === '2.5xl' },
-    size2hXlXs() { const s = this.size; return typeof s === 'object' ? s.xs === '2.5xl' : this.size2hXl },
-    size2hXlLg() { const s = this.size; return typeof s === 'object' ? (s.lg === '2.5xl' || (!s.lg && this.size2hXlXs)) : this.size2hXl },
-    size2hXl3xl() { const s = this.size; return typeof s === 'object' ? (s['3xl'] === '2.5xl' || (!s['3xl'] && this.size2hXlLg)) : this.size2hXl },
-    size2hXl4xl() { const s = this.size; return typeof s === 'object' ? (s['4xl'] === '2.5xl' || (!s['4xl'] && this.size2hXl3xl)) : this.size2hXl },
+    size2hxl() { return this.size === '2.5xl' },
+    size2hxlXs() { const s = this.size; return typeof s === 'object' ? s.xs === '2.5xl' : this.size2hxl },
+    size2hxlLg() { const s = this.size; return typeof s === 'object' ? (s.lg === '2.5xl' || (!s.lg && this.size2hxlXs)) : this.size2hxl },
+    size2hxl3xl() { const s = this.size; return typeof s === 'object' ? (s['3xl'] === '2.5xl' || (!s['3xl'] && this.size2hxlLg)) : this.size2hxl },
+    size2hxl4xl() { const s = this.size; return typeof s === 'object' ? (s['4xl'] === '2.5xl' || (!s['4xl'] && this.size2hxl3xl)) : this.size2hxl },
     colorBase() { return this.color === 'base' },
     colorBaseXs() { const c = this.color; return typeof c === 'object' ? c.xs === 'base' : this.colorBase },
     colorBaseLg() { const c = this.color; return typeof c === 'object' ? (c.lg === 'base' || (!c.lg && this.colorBaseXs)) : this.colorBase },

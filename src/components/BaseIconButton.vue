@@ -16,14 +16,13 @@ https://mui.com/material-ui/api/icon-button/
         'h-full': fullHeight,
         'p-2.5': size2hXlXs, 'lg:p-2.5': size2hXlLg, '3xl:p-2.5': size2hXl3xl, '4xl:p-2.5': size2hXl4xl,
         'p-3.5': size3hXlXs, 'lg:p-3.5': size3hXlLg, '3xl:p-3.5': size3hXl3xl, '4xl:p-3.5': size3hXl4xl,
+        'bg-white/75': colorBase,
         'bg-lime': colorInfo && !disabled,
         'bg-lightgray': colorInfo && disabled,
-        'bg-white/75': colorBase || colorInherit,
         'backdrop-blur': blurred,
-        'text-inherit': colorInherit,
-        'text-white': colorInfo,
         'text-black': colorBase && !disabled,
         'text-lightgray': colorBase && disabled,
+        'text-white': colorInfo,
         'pointer-device:hover:shadow-none': !nullableDisabled,
         'pointer-device:hover:translate-y-0.5': !nullableDisabled,
       },
@@ -50,7 +49,6 @@ type Computed = {
   size2hXl: boolean, size2hXlXs: boolean, size2hXlLg: boolean, size2hXl3xl: boolean, size2hXl4xl: boolean,
   size3hXl: boolean, size3hXlXs: boolean, size3hXlLg: boolean, size3hXl3xl: boolean, size3hXl4xl: boolean,
   colorInfo: boolean
-  colorInherit: boolean
   colorBase: boolean
 }
 type Props = {
@@ -59,7 +57,7 @@ type Props = {
   fullHeight: boolean
   disabled: boolean
   size: Size | { [key in keyof typeof theme.screens]?: Size }
-  color: 'info' | 'inherit' | 'base'
+  color: 'base' | 'info'
   blurred: boolean
 }
 
@@ -85,7 +83,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       default: '2.5xl',
     },
     color: {
-      validator: (value) => ['info', 'inherit', 'base'].includes(value),
+      validator: (value) => ['base', 'info'].includes(value),
       default: 'base',
     },
     blurred: { type: Boolean, default: true },
@@ -111,14 +109,11 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     size3hXlLg() { const s = this.size; return typeof s === 'object' ? (s.lg === '3.5xl' || (!s.lg && this.size3hXlXs)) : this.size3hXl },
     size3hXl3xl() { const s = this.size; return typeof s === 'object' ? (s['3xl'] === '3.5xl' || (!s['3xl'] && this.size3hXlLg)) : this.size3hXl },
     size3hXl4xl() { const s = this.size; return typeof s === 'object' ? (s['4xl'] === '3.5xl' || (!s['4xl'] && this.size3hXl3xl)) : this.size3hXl },
-    colorInfo() {
-      return this.color === 'info'
-    },
-    colorInherit() {
-      return this.color === 'inherit'
-    },
     colorBase() {
       return this.color === 'base'
+    },
+    colorInfo() {
+      return this.color === 'info'
     },
   },
 })

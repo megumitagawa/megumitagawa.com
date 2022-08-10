@@ -1,21 +1,11 @@
 <template>
-  <BaseBox
+  <BaseButton
     component="NuxtLink"
     to="/"
-    :class="[
-      'flex justify-center items-center w-full p-2.5 rounded text-base',
-      'bg-white/75 backdrop-blur shadow-md',
-      'transition',
-      'pointer-device:hover:shadow-none pointer-device:hover:translate-y-0.5',
-      'lg:block lg:p-0 lg:rounded-none lg:text-xl lg:text-gray',
-      'lg:bg-transparent lg:backdrop-blur-none',
-      'lg:shadow-none lg:drop-shadow-md',
-      'lg:pointer-device:hover:text-lime',
-      'lg:pointer-device:hover:drop-shadow-none',
-      'lg:pointer-device:hover:translate-y-0',
-      '3xl:text-2xl',
-      '4xl:text-2.5xl',
-    ]"
+    :full-width="{ xs: true, lg: false }"
+    :text="{ xs: false, lg: true }"
+    :size="{ xs: 'base', lg: 'xl', '3xl': '2xl', '4xl': '2.5xl' }"
+    :color="{ xs: 'base', lg: 'pale' }"
   >
     <BaseStack
       :component="component"
@@ -27,12 +17,14 @@
       <BaseBox>
         {{ $accessor.resources.shortTextMap.get('site-title-ja') }}
       </BaseBox>
-      <SingleDotIcon v-show="!$accessor.currentScreen.overLg" size="xs" />
+      <BaseBox class="lg:hidden">
+        <SingleDotIcon size="xs" />
+      </BaseBox>
       <BaseBox>
         {{ $accessor.resources.shortTextMap.get('site-title-en') }}
       </BaseBox>
     </BaseStack>
-  </BaseBox>
+  </BaseButton>
 </template>
 
 <script lang="ts">

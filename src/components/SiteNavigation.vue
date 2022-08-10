@@ -1,8 +1,5 @@
 <template>
-  <BaseBox
-    component="footer"
-    :class="['w-full text-base', 'lg:text-gray', '3xl:text-xl', '4xl:text-2xl']"
-  >
+  <BaseBox component="footer" class="w-full">
     <BaseStack
       component="nav"
       :direction="{ xs: 'row', lg: 'column' }"
@@ -18,10 +15,10 @@
         <BaseButton
           component="NuxtLink"
           to="/#works"
-          color="inherit"
           :full-width="{ xs: true, lg: false }"
           :text="{ xs: false, lg: true }"
-          inherited-font-size
+          :size="{ xs: 'base', '3xl': 'xl', '4xl': '2xl' }"
+          :color="{ xs: 'base', lg: 'pale' }"
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-works-link')
@@ -30,10 +27,10 @@
         <BaseButton
           component="NuxtLink"
           to="/#profile"
-          color="inherit"
           :full-width="{ xs: true, lg: false }"
           :text="{ xs: false, lg: true }"
-          inherited-font-size
+          :size="{ xs: 'base', '3xl': 'xl', '4xl': '2xl' }"
+          :color="{ xs: 'base', lg: 'pale' }"
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-profile-link')
@@ -42,10 +39,10 @@
         <BaseButton
           component="NuxtLink"
           to="/#contact"
-          color="inherit"
           :full-width="{ xs: true, lg: false }"
           :text="{ xs: false, lg: true }"
-          inherited-font-size
+          :size="{ xs: 'base', '3xl': 'xl', '4xl': '2xl' }"
+          :color="{ xs: 'base', lg: 'pale' }"
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-contact-link')

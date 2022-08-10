@@ -39,7 +39,6 @@
           component="NuxtLink"
           :to="`/works/page/${previousPageNumber || ''}`"
           :disabled="!previousPageNumber"
-          :full-width="false"
           size="xs"
         >
           <template #startIcon>
@@ -71,7 +70,6 @@
           component="NuxtLink"
           :to="`/works/page/${nextPageNumber || ''}`"
           :disabled="!nextPageNumber"
-          :full-width="false"
           size="xs"
         >
           <BaseBox class="-translate-x-2.5">

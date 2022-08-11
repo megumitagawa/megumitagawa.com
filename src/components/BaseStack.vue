@@ -42,8 +42,8 @@ Don't use gap for spacing for old iOS
         'space-y-5': directionColumnXs && spacingMdXs, 'lg:space-y-5': directionColumnLg && spacingMdLg, '3xl:space-y-5': directionColumn3xl && spacingMd3xl, '4xl:space-y-5': directionColumn4xl && spacingMd4xl,
         'space-x-6': directionRowXs && spacingLgXs, 'lg:space-x-6': directionRowLg && spacingLgLg, '3xl:space-x-6': directionRow3xl && spacingLg3xl, '4xl:space-x-6': directionRow4xl && spacingLg4xl,
         'space-y-6': directionColumnXs && spacingLgXs, 'lg:space-y-6': directionColumnLg && spacingLgLg, '3xl:space-y-6': directionColumn3xl && spacingLg3xl, '4xl:space-y-6': directionColumn4xl && spacingLg4xl,
-        'space-x-30': directionRowXs && spacingXlXs, 'lg:space-x-30': directionRowLg && spacingXlLg, '3xl:space-x-30': directionRow3xl && spacingXl3xl, '4xl:space-x-30': directionRow4xl && spacingXl4xl,
-        'space-y-30': directionColumnXs && spacingXlXs, 'lg:space-y-30': directionColumnLg && spacingXlLg, '3xl:space-y-30': directionColumn3xl && spacingXl3xl, '4xl:space-y-30': directionColumn4xl && spacingXl4xl,
+        'space-x-40': directionRowXs && spacingXlXs, 'lg:space-x-40': directionRowLg && spacingXlLg, '3xl:space-x-40': directionRow3xl && spacingXl3xl, '4xl:space-x-40': directionRow4xl && spacingXl4xl,
+        'space-y-40': directionColumnXs && spacingXlXs, 'lg:space-y-40': directionColumnLg && spacingXlLg, '3xl:space-y-40': directionColumn3xl && spacingXl3xl, '4xl:space-y-40': directionColumn4xl && spacingXl4xl,
       },
     ]"
     v-bind="$attrs"

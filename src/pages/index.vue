@@ -133,6 +133,7 @@
                 name="bot-field"
                 invisible
                 :value="contactFormValue.botField"
+                placeholder="Bot Field"
                 @input="updateContactFormBotFieldValue"
               />
               <BaseStack component="div" spacing="md">

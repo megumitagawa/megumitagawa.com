@@ -85,6 +85,8 @@ const nuxtConfig: NuxtConfig = {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&family=Quicksand:wght@600&display=swap',
+        media: 'print',
+        onload: 'this.media="all"',
       },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],

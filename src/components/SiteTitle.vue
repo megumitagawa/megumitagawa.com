@@ -6,6 +6,7 @@
     :text="{ xs: false, lg: true }"
     :size="{ xs: 'base', lg: 'xl', '3xl': '2xl', '4xl': '2.5xl' }"
     :color="{ xs: 'base', lg: 'pale' }"
+    opaque
   >
     <BaseStack
       :component="component"

@@ -1,9 +1,6 @@
 <template>
-  <BaseBox
-    component="div"
-    :class="['relative w-full h-full py-21 overflow-hidden', 'lg:py-5']"
-  >
-    <BaseBox class="absolute top-0 left-0 w-full h-full">
+  <Fragment>
+    <BaseBox class="fixed top-0 left-0 w-full h-full">
       <BaseImage
         src="/img/background-xs.jpg"
         :width="856"
@@ -27,7 +24,7 @@
     </BaseBox>
     <BaseBox
       :class="[
-        'absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
+        'fixed top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
         'w-[calc((var(--vh,1vh)*100_-_theme(spacing.21)*2)*0.9*(550/1635))]',
         'drop-shadow-2xl',
         'lg:right-[calc((100%_-_theme(screens.xs))/2/2)] lg:w-46',
@@ -47,7 +44,7 @@
     <BaseBox
       component="div"
       :class="[
-        'absolute top-10.5 right-1/2 translate-x-1/2 -translate-y-1/2',
+        'fixed top-10.5 right-1/2 z-10 translate-x-1/2 -translate-y-1/2',
         'w-screens.xs px-5',
         'lg:top-auto lg:bottom-1/2',
         'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
@@ -60,17 +57,14 @@
     </BaseBox>
     <BaseBox
       component="div"
-      :class="[
-        'relative w-screens.xs h-full mx-auto px-5 pb-2',
-        'overflow-auto scrollbar-none',
-      ]"
+      :class="['w-screens.xs mx-auto px-5 py-21', 'lg:py-5']"
     >
       <Nuxt />
     </BaseBox>
     <BaseBox
       component="div"
       :class="[
-        'absolute bottom-10.5 right-1/2 translate-x-1/2 translate-y-1/2',
+        'fixed bottom-10.5 right-1/2 z-10 translate-x-1/2 translate-y-1/2',
         'w-screens.xs px-5',
         'lg:top-1/2 lg:bottom-auto',
         'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
@@ -81,7 +75,7 @@
     >
       <SiteNavigation />
     </BaseBox>
-  </BaseBox>
+  </Fragment>
 </template>
 
 <script lang="ts">

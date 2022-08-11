@@ -20,22 +20,7 @@
 }
 
 html {
-  @apply w-full min-w-screens.xs text-px-base text-black;
-  /* To update window.innerHeight in Safari on iOS >= 15 */
-  @apply h-screen;
-  /* To avoid unnecessary scrolling outside page content in Safari on iOS >= 15 */
-  @apply overflow-hidden;
-}
-
-body {
-  @apply w-full;
-  /* To avoid unnecessary space above native footer in Safari on iOS >= 15 */
-  @apply h-[calc(var(--vh,1vh)*100)];
-}
-
-#__nuxt,
-#__layout {
-  @apply w-full h-full;
+  @apply min-w-screens.xs text-px-base text-black scroll-smooth;
 }
 
 :focus-visible {

@@ -19,6 +19,7 @@
           :text="{ xs: false, lg: true }"
           :size="{ xs: 'base', '3xl': 'xl', '4xl': '2xl' }"
           :color="{ xs: 'base', lg: 'pale' }"
+          opaque
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-works-link')
@@ -31,6 +32,7 @@
           :text="{ xs: false, lg: true }"
           :size="{ xs: 'base', '3xl': 'xl', '4xl': '2xl' }"
           :color="{ xs: 'base', lg: 'pale' }"
+          opaque
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-profile-link')
@@ -43,6 +45,7 @@
           :text="{ xs: false, lg: true }"
           :size="{ xs: 'base', '3xl': 'xl', '4xl': '2xl' }"
           :color="{ xs: 'base', lg: 'pale' }"
+          opaque
         >
           {{
             $accessor.resources.shortTextMap.get('site-navigation-contact-link')

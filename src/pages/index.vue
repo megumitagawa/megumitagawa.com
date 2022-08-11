@@ -3,15 +3,18 @@
     <BaseBox
       component="div"
       :class="[
-        'w-full h-[calc(var(--vh,1vh)*100_-_theme(spacing.21)*2)]',
+        'w-full h-[calc(var(--vh,1vh)*100_-_theme(spacing.21))]',
         'lg:h-0',
       ]"
     />
     <BaseStack component="div" spacing="xl">
       <BaseStack component="section" spacing="md">
-        <PrimaryHeading id="works" component="h2">
-          {{ shortTextMap.get('index-page-works-section-heading') }}
-        </PrimaryHeading>
+        <BaseBox class="relative w-full">
+          <BaseBox id="works" :class="['absolute -top-21', 'lg:-top-5']" />
+          <PrimaryHeading component="h2">
+            {{ shortTextMap.get('index-page-works-section-heading') }}
+          </PrimaryHeading>
+        </BaseBox>
         <PrimaryBody
           v-for="work of workList"
           :key="work.id"
@@ -54,9 +57,12 @@
       </BaseStack>
 
       <BaseStack component="section" spacing="md">
-        <PrimaryHeading id="profile" component="h2">
-          {{ shortTextMap.get('index-page-profile-section-heading') }}
-        </PrimaryHeading>
+        <BaseBox class="relative w-full">
+          <BaseBox id="profile" :class="['absolute -top-21', 'lg:-top-5']" />
+          <PrimaryHeading component="h2">
+            {{ shortTextMap.get('index-page-profile-section-heading') }}
+          </PrimaryHeading>
+        </BaseBox>
         <PrimaryBody component="div">
           <BaseStack component="div" spacing="md">
             <BaseImage
@@ -103,9 +109,12 @@
       </BaseStack>
 
       <BaseStack component="section" spacing="md">
-        <PrimaryHeading id="contact" component="h2">
-          {{ shortTextMap.get('index-page-contact-section-heading') }}
-        </PrimaryHeading>
+        <BaseBox class="relative w-full">
+          <BaseBox id="contact" :class="['absolute -top-21', 'lg:-top-5']" />
+          <PrimaryHeading component="h2">
+            {{ shortTextMap.get('index-page-contact-section-heading') }}
+          </PrimaryHeading>
+        </BaseBox>
         <PrimaryBody component="div">
           <BaseForm
             :name="$config.netlifyFormName"
@@ -168,6 +177,7 @@
                   color="info"
                   :full-width="true"
                   :disabled="!valid"
+                  opaque
                 >
                   {{ shortTextMap.get('index-page-contact-section-button') }}
                 </BaseButton>
@@ -202,13 +212,12 @@ import {
   ContactFormValue,
   createURLSearchParams,
 } from '@/models/ContactFormValue'
-import { scrollOffsetParentTo } from '@/models/HTMLElement'
 import { post } from '@/models/RequestInfo'
 import { wait } from '@/models/Milliseconds'
 import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
-import { updateViewportHeight, getHTMLElement } from '@/models/Window'
+import { updateViewportHeight } from '@/models/Window'
 import { Work } from '@/models/Work'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'
@@ -232,12 +241,6 @@ type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'IndexPage',
-
-  beforeRouteUpdate(to, from, next) {
-    const destinationEl = getHTMLElement(window, to.hash)
-    if (destinationEl) scrollOffsetParentTo(destinationEl, true)
-    next()
-  },
 
   asyncData: createErrorCatchableAsyncData(
     createStoreReadyAsyncData(
@@ -302,8 +305,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 
   async mounted() {
-    const destinationEl = getHTMLElement(window, this.$route.hash)
-    if (destinationEl) scrollOffsetParentTo(destinationEl)
     // To avoid unnecessary space above native footer in Safari on iOS >= 15
     await wait(this.$config.viewportUpdateDelay)
     updateViewportHeight(window)

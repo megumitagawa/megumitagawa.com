@@ -21,7 +21,8 @@
         'rounded-none': textXs, 'lg:rounded-none': textLg, '3xl:rounded-none': text3xl, '4xl:rounded-none': text4xl,
         rounded: !textXs, 'lg:rounded': !textLg, '3xl:rounded': !text3xl, '4xl:rounded': !text4xl,
         'bg-transparent': textXs, 'lg:bg-transparent': textLg, '3xl:bg-transparent': text3xl, '4xl:bg-transparent': text4xl,
-        'bg-white/75': !textXs && (colorBaseXs || colorPaleXs), 'lg:bg-white/75': !textLg && (colorBaseLg || colorPaleLg), '3xl:bg-white/75': !text3xl && (colorBase3xl || colorPale3xl), '4xl:bg-white/75': !text4xl && (colorBase4xl || colorPale4xl),
+        'bg-white/75': !textXs && !opaque && (colorBaseXs || colorPaleXs), 'lg:bg-white/75': !textLg && !opaque && (colorBaseLg || colorPaleLg), '3xl:bg-white/75': !text3xl && !opaque && (colorBase3xl || colorPale3xl), '4xl:bg-white/75': !text4xl && !opaque && (colorBase4xl || colorPale4xl),
+        'bg-white': !textXs && opaque && (colorBaseXs || colorPaleXs), 'lg:bg-white': !textLg && opaque && (colorBaseLg || colorPaleLg), '3xl:bg-white': !text3xl && opaque && (colorBase3xl || colorPale3xl), '4xl:bg-white': !text4xl && opaque && (colorBase4xl || colorPale4xl),
         'bg-lime': !textXs && colorInfoXs && !disabled, 'lg:bg-lime': !textLg && colorInfoLg && !disabled, '3xl:bg-lime': !text3xl && colorInfo3xl && !disabled, '4xl:bg-lime': !text4xl && colorInfo4xl && !disabled,
         'bg-lightgray': !textXs && colorInfoXs && disabled, 'lg:bg-lightgray': !textLg && colorInfoLg && disabled, '3xl:bg-lightgray': !text3xl && colorInfo3xl && disabled, '4xl:bg-lightgray': !text4xl && colorInfo4xl && disabled,
         'backdrop-blur-none': textXs && blurred, 'lg:backdrop-blur-none': textLg && blurred, '3xl:backdrop-blur-none': text3xl && blurred, '4xl:backdrop-blur-none': text4xl && blurred,
@@ -90,6 +91,7 @@ type Props = {
   color: Color | { [key in keyof typeof theme.screens]?: Color }
   blurred: boolean
   text: boolean | { [key in keyof typeof theme.screens]?: boolean }
+  opaque: boolean
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -146,6 +148,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
         : typeof value === 'boolean',
       default: false,
     },
+    opaque: { type: Boolean, default: false },
   },
 
   // prettier-ignore

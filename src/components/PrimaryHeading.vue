@@ -1,6 +1,5 @@
 <template>
   <BaseBox
-    :id="id"
     :component="component"
     :class="[
       'flex justify-center items-center w-full p-2.5 rounded text-base',
@@ -30,7 +29,6 @@ type Methods = {}
 type Computed = {}
 type Props = {
   component: string
-  id: string | null
 }
 
 export default Vue.extend<Data, Methods, Computed, Props>({
@@ -40,7 +38,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
 
   props: {
     component: { type: String, default: 'span' },
-    id: { type: String, default: null },
   },
 })
 </script>

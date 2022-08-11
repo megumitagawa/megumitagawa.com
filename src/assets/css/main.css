@@ -4,11 +4,21 @@
 
 :root {
   /**
-   * Required to enable backdrop blur filter
+   * Required to enable filter and backdrop filter
    * Because cssnano@^4.1.11 removes empty variables
    * It can be removed on cssnano@latest
    * https://github.com/cssnano/cssnano/issues/1165#issuecomment-880284880
    */
+  --tw-blur: blur(0);
+  --tw-brightness: brightness(1);
+  --tw-contrast: contrast(1);
+  --tw-grayscale: grayscale(0);
+  --tw-hue-rotate: hue-rotate(0);
+  --tw-invert: invert(0);
+  --tw-saturate: saturate(1);
+  --tw-sepia: sepia(0);
+  --tw-drop-shadow: drop-shadow(0 0 #0000);
+  --tw-backdrop-blur: blur(0);
   --tw-backdrop-brightness: brightness(1);
   --tw-backdrop-contrast: contrast(1);
   --tw-backdrop-grayscale: grayscale(0);

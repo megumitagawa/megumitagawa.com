@@ -6,7 +6,7 @@
         :width="856"
         :height="1618"
         alt=""
-        loading="lazy"
+        preload
         object-fit="cover"
         :media="$mediaQueries.notLg"
         :rounded="false"
@@ -16,7 +16,7 @@
         :width="3840"
         :height="2160"
         alt=""
-        loading="lazy"
+        preload
         object-fit="cover"
         :media="$mediaQueries.lg"
         :rounded="false"
@@ -37,7 +37,7 @@
         :width="550"
         :height="1635"
         alt=""
-        loading="lazy"
+        preload
         :rounded="false"
       />
     </BaseBox>

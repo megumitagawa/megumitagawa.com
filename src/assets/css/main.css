@@ -36,3 +36,7 @@ html {
 :focus-visible {
   @apply outline outline-2 -outline-offset-1 outline-lime;
 }
+
+::selection {
+  @apply bg-lime/35;
+}

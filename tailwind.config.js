@@ -103,6 +103,8 @@ module.exports = {
       },
       height: {
         em: '1em',
+        'large-screen': '100lvh',
+        'dynamic-screen': '100dvh',
       },
       minHeight: {
         11: '2.75rem', // 44px
@@ -132,6 +134,9 @@ module.exports = {
       },
       outlineOffset: {
         '-1': '-1px',
+      },
+      transitionProperty: {
+        'sizes-opacity': 'width, height, opacity',
       },
     },
   },

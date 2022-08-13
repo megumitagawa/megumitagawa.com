@@ -3,7 +3,9 @@
     <BaseBox
       component="div"
       :class="[
-        'w-full h-[calc(var(--vh,1vh)*100_-_theme(spacing.21))]',
+        'w-full h-[calc(theme(height.screen)_-_theme(spacing.21))]',
+        // To avoid updating scroll position in iOS >= 15.4
+        'h-[calc(theme(height.large-screen)_-_theme(spacing.21))]',
         'lg:h-0',
       ]"
     />
@@ -218,7 +220,6 @@ import { wait } from '@/models/Milliseconds'
 import { Page } from '@/models/Page'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'
-import { updateViewportHeight } from '@/models/Window'
 import { Work } from '@/models/Work'
 import { createWork } from '@/models/WorkEntry'
 import { WorkFields } from '@/models/WorkFields'
@@ -303,12 +304,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
       parseFloat(theme.extend.fontSize['px-base']) *
         parseFloat(theme.extend.spacing[5]) *
         2
-  },
-
-  async mounted() {
-    // To avoid unnecessary space above native footer in Safari on iOS >= 15
-    await wait(this.$config.viewportUpdateDelay)
-    updateViewportHeight(window)
   },
 
   methods: {

@@ -1,6 +1,12 @@
 <template>
   <Fragment>
-    <BaseBox class="fixed top-0 left-0 w-full h-full">
+    <BaseBox
+      :class="[
+        'fixed top-0 left-0 w-full h-screen',
+        // To hide image resizing in iOS >= 15.4
+        'h-large-screen',
+      ]"
+    >
       <BaseImage
         src="/img/background-xs.jpg"
         :width="856"
@@ -25,11 +31,17 @@
     <BaseBox
       :class="[
         'fixed top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
-        'w-[calc((var(--vh,1vh)*100_-_theme(spacing.21)*2)*0.9*(550/1635))]',
-        'drop-shadow-2xl',
-        'lg:right-[calc((100%_-_theme(screens.xs))/2/2)] lg:w-46',
+        'w-[calc((theme(height.screen)_-_theme(spacing.21)*2)*0.9*(550/1635))]',
+        // To avoid SiteNavigation overlapping with full body image in iOS >= 15.4
+        'w-[calc((theme(height.dynamic-screen)_-_theme(spacing.21)*2)*0.9*(550/1635))]',
+        'drop-shadow-2xl transition-sizes-opacity duration-1000',
+        'lg:right-[calc((theme(inset.full)_-_theme(screens.xs))/2/2)] lg:w-46',
         '3xl:w-57',
         '4xl:w-68',
+        {
+          'opacity-0': !fullBodyImageActive,
+          'opacity-100': fullBodyImageActive,
+        },
       ]"
     >
       <BaseImage
@@ -47,9 +59,9 @@
         'fixed top-10.5 right-1/2 z-10 translate-x-1/2 -translate-y-1/2',
         'w-screens.xs px-5',
         'lg:top-auto lg:bottom-1/2',
-        'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
+        'lg:right-[calc(theme(screens.xs)+(theme(inset.full)_-_theme(screens.xs))*(5/8))]',
         'lg:translate-x-3.5 lg:-translate-y-28 lg:w-auto lg:px-0',
-        'xl:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
+        'xl:right-[calc(theme(screens.xs)+(theme(inset.full)_-_theme(screens.xs))*(4/6))]',
         'xl:translate-x-5',
       ]"
     >
@@ -67,9 +79,9 @@
         'fixed bottom-10.5 right-1/2 z-10 translate-x-1/2 translate-y-1/2',
         'w-screens.xs px-5',
         'lg:top-1/2 lg:bottom-auto',
-        'lg:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(5/8))]',
+        'lg:right-[calc(theme(screens.xs)+(theme(inset.full)_-_theme(screens.xs))*(5/8))]',
         'lg:translate-x-3.5 lg:translate-y-0 lg:w-auto lg:px-0',
-        'xl:right-[calc(theme(screens.xs)+(100%_-_theme(screens.xs))*(4/6))]',
+        'xl:right-[calc(theme(screens.xs)+(theme(inset.full)_-_theme(screens.xs))*(4/6))]',
         'xl:translate-x-5',
       ]"
     >
@@ -81,14 +93,23 @@
 <script lang="ts">
 import Vue from 'vue'
 import { theme } from '@/../tailwind.config'
+import { wait } from '@/models/Milliseconds'
 
-type Data = {}
+type Data = {
+  fullBodyImageActive: boolean
+}
 type Methods = {}
 type Computed = {}
 type Props = {}
 
 export default Vue.extend<Data, Methods, Computed, Props>({
   name: 'DefalutLayout',
+
+  data() {
+    return {
+      fullBodyImageActive: false,
+    }
+  },
 
   created() {
     this.$accessor.currentLayout.set({
@@ -98,6 +119,12 @@ export default Vue.extend<Data, Methods, Computed, Props>({
           parseFloat(theme.extend.spacing[5]) *
           2,
     })
+  },
+
+  async mounted() {
+    // To hide image resizing when updating viewport
+    await wait(this.$config.indexFullBodyImageDelay)
+    this.fullBodyImageActive = true
   },
 })
 </script>

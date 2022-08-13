@@ -12,8 +12,7 @@ const {
   NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH = '',
   NUXT_PUBLIC_NETLIFY_FORM_NAME = '',
   NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY = '',
-  NUXT_PUBLIC_VIEWPORT_UPDATE_DELAY = '',
-  NUXT_PUBLIC_DEBOUNCE_DELAY = '',
+  NUXT_PUBLIC_INDEX_FULL_BODY_IMAGE_DELAY = '',
   NUXT_PRIVATE_CTF_SPACE_ID = '',
   NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN = '',
   NUXT_PRIVATE_META_ROBOTS_NONE = 'off',
@@ -36,10 +35,8 @@ const createClientParams = {
 
 const indexPageBackdropDelayNumber = +NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY
 const indexPageBackdropDelay = indexPageBackdropDelayNumber || 0
-const viewportUpdateDelayNumber = +NUXT_PUBLIC_VIEWPORT_UPDATE_DELAY
-const viewportUpdateDelay = viewportUpdateDelayNumber || 0
-const debounceDelayNumber = +NUXT_PUBLIC_DEBOUNCE_DELAY
-const debounceDelay = debounceDelayNumber || 0
+const indexFullBodyImageDelayNumber = +NUXT_PUBLIC_INDEX_FULL_BODY_IMAGE_DELAY
+const indexFullBodyImageDelay = indexFullBodyImageDelayNumber || 0
 
 const metaRobotsNone = NUXT_PRIVATE_META_ROBOTS_NONE.toLowerCase() === 'on'
 
@@ -108,7 +105,6 @@ const nuxtConfig: NuxtConfig = {
     { src: '@/plugins/injectMediaQueries.ts', mode: 'all' },
     { src: '@/plugins/injectDefaultImgSizes.ts', mode: 'all' },
     { src: '@/plugins/updateViewportMeta.ts', mode: 'client' },
-    { src: '@/plugins/setWindowResizeHandler.ts', mode: 'client' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -163,8 +159,7 @@ const nuxtConfig: NuxtConfig = {
     worksPageWorkListLength,
     netlifyFormName: NUXT_PUBLIC_NETLIFY_FORM_NAME,
     indexPageBackdropDelay,
-    viewportUpdateDelay,
-    debounceDelay,
+    indexFullBodyImageDelay,
     ...(productionMode ? {} : { createClientParams }),
   } as NuxtOptionsRuntimeConfig,
 

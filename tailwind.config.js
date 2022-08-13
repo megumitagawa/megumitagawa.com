@@ -1,5 +1,3 @@
-const plugin = require('tailwindcss/plugin')
-
 // Share settings between Tailwind and NuxtImage
 // Override default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
 const screens = {
@@ -34,13 +32,6 @@ module.exports = {
       },
       fontSize: {
         'px-base': '16px', // to know font size set to body
-        'inherited-size': [
-          'inherit',
-          {
-            lineHeight: 'inherit',
-            letterSpacing: 'inherit',
-          },
-        ],
         xs: [
           '0.75rem', // 12px
           {
@@ -107,7 +98,6 @@ module.exports = {
         'dynamic-screen': '100dvh',
       },
       minHeight: {
-        11: '2.75rem', // 44px
         53: '13.25rem', // 212px
       },
       spacing: {
@@ -140,17 +130,4 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    plugin(({ addUtilities }) => {
-      addUtilities({
-        '.scrollbar-none': {
-          'scrollbar-width': 'none',
-          '-ms-overflow-style': 'none',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        },
-      })
-    }),
-  ],
 }

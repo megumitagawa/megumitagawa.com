@@ -30,13 +30,22 @@
     </BaseBox>
     <BaseBox
       :class="[
-        'fixed top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
-        'w-[calc((theme(height.screen)_-_theme(spacing.21)*2)*0.9*(550/1635))]',
+        'fixed right-1/2 translate-x-1/2',
         // To avoid SiteNavigation overlapping with full body image in iOS >= 15.4
+        'top-[calc(theme(spacing.21)+(theme(height.screen)_-_theme(spacing.21)*2)*((1_-_0.9)/2))]',
+        'top-[calc(theme(spacing.21)+(theme(height.dynamic-screen)_-_theme(spacing.21)*2)*((1_-_0.9)/2))]',
+        'w-[calc((theme(height.screen)_-_theme(spacing.21)*2)*0.9*(550/1635))]',
         'w-[calc((theme(height.dynamic-screen)_-_theme(spacing.21)*2)*0.9*(550/1635))]',
-        'drop-shadow-2xl transition-sizes-opacity duration-1000',
-        'lg:right-[calc((theme(inset.full)_-_theme(screens.xs))/2/2)] lg:w-46',
+        'drop-shadow-2xl transition-top-width-opacity duration-1000',
+        'lg:top-[calc((theme(height.screen)-theme(width.46)*(1635/550))/2)]',
+        'lg:top-[calc((theme(height.dynamic-screen)-theme(width.46)*(1635/550))/2)]',
+        'lg:right-[calc((theme(inset.full)_-_theme(screens.xs))/2/2)]',
+        'lg:w-46',
+        '3xl:top-[calc((theme(height.screen)-theme(width.57)*(1635/550))/2)]',
+        '3xl:top-[calc((theme(height.dynamic-screen)-theme(width.57)*(1635/550))/2)]',
         '3xl:w-57',
+        '4xl:top-[calc((theme(height.screen)-theme(width.68)*(1635/550))/2)]',
+        '4xl:top-[calc((theme(height.dynamic-screen)-theme(width.68)*(1635/550))/2)]',
         '4xl:w-68',
         {
           'opacity-0': !fullBodyImageActive,

@@ -126,7 +126,7 @@ module.exports = {
         '-1': '-1px',
       },
       transitionProperty: {
-        'sizes-opacity': 'width, height, opacity',
+        'top-width-opacity': 'top, width, opacity',
       },
     },
   },

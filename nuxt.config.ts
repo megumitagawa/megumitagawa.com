@@ -13,6 +13,7 @@ const {
   NUXT_PUBLIC_NETLIFY_FORM_NAME = '',
   NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY = '',
   NUXT_PUBLIC_INDEX_FULL_BODY_IMAGE_DELAY = '',
+  NUXT_PUBLIC_BASE_CROSSFADER_DURATION = '',
   NUXT_PRIVATE_CTF_SPACE_ID = '',
   NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN = '',
   NUXT_PRIVATE_META_ROBOTS_NONE = 'off',
@@ -37,6 +38,10 @@ const indexPageBackdropDelayNumber = +NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY
 const indexPageBackdropDelay = indexPageBackdropDelayNumber || 0
 const indexFullBodyImageDelayNumber = +NUXT_PUBLIC_INDEX_FULL_BODY_IMAGE_DELAY
 const indexFullBodyImageDelay = indexFullBodyImageDelayNumber || 0
+const basePublicBaseCrossfaderDurationNumber =
+  +NUXT_PUBLIC_BASE_CROSSFADER_DURATION
+const basePublicBaseCrossfaderDuration =
+  basePublicBaseCrossfaderDurationNumber || 0
 
 const metaRobotsNone = NUXT_PRIVATE_META_ROBOTS_NONE.toLowerCase() === 'on'
 
@@ -160,6 +165,7 @@ const nuxtConfig: NuxtConfig = {
     netlifyFormName: NUXT_PUBLIC_NETLIFY_FORM_NAME,
     indexPageBackdropDelay,
     indexFullBodyImageDelay,
+    basePublicBaseCrossfaderDuration,
     ...(productionMode ? {} : { createClientParams }),
   } as NuxtOptionsRuntimeConfig,
 

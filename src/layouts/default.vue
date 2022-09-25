@@ -1,36 +1,41 @@
 <template>
   <Fragment>
+    <BaseCrossfader>
+      <BaseBox
+        v-for="index of 5"
+        :key="index"
+        component="div"
+        :class="[
+          'fixed top-0 left-0 w-full h-screen',
+          // To hide image resizing in iOS >= 15.4
+          'h-large-screen',
+        ]"
+      >
+        <BaseImage
+          :src="`/img/background-${index}-xs.jpg`"
+          :width="856"
+          :height="1618"
+          alt=""
+          preload
+          object-fit="cover"
+          :media="$mediaQueries.notLg"
+          :rounded="false"
+        />
+        <BaseImage
+          :src="`/img/background-${index}-lg.jpg`"
+          :width="3840"
+          :height="2160"
+          alt=""
+          preload
+          object-fit="cover"
+          :media="$mediaQueries.lg"
+          :rounded="false"
+        />
+      </BaseBox>
+    </BaseCrossfader>
     <BaseBox
       :class="[
-        'fixed top-0 left-0 w-full h-screen',
-        // To hide image resizing in iOS >= 15.4
-        'h-large-screen',
-      ]"
-    >
-      <BaseImage
-        src="/img/background-xs.jpg"
-        :width="856"
-        :height="1618"
-        alt=""
-        preload
-        object-fit="cover"
-        :media="$mediaQueries.notLg"
-        :rounded="false"
-      />
-      <BaseImage
-        src="/img/background-lg.jpg"
-        :width="3840"
-        :height="2160"
-        alt=""
-        preload
-        object-fit="cover"
-        :media="$mediaQueries.lg"
-        :rounded="false"
-      />
-    </BaseBox>
-    <BaseBox
-      :class="[
-        'fixed right-1/2 translate-x-1/2',
+        'fixed right-1/2 z-10 translate-x-1/2',
         // To avoid SiteNavigation overlapping with full body image in iOS >= 15.4
         'top-[calc(theme(spacing.21)+(theme(height.screen)_-_theme(spacing.21)*2)*((1_-_0.9)/2))]',
         'top-[calc(theme(spacing.21)+(theme(height.dynamic-screen)_-_theme(spacing.21)*2)*((1_-_0.9)/2))]',
@@ -65,7 +70,7 @@
     <BaseBox
       component="div"
       :class="[
-        'fixed top-10.5 right-1/2 z-10 translate-x-1/2 -translate-y-1/2',
+        'fixed top-10.5 right-1/2 z-20 translate-x-1/2 -translate-y-1/2',
         'w-screens.xs px-5',
         'lg:top-auto lg:bottom-1/2',
         'lg:right-[calc(theme(screens.xs)+(theme(inset.full)_-_theme(screens.xs))*(5/8))]',
@@ -78,14 +83,14 @@
     </BaseBox>
     <BaseBox
       component="div"
-      :class="['w-screens.xs mx-auto px-5 py-21', 'lg:py-5']"
+      :class="['relative z-10 w-screens.xs mx-auto px-5 py-21', 'lg:py-5']"
     >
       <Nuxt />
     </BaseBox>
     <BaseBox
       component="div"
       :class="[
-        'fixed bottom-10.5 right-1/2 z-10 translate-x-1/2 translate-y-1/2',
+        'fixed bottom-10.5 right-1/2 z-20 translate-x-1/2 translate-y-1/2',
         'w-screens.xs px-5',
         'lg:top-1/2 lg:bottom-auto',
         'lg:right-[calc(theme(screens.xs)+(theme(inset.full)_-_theme(screens.xs))*(5/8))]',

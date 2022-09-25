@@ -8,6 +8,7 @@ declare module '@nuxt/types/config/runtime' {
     netlifyFormName: string
     indexPageBackdropDelay: number
     indexFullBodyImageDelay: number
+    basePublicBaseCrossfaderDuration: number
     createClientParams?: CreateClientParams
   }
 }

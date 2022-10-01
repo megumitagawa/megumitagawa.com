@@ -126,11 +126,6 @@
           >
             <template #default="{ valid }">
               <BaseInput
-                type="hidden"
-                name="form-name"
-                :value="$config.netlifyFormName"
-              />
-              <BaseInput
                 type="text"
                 name="bot-field"
                 invisible
@@ -271,6 +266,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
           ...page,
           workList,
           contactFormValue: {
+            'form-name': $config.netlifyFormName,
             botField: '',
             name: '',
             email: '',

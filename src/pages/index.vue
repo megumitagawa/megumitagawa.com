@@ -192,12 +192,17 @@
     </BaseStack>
 
     <BaseBackdrop component="div" :open="backdropOpen">
-      <BaseBox v-show="contactFormSending" component="p">...</BaseBox>
-      <BaseBox v-show="contactFormSucceeded" component="p">
-        {{ longTextMap.get('index-page-backdrop-submission-success') }}
-      </BaseBox>
-      <BaseBox v-show="contactFormFailed" component="p">
-        {{ longTextMap.get('index-page-backdrop-submission-failure') }}
+      <BaseBox
+        component="p"
+        class="flex justify-center w-1/2 min-w-screens.xs px-5 whitespace-pre-line"
+      >
+        <template v-if="contactFormSending">...</template>
+        <template v-else-if="contactFormSucceeded">{{
+          longTextMap.get('index-page-backdrop-submission-success')
+        }}</template>
+        <template v-else-if="contactFormFailed">{{
+          longTextMap.get('index-page-backdrop-submission-failure')
+        }}</template>
       </BaseBox>
     </BaseBackdrop>
   </Fragment>

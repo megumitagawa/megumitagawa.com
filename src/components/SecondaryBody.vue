@@ -1,7 +1,7 @@
 <template>
   <BaseBox
     :component="component"
-    class="block w-full text-xs whitespace-pre-wrap"
+    class="block w-full text-xs whitespace-pre-line"
   >
     <RichText :document="document" />
   </BaseBox>

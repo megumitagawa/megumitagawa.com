@@ -127,6 +127,7 @@ module.exports = {
       },
       transitionProperty: {
         'top-width-opacity': 'top, width, opacity',
+        'visibility-opacity': 'visibility, opacity',
       },
     },
   },

@@ -1,4 +1,5 @@
 export type ContactFormValue = {
+  'form-name': string
   botField: string
   name: string
   email: string

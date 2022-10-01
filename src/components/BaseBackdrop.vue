@@ -10,10 +10,10 @@ MountingPortal should be replace to teleport in Vue3
     <MountingPortal mount-to="body" append>
       <component
         :is="component"
-        v-show="open"
         :class="[
           'fixed inset-0 z-20 flex justify-center items-center',
-          'overflow-hidden bg-white/75',
+          'overflow-hidden bg-white/90 transition-visibility-opacity',
+          { invisible: !open, 'opacity-0': !open },
         ]"
         v-bind="$attrs"
         v-on="$listeners"

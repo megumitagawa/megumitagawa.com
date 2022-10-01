@@ -126,6 +126,11 @@
           >
             <template #default="{ valid }">
               <BaseInput
+                type="hidden"
+                name="form-name"
+                :value="contactFormValue['form-name']"
+              />
+              <BaseInput
                 type="text"
                 name="bot-field"
                 invisible

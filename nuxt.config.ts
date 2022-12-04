@@ -1,3 +1,13 @@
+import { theme } from './tailwind.config'
+
+// For NuxtImage, convert Tailwind breakpoints settings to unit-less
+const screensWithoutUnits = Object.fromEntries(
+  Object.entries(theme.screens).map(([key, value]) => [
+    key,
+    parseInt(value, 10),
+  ])
+)
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: 'src/',
@@ -9,6 +19,13 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+
+  modules: ['@nuxt/image-edge'],
+
+  image: {
+    domains: ['images.ctfassets.net'],
+    screens: screensWithoutUnits,
   },
 
   runtimeConfig: {

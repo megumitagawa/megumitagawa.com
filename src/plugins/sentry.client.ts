@@ -11,25 +11,13 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
     dsn: sentryDsn,
     tracesSampleRate: sentryTracesSampleRate,
     logErrors: true,
-    environment: `${nodeEnv}: client`,
+    environment: nodeEnv,
     integrations: [
       new BrowserTracing({
         routingInstrumentation: Sentry.vueRouterInstrumentation($router),
         tracePropagationTargets: [siteHostname, /^\//],
       }),
     ],
-  })
-
-  const tracingOptions: Parameters<typeof Sentry.createTracingMixins>[0] = {
-    trackComponents: true,
-    timeout: 2000,
-    hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
-  }
-  vueApp.mixin(Sentry.createTracingMixins(tracingOptions))
-  Sentry.attachErrorHandler(vueApp, {
-    logErrors: true,
-    attachProps: true,
-    ...tracingOptions,
   })
 
   return {

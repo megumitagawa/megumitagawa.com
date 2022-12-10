@@ -1,29 +1,8 @@
 import { useAsyncData } from 'nuxt/app'
-import { isErrorLike } from '@/models/ErrorLike'
 import { createResources } from '@/models/ResourcesEntry'
 import { ResourcesFields } from '@/models/ResourcesFields'
-import { createNuxtErrorFromServerError } from '@/models/ServerError'
 
 type AsyncDataHandler = Parameters<typeof useAsyncData>[1]
-
-type CreateErrorCatchableAsyncDataHandler = (
-  asyncDataHandler: AsyncDataHandler
-) => AsyncDataHandler
-
-export const createErrorCatchableAsyncDataHandler: CreateErrorCatchableAsyncDataHandler =
-  (asyncDataHandler) => async (nuxtApp) => {
-    try {
-      const data = await asyncDataHandler(nuxtApp)
-      return data
-    } catch (error) {
-      if (nuxtApp) {
-        const serverError = isErrorLike(error) ? error : new Error(`${error}`)
-        nuxtApp.$sentry.captureException(serverError)
-        const nuxtError = createNuxtErrorFromServerError(serverError)
-        nuxtApp.error(nuxtError)
-      }
-    }
-  }
 
 type CreateStoreReadyAsyncDataHandler = (
   asyncDataHandler: AsyncDataHandler

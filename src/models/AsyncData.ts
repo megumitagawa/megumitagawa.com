@@ -1,42 +1,50 @@
-import Vue, { ComponentOptions } from 'vue'
+import { useAsyncData } from 'nuxt/app'
 import { isErrorLike } from '@/models/ErrorLike'
 import { createResources } from '@/models/ResourcesEntry'
 import { ResourcesFields } from '@/models/ResourcesFields'
 import { createNuxtErrorFromServerError } from '@/models/ServerError'
 
-type AsyncData = Exclude<ComponentOptions<Vue>['asyncData'], undefined>
+type AsyncDataHandler = Parameters<typeof useAsyncData>[1]
 
-type CreateErrorCatchableAsyncData = (asyncData: AsyncData) => AsyncData
+type CreateErrorCatchableAsyncDataHandler = (
+  asyncDataHandler: AsyncDataHandler
+) => AsyncDataHandler
 
-export const createErrorCatchableAsyncData: CreateErrorCatchableAsyncData =
-  (asyncData) => async (context) => {
+export const createErrorCatchableAsyncDataHandler: CreateErrorCatchableAsyncDataHandler =
+  (asyncDataHandler) => async (nuxtApp) => {
     try {
-      const data = await asyncData(context)
+      const data = await asyncDataHandler(nuxtApp)
       return data
     } catch (error) {
-      const serverError = isErrorLike(error) ? error : new Error(`${error}`)
-      context.$sentry.captureException(serverError)
-      const nuxtError = createNuxtErrorFromServerError(serverError)
-      context.error(nuxtError)
+      if (nuxtApp) {
+        const serverError = isErrorLike(error) ? error : new Error(`${error}`)
+        nuxtApp.$sentry.captureException(serverError)
+        const nuxtError = createNuxtErrorFromServerError(serverError)
+        nuxtApp.error(nuxtError)
+      }
     }
   }
 
-type CreateStoreReadyAsyncData = (asyncData: AsyncData) => AsyncData
+type CreateStoreReadyAsyncDataHandler = (
+  asyncDataHandler: AsyncDataHandler
+) => AsyncDataHandler
 
-export const createStoreReadyAsyncData: CreateStoreReadyAsyncData =
-  (asyncData) => async (context) => {
-    const { $contentfulClientApi, $accessor } = context
+export const createStoreReadyAsyncDataHandler: CreateStoreReadyAsyncDataHandler =
+  (asyncDataHandler) => async (nuxtApp) => {
+    if (nuxtApp) {
+      const { $contentfulClientApi, $accessor } = nuxtApp
 
-    const { items: ResourcesEntryList } =
-      await $contentfulClientApi.withoutUnresolvableLinks.getEntries<ResourcesFields>(
-        { content_type: 'resources', 'fields.slug': 'global-components' }
-      )
-    if (ResourcesEntryList.length < 1)
-      throw new Error('No global components resources entry')
+      const { items: ResourcesEntryList } =
+        await $contentfulClientApi.withoutUnresolvableLinks.getEntries<ResourcesFields>(
+          { content_type: 'resources', 'fields.slug': 'global-components' }
+        )
+      if (ResourcesEntryList.length < 1)
+        throw new Error('No global components resources entry')
 
-    const resources = createResources(ResourcesEntryList[0])
-    $accessor.resources.set(resources)
+      const resources = createResources(ResourcesEntryList[0])
+      $accessor.resources.set(resources)
+    }
 
-    const data = await asyncData(context)
+    const data = await asyncDataHandler(nuxtApp)
     return data
   }

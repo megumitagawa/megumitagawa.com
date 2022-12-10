@@ -1,3 +1,4 @@
+import { version as contentfulVersion } from 'contentful/package.json'
 import { theme } from './tailwind.config'
 
 // For NuxtImage, convert Tailwind breakpoints settings to unit-less
@@ -54,5 +55,26 @@ export default defineNuxtConfig({
       siteUrl: '',
       worksPageWorkListLength: 20,
     },
+  },
+
+  vite: {
+    define: {
+      // Required variable to import contentful as TypeScript
+      // https://github.com/contentful/contentful.js/blob/2ede16730b869e7f8041d35ea176b54550098da0/webpack.config.js#L4
+      // This is workaround for following issues of contentful
+      // - Different handling of modules between production and development
+      //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
+      // - Bundle code containing eval
+      __VERSION__: `'${contentfulVersion}'`,
+    },
+  },
+
+  alias: {
+    // Required alias to import contentful as TypeScript
+    // This is workaround for following issues of contentful
+    // - Different handling of modules between production and development
+    //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
+    // - Bundle code containing eval
+    contentful: 'contentful/lib/index',
   },
 })

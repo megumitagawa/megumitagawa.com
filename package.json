@@ -21,10 +21,12 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@contentful/rich-text-types": "^16.0.2",
     "@nuxt/image-edge": "^1.0.0-27827328.bc9ddc0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@sentry/tracing": "^7.23.0",
     "@sentry/vue": "^7.23.0",
+    "contentful": "^10.0.0-beta-v10.8",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^4.0.0",

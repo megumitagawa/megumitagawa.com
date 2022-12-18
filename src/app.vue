@@ -24,5 +24,32 @@
 </template>
 
 <script setup lang="ts">
+import { ResourcesFields } from '@/models/ResourcesFields'
+import { createResources } from '@/models/ResourcesEntry'
+import { useResourcesStore } from '@/stores/resources'
+
+// Robots meta element
 const { metaRobotsNone } = useRuntimeConfig()
+
+// Resources for global components
+const { $contentfulClientApi } = useNuxtApp()
+const { data: resourcesEntriesRef } = await useAsyncData(
+  'resources/global-components',
+  () =>
+    $contentfulClientApi.withoutUnresolvableLinks.getEntries<ResourcesFields>({
+      content_type: 'resources',
+      'fields.slug': 'global-components',
+    })
+)
+if (!resourcesEntriesRef.value)
+  throw createError('No global components resources response')
+const { items: resourcesEntryList } = resourcesEntriesRef.value
+if (resourcesEntryList.length < 1)
+  throw createError('No global components resources entry')
+const resources = createResources(resourcesEntryList[0])
+const resourcesStore = useResourcesStore()
+resourcesStore.shortTextMap = resources.shortTextMap
+resourcesStore.longTextMap = resources.longTextMap
+resourcesStore.richTextMap = resources.richTextMap
+resourcesStore.mediaMap = resources.mediaMap
 </script>

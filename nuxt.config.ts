@@ -9,6 +9,13 @@ const screensWithoutUnits = Object.fromEntries(
   ])
 )
 
+// Values calculated from Tailwind config
+const pageContentWidth =
+  parseFloat(theme.extend.width['screens.xs']) -
+  parseFloat(theme.extend.fontSize['px-base']) *
+    parseFloat(theme.extend.spacing[5]) *
+    2
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: 'src/',
@@ -22,7 +29,10 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/image-edge'],
+  modules: [
+    '@nuxt/image-edge',
+    ['@pinia/nuxt', { autoImports: ['defineStore'] }],
+  ],
 
   image: {
     domains: ['images.ctfassets.net'],
@@ -49,6 +59,7 @@ export default defineNuxtConfig({
       metaRobotsNone: false,
       netlifyFormName: '',
       nodeEnv: process.env.NODE_ENV,
+      pageContentWidth,
       sentryDsn: '',
       sentryTracesSampleRate: 1,
       siteHostname: '',
@@ -76,5 +87,8 @@ export default defineNuxtConfig({
     //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
     // - Bundle code containing eval
     contentful: 'contentful/lib/index',
+    // Workaround to build with @pinia/nuxt
+    // https://stackoverflow.com/a/74801367
+    pinia: '@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
   },
 })

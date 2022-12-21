@@ -1,17 +1,12 @@
 import { version as contentfulVersion } from 'contentful/package.json'
 import { theme } from './tailwind.config'
 
-// Values in Tailwind config
-const screens = theme.screens
-const pxSpacing5 =
-  parseFloat(theme.extend.fontSize['px-base']) *
-  parseFloat(theme.extend.spacing[5])
-const pageContentWidth = parseFloat(screens.xs) - pxSpacing5 * 2
-const primaryContentWidth = pageContentWidth - pxSpacing5 * 2
-
 // For NuxtImage, convert Tailwind breakpoints settings to unit-less
 const screensWithoutUnits = Object.fromEntries(
-  Object.entries(screens).map(([key, value]) => [key, parseInt(value, 10)])
+  Object.entries(theme.screens).map(([key, value]) => [
+    key,
+    parseInt(value, 10),
+  ])
 )
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -57,8 +52,7 @@ export default defineNuxtConfig({
       metaRobotsNone: false,
       netlifyFormName: '',
       nodeEnv: process.env.NODE_ENV,
-      primaryContentWidth,
-      screens,
+      tailwindTheme: theme,
       sentryDsn: '',
       sentryTracesSampleRate: 1,
       siteHostname: '',

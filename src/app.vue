@@ -2,6 +2,7 @@
   <Html lang="ja">
     <Head>
       <Title>megumitagawa.com</Title>
+      <Meta name="viewport" />
       <Meta v-if="metaRobotsNone" name="robots" content="noindex,nofollow" />
       <Link rel="preconnect" href="https://fonts.googleapis.com" />
       <Link
@@ -24,14 +25,11 @@
 </template>
 
 <script setup lang="ts">
+import { setContent, updateReference } from 'viewport-extra'
 import { ResourcesFields } from '@/models/ResourcesFields'
 import { createResources } from '@/models/ResourcesEntry'
 import { useResourcesStore } from '@/stores/resources'
 
-// Robots meta element
-const { metaRobotsNone } = useRuntimeConfig()
-
-// Resources for global components
 const { $contentfulClientApi } = useNuxtApp()
 const { data: resourcesEntriesRef } = await useAsyncData(
   'resources/global-components',
@@ -52,4 +50,12 @@ resourcesStore.shortTextMap = resources.shortTextMap
 resourcesStore.longTextMap = resources.longTextMap
 resourcesStore.richTextMap = resources.richTextMap
 resourcesStore.mediaMap = resources.mediaMap
+
+const {
+  public: { metaRobotsNone, tailwindTheme },
+} = useRuntimeConfig()
+onMounted(() => {
+  updateReference()
+  setContent({ minWidth: parseInt(tailwindTheme.screens.xs, 10) })
+})
 </script>

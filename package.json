@@ -40,6 +40,7 @@
     "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^29.0.0",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "viewport-extra": "^2.1.4"
   }
 }

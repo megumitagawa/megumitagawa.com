@@ -19,7 +19,7 @@
       <Link rel="icon" type="image/x-icon" href="/favicon.ico" />
     </Head>
     <Body>
-      <div />
+      <NuxtPage />
     </Body>
   </Html>
 </template>

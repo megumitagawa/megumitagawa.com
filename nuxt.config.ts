@@ -61,6 +61,10 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    '/works': { redirect: { to: '/works/page/1', statusCode: 301 } },
+  },
+
   vite: {
     define: {
       // Required variable to import contentful as TypeScript

@@ -65,6 +65,12 @@ export default defineNuxtConfig({
     '/works': { redirect: { to: '/works/page/1', statusCode: 301 } },
   },
 
+  build: {
+    // Workaround to build with @contentful/rich-text-types in development
+    // https://nuxt.com/docs/guide/concepts/esm#transpiling-libraries
+    transpile: ['@contentful/rich-text-types'],
+  },
+
   vite: {
     define: {
       // Required variable to import contentful as TypeScript
@@ -74,6 +80,11 @@ export default defineNuxtConfig({
       //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
       // - Bundle code containing eval
       __VERSION__: `'${contentfulVersion}'`,
+    },
+    optimizeDeps: {
+      // Workaround to build with @contentful/rich-text-types in production
+      // https://ja.vitejs.dev/config/dep-optimization-options.html#optimizedeps-include
+      include: ['@contentful/rich-text-types'],
     },
   },
 

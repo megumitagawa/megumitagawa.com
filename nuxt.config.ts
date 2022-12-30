@@ -1,4 +1,7 @@
+import { createClient } from 'contentful'
 import { version as contentfulVersion } from 'contentful/package.json'
+import { createDynamicRouteList } from './src/models/WorkEntries'
+import { WorkFields } from './src/models/WorkFields'
 import { theme } from './tailwind.config'
 
 // For NuxtImage, convert Tailwind breakpoints settings to unit-less
@@ -63,6 +66,31 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/works': { redirect: { to: '/works/page/1', statusCode: 301 } },
+  },
+
+  hooks: {
+    // Workaround to generate dynamic routes instead of generate.routes
+    // https://github.com/nuxt/framework/issues/4919#issuecomment-1124349857
+    async 'nitro:config'({ prerender }) {
+      const {
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_ACCESS_TOKEN:
+          accessToken = 'dummy',
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_SPACE: space = 'dummy',
+        NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH: worksPageWorkListLength = '',
+      } = process.env
+      const contentfulClientApi = createClient({ accessToken, space })
+      const unsafeLimit = parseInt(worksPageWorkListLength, 10)
+      const limit = Number.isNaN(unsafeLimit) ? 20 : unsafeLimit
+      const workEntries =
+        await contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
+          {
+            content_type: 'work',
+            limit,
+          }
+        )
+      const routes = createDynamicRouteList(workEntries, '/works/page/')
+      if (prerender?.routes) prerender.routes.push(...routes)
+    },
   },
 
   build: {

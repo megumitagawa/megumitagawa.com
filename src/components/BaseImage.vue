@@ -43,7 +43,6 @@ import {
   addChangeEventListener,
   removeChangeEventListener,
 } from '@/models/MediaQueryList'
-import { createMediaQueryList } from '@/models/Window'
 
 type ObjectFit = 'fill' | 'cover' | 'contain'
 type Data = {
@@ -97,7 +96,7 @@ export default defineNuxtComponent({
 
   mounted() {
     if (this.media) {
-      this.mediaQueryList = createMediaQueryList(window, this.media)
+      this.mediaQueryList = window.matchMedia(this.media)
       addChangeEventListener(this.mediaQueryList, this.updateExisting)
       this.existing = this.mediaQueryList.matches
     }

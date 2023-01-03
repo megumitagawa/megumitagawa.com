@@ -27,8 +27,7 @@
     <div>
       {{ work.title }}
     </div>
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="documentToHtmlString(work.content)" />
+    <RichTextRenderer :document="work.content" />
   </div>
   <NuxtLink v-if="workList.length" to="/works/page/1">
     {{ shortTextMap.get('index-page-works-section-link') ?? '' }}
@@ -58,27 +57,19 @@
   <div>
     {{ shortTextMap.get('index-page-profile-section-name-ja') ?? '' }}
   </div>
-  <!-- eslint-disable vue/no-v-html -->
-  <div
-    v-html="
-      documentToHtmlString(
-        richTextMap.get('index-page-profile-section-ja') ?? EMPTY_DOCUMENT
-      )
+  <RichTextRenderer
+    :document="
+      richTextMap.get('index-page-profile-section-ja') ?? EMPTY_DOCUMENT
     "
   />
-  <!-- eslint-enable vue/no-v-html -->
   <div>
     {{ shortTextMap.get('index-page-profile-section-name-en') ?? '' }}
   </div>
-  <!-- eslint-disable vue/no-v-html -->
-  <div
-    v-html="
-      documentToHtmlString(
-        richTextMap.get('index-page-profile-section-en') ?? EMPTY_DOCUMENT
-      )
+  <RichTextRenderer
+    :document="
+      richTextMap.get('index-page-profile-section-en') ?? EMPTY_DOCUMENT
     "
   />
-  <!-- eslint-enable vue/no-v-html -->
 
   <div>
     {{ shortTextMap.get('index-page-contact-section-heading') ?? '' }}
@@ -151,7 +142,9 @@
 </template>
 
 <script lang="ts" setup>
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+// contentful-rich-text-vue-renderer has no type declaration
+// @ts-ignore
+import RichTextRenderer from 'contentful-rich-text-vue-renderer'
 import { EMPTY_DOCUMENT } from '@contentful/rich-text-types'
 import { createURLSearchParams } from '@/models/ContactFormValue'
 import { isHTMLFormElement } from '@/models/HTMLFormElement'

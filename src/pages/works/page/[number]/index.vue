@@ -27,8 +27,7 @@
     <div>
       {{ work.title }}
     </div>
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="documentToHtmlString(work.content)" />
+    <RichTextRenderer :document="work.content" />
   </div>
   <div v-if="!workList.length">
     {{ shortTextMap.get('works-page-no-entry-message') ?? '' }}
@@ -45,7 +44,9 @@
 </template>
 
 <script lang="ts" setup>
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+// contentful-rich-text-vue-renderer has no type declaration
+// @ts-ignore
+import RichTextRenderer from 'contentful-rich-text-vue-renderer'
 import { isHTMLSelectElement } from '@/models/HTMLSelectElement'
 import { createPage } from '@/models/PageEntry'
 import { PageFields } from '@/models/PageFields'

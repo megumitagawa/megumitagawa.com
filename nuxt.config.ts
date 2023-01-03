@@ -94,9 +94,12 @@ export default defineNuxtConfig({
   },
 
   build: {
-    // Workaround to build with @contentful/rich-text-types in development
+    // Workaround to build with @contentful/rich-text-types and contentful-rich-text-vue-renderer in development
     // https://nuxt.com/docs/guide/concepts/esm#transpiling-libraries
-    transpile: ['@contentful/rich-text-types'],
+    transpile: [
+      '@contentful/rich-text-types',
+      'contentful-rich-text-vue-renderer',
+    ],
   },
 
   vite: {

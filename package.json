@@ -5,6 +5,7 @@
     "dev": "nuxt dev --dotenv .env.development",
     "generate": "nuxt generate --dotenv .env.production",
     "preview": "nuxt preview",
+    "preview:generate": "node bin/create-serve-json.mjs && npx serve dist",
     "postinstall": "node bin/fix-untyped.mjs && env-cmd -f .env.production nuxt prepare",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore",

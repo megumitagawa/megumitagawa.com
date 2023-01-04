@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  @apply min-w-screens.xs text-px-base text-black scroll-smooth;
+}
+
+:focus-visible {
+  @apply outline outline-2 -outline-offset-1 outline-lime;
+}
+
+::selection {
+  @apply bg-lime/35;
+}

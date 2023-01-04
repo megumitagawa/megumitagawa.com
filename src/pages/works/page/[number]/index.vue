@@ -7,40 +7,91 @@
     :content="metaItem.content"
   />
 
-  <div>
-    {{ shortTextMap.get('works-page-heading') ?? '' }}
-  </div>
-  <div v-for="work of workList" :key="work.id">
-    <img
-      v-for="featuredMedia of work.featuredMediaList"
-      :key="featuredMedia.sys.id"
-      :src="`https:${featuredMedia.fields.file?.url ?? ''}`"
-      :width="primaryContentWidth"
-      :height="
-        primaryContentWidth *
-        ((featuredMedia.fields.file?.details?.image?.height ?? 0) /
-          (featuredMedia.fields.file?.details?.image?.width ?? 0))
-      "
-      :alt="featuredMedia.fields.description ?? ''"
-      loading="lazy"
-    />
-    <div>
-      {{ work.title }}
-    </div>
-    <RichTextRenderer :document="work.content" />
-  </div>
-  <div v-if="!workList.length">
-    {{ shortTextMap.get('works-page-no-entry-message') ?? '' }}
-  </div>
-  <select :value="`${currentPageNumber}`" name="pager" @input="goToWorksPage">
-    <option
-      v-for="pageNumber in totalPageNumber"
-      :key="pageNumber"
-      :value="`${pageNumber}`"
+  <BaseStack component="div" spacing="md">
+    <PrimaryHeading component="h1">
+      {{ shortTextMap.get('works-page-heading') }}
+    </PrimaryHeading>
+    <PrimaryBody v-for="work of workList" :key="work.id" component="article">
+      <BaseStack component="div" spacing="md">
+        <BaseImage
+          v-for="featuredMedia of work.featuredMediaList"
+          :key="featuredMedia.sys.id"
+          :src="`https:${featuredMedia.fields.file?.url ?? ''}`"
+          :width="primaryContentWidth"
+          :height="
+            primaryContentWidth *
+            ((featuredMedia.fields.file?.details.image?.height ?? 0) /
+              (featuredMedia.fields.file?.details.image?.width ?? 0))
+          "
+          :alt="featuredMedia.fields.description || ''"
+          loading="lazy"
+        />
+        <SecondaryHeading component="h2">
+          {{ work.title }}
+        </SecondaryHeading>
+        <SecondaryBody component="div">
+          <RichTextRenderer :document="work.content" />
+        </SecondaryBody>
+      </BaseStack>
+    </PrimaryBody>
+    <PrimaryBody v-if="!workList.length" component="p">
+      {{ shortTextMap.get('works-page-no-entry-message') }}
+    </PrimaryBody>
+    <BasePager
+      component="BaseStack"
+      direction="row"
+      spacing="md"
+      :current-page-number="currentPageNumber"
+      :total-page-number="totalPageNumber"
     >
-      {{ pageNumber }} / {{ totalPageNumber }}
-    </option>
-  </select>
+      <template #previous="{ previousPageNumber }">
+        <BaseButton
+          component="NuxtLink"
+          :to="`/works/page/${previousPageNumber || ''}`"
+          :disabled="!previousPageNumber"
+          size="xs"
+        >
+          <template #startIcon>
+            <LeftChevonIcon color="inherit" />
+          </template>
+          <BaseBox class="translate-x-2.5">
+            {{ shortTextMap.get('works-page-pager-previous-link') }}
+          </BaseBox>
+        </BaseButton>
+      </template>
+      <template #current>
+        <BaseSelect
+          :value="`${currentPageNumber}`"
+          name="pager"
+          @input="goToWorksPage"
+        >
+          <BaseBox
+            v-for="pageNumber in totalPageNumber"
+            :key="pageNumber"
+            :value="`${pageNumber}`"
+            component="option"
+          >
+            {{ pageNumber }} / {{ totalPageNumber }}
+          </BaseBox>
+        </BaseSelect>
+      </template>
+      <template #next="{ nextPageNumber }">
+        <BaseButton
+          component="NuxtLink"
+          :to="`/works/page/${nextPageNumber || ''}`"
+          :disabled="!nextPageNumber"
+          size="xs"
+        >
+          <BaseBox class="-translate-x-2.5">
+            {{ shortTextMap.get('works-page-pager-next-link') }}
+          </BaseBox>
+          <template #endIcon>
+            <RightChevonIcon color="inherit" />
+          </template>
+        </BaseButton>
+      </template>
+    </BasePager>
+  </BaseStack>
 </template>
 
 <script lang="ts" setup>

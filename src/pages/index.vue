@@ -7,138 +7,217 @@
     :content="metaItem.content"
   />
 
-  <div>
-    {{ shortTextMap.get('index-page-works-section-heading') ?? '' }}
-  </div>
-  <div v-for="work of workList" :key="work.id">
-    <img
-      v-for="featuredMedia of work.featuredMediaList"
-      :key="featuredMedia.sys.id"
-      :src="`https:${featuredMedia.fields.file?.url ?? ''}`"
-      :width="primaryContentWidth"
-      :height="
-        primaryContentWidth *
-        ((featuredMedia.fields.file?.details?.image?.height ?? 0) /
-          (featuredMedia.fields.file?.details?.image?.width ?? 0))
-      "
-      :alt="featuredMedia.fields.description ?? ''"
-      loading="lazy"
-    />
-    <div>
-      {{ work.title }}
-    </div>
-    <RichTextRenderer :document="work.content" />
-  </div>
-  <NuxtLink v-if="workList.length" to="/works/page/1">
-    {{ shortTextMap.get('index-page-works-section-link') ?? '' }}
-  </NuxtLink>
-  <div v-else>
-    {{ shortTextMap.get('index-page-no-entry-message') ?? '' }}
-  </div>
-
-  <div>
-    {{ shortTextMap.get('index-page-profile-section-heading') ?? '' }}
-  </div>
-  <img
-    :src="`https:${
-      mediaMap.get('index-page-profile-section')?.fields?.file?.url ?? ''
-    }`"
-    :width="primaryContentWidth"
-    :height="
-      primaryContentWidth *
-      ((mediaMap.get('index-page-profile-section')?.fields?.file?.details?.image
-        ?.height ?? 0) /
-        (mediaMap.get('index-page-profile-section')?.fields?.file?.details
-          ?.image?.width ?? 0))
-    "
-    :alt="mediaMap.get('index-page-profile-section')?.fields?.description ?? ''"
-    loading="lazy"
+  <BaseBox
+    component="div"
+    :class="[
+      'w-full h-[calc(theme(height.screen)_-_theme(spacing.21))]',
+      // To avoid updating scroll position in iOS >= 15.4
+      'h-[calc(theme(height.large-screen)_-_theme(spacing.21))]',
+      'lg:h-0',
+    ]"
   />
-  <div>
-    {{ shortTextMap.get('index-page-profile-section-name-ja') ?? '' }}
-  </div>
-  <RichTextRenderer
-    :document="
-      richTextMap.get('index-page-profile-section-ja') ?? EMPTY_DOCUMENT
-    "
-  />
-  <div>
-    {{ shortTextMap.get('index-page-profile-section-name-en') ?? '' }}
-  </div>
-  <RichTextRenderer
-    :document="
-      richTextMap.get('index-page-profile-section-en') ?? EMPTY_DOCUMENT
-    "
-  />
+  <BaseStack component="div" spacing="xl">
+    <BaseStack component="section" spacing="md">
+      <BaseBox class="relative w-full">
+        <BaseBox id="works" :class="['absolute -top-21', 'lg:-top-5']" />
+        <PrimaryHeading component="h2">
+          {{ shortTextMap.get('index-page-works-section-heading') }}
+        </PrimaryHeading>
+      </BaseBox>
+      <PrimaryBody v-for="work of workList" :key="work.id" component="article">
+        <BaseStack component="div" spacing="md">
+          <BaseImage
+            v-for="featuredMedia of work.featuredMediaList"
+            :key="featuredMedia.sys.id"
+            :src="`https:${featuredMedia.fields.file?.url ?? ''}`"
+            :width="primaryContentWidth"
+            :height="
+              primaryContentWidth *
+              ((featuredMedia.fields.file?.details.image?.height ?? 0) /
+                (featuredMedia.fields.file?.details.image?.width ?? 0))
+            "
+            :alt="featuredMedia.fields.description || ''"
+            loading="lazy"
+          />
+          <SecondaryHeading component="h3">
+            {{ work.title }}
+          </SecondaryHeading>
+          <SecondaryBody component="div">
+            <RichTextRenderer :document="work.content" />
+          </SecondaryBody>
+        </BaseStack>
+      </PrimaryBody>
+      <BaseButton
+        v-if="workList.length"
+        component="NuxtLink"
+        to="/works/page/1"
+        :full-width="true"
+      >
+        {{ shortTextMap.get('index-page-works-section-link') }}
+        <template #endIcon>
+          <RightChevonIcon />
+        </template>
+      </BaseButton>
+      <PrimaryBody v-else component="p">
+        {{ shortTextMap.get('index-page-no-entry-message') }}
+      </PrimaryBody>
+    </BaseStack>
 
-  <div>
-    {{ shortTextMap.get('index-page-contact-section-heading') ?? '' }}
-  </div>
-  <form
-    :name="netlifyFormName"
-    data-netlify="true"
-    data-netlify-honeypot="bot-field"
-    @submit.prevent="postAndReport"
-  >
-    <input
-      type="hidden"
-      name="form-name"
-      :value="contactFormValue['form-name']"
-    />
-    <input
-      type="text"
-      name="bot-field"
-      :value="contactFormValue.botField"
-      @input="updateContactFormBotFieldValue"
-    />
-    <input
-      type="text"
-      name="name"
-      required
-      :value="contactFormValue.name"
-      :placeholder="
-        shortTextMap.get('index-page-contact-section-name-input-placeholder') ??
-        ''
-      "
-      @input="updateContactFormNameValue"
-    />
-    <input
-      type="email"
-      name="email"
-      required
-      :value="contactFormValue.email"
-      :placeholder="
-        shortTextMap.get(
-          'index-page-contact-section-email-input-placeholder'
-        ) ?? ''
-      "
-      @input="updateContactFormEmailValue"
-    />
-    <textarea
-      name="message"
-      required
-      :value="contactFormValue.message"
-      :placeholder="
-        shortTextMap.get(
-          'index-page-contact-section-message-textarea-placeholder'
-        ) ?? ''
-      "
-      @input="updateContactFormMessageValue"
-    />
-    <button type="submit">
-      {{ shortTextMap.get('index-page-contact-section-button') ?? '' }}
-    </button>
-  </form>
+    <BaseStack component="section" spacing="md">
+      <BaseBox class="relative w-full">
+        <BaseBox id="profile" :class="['absolute -top-21', 'lg:-top-5']" />
+        <PrimaryHeading component="h2">
+          {{ shortTextMap.get('index-page-profile-section-heading') }}
+        </PrimaryHeading>
+      </BaseBox>
+      <PrimaryBody component="div">
+        <BaseStack component="div" spacing="md">
+          <BaseImage
+            :src="`https:${
+              mediaMap.get('index-page-profile-section')?.fields.file?.url || ''
+            }`"
+            :width="primaryContentWidth"
+            :height="
+              primaryContentWidth *
+              ((mediaMap.get('index-page-profile-section')?.fields.file?.details
+                .image?.height ?? 0) /
+                (mediaMap.get('index-page-profile-section')?.fields.file
+                  ?.details.image?.width ?? 0))
+            "
+            :alt="
+              mediaMap.get('index-page-profile-section')?.fields.description ||
+              ''
+            "
+            loading="lazy"
+          />
+          <SecondaryHeading component="h3">
+            {{ shortTextMap.get('index-page-profile-section-name-ja') }}
+          </SecondaryHeading>
+          <SecondaryBody component="div">
+            <RichTextRenderer
+              :document="
+                richTextMap.get('index-page-profile-section-ja') ??
+                EMPTY_DOCUMENT
+              "
+            />
+          </SecondaryBody>
+          <BaseBox
+            component="hr"
+            :class="[
+              'box-content block w-full h-1.5 border-t-0 py-5',
+              'bg-quintuple-dots-icon bg-no-repeat bg-center',
+            ]"
+          />
+          <SecondaryHeading component="h3">
+            {{ shortTextMap.get('index-page-profile-section-name-en') }}
+          </SecondaryHeading>
+          <SecondaryBody component="div">
+            <RichTextRenderer
+              :document="
+                richTextMap.get('index-page-profile-section-en') ??
+                EMPTY_DOCUMENT
+              "
+            />
+          </SecondaryBody>
+        </BaseStack>
+      </PrimaryBody>
+    </BaseStack>
 
-  <div v-show="backdropOpen">
-    <div v-if="contactFormSending">...</div>
-    <div v-else-if="contactFormSucceeded">
-      {{ longTextMap.get('index-page-backdrop-submission-success') }}
-    </div>
-    <div v-else-if="contactFormFailed">
-      {{ longTextMap.get('index-page-backdrop-submission-failure') }}
-    </div>
-  </div>
+    <BaseStack component="section" spacing="md">
+      <BaseBox class="relative w-full">
+        <BaseBox id="contact" :class="['absolute -top-21', 'lg:-top-5']" />
+        <PrimaryHeading component="h2">
+          {{ shortTextMap.get('index-page-contact-section-heading') }}
+        </PrimaryHeading>
+      </BaseBox>
+      <PrimaryBody component="div">
+        <BaseForm
+          :name="$config.netlifyFormName"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          @submit="postAndReport"
+        >
+          <template #default="{ valid }">
+            <BaseInput
+              type="hidden"
+              name="form-name"
+              :value="contactFormValue['form-name']"
+            />
+            <BaseInput
+              type="text"
+              name="bot-field"
+              invisible
+              :value="contactFormValue.botField"
+              placeholder="Bot Field"
+              @input="updateContactFormBotFieldValue"
+            />
+            <BaseStack component="div" spacing="md">
+              <BaseInput
+                type="text"
+                name="name"
+                required
+                :value="contactFormValue.name"
+                :placeholder="
+                  shortTextMap.get(
+                    'index-page-contact-section-name-input-placeholder'
+                  )
+                "
+                @input="updateContactFormNameValue"
+              />
+              <BaseInput
+                type="email"
+                name="email"
+                required
+                :value="contactFormValue.email"
+                :placeholder="
+                  shortTextMap.get(
+                    'index-page-contact-section-email-input-placeholder'
+                  )
+                "
+                @input="updateContactFormEmailValue"
+              />
+              <BaseTextarea
+                name="message"
+                required
+                :value="contactFormValue.message"
+                :placeholder="
+                  shortTextMap.get(
+                    'index-page-contact-section-message-textarea-placeholder'
+                  )
+                "
+                @input="updateContactFormMessageValue"
+              />
+              <BaseBox />
+              <BaseButton
+                type="submit"
+                color="info"
+                :full-width="true"
+                :disabled="!valid"
+                opaque
+              >
+                {{ shortTextMap.get('index-page-contact-section-button') }}
+              </BaseButton>
+            </BaseStack>
+          </template>
+        </BaseForm>
+      </PrimaryBody>
+    </BaseStack>
+  </BaseStack>
+
+  <BaseBackdrop component="div" :open="backdropOpen">
+    <BaseBox
+      component="p"
+      class="flex justify-center w-1/2 min-w-screens.xs px-5 whitespace-pre-line"
+    >
+      <template v-if="contactFormSending">...</template>
+      <template v-else-if="contactFormSucceeded">{{
+        longTextMap.get('index-page-backdrop-submission-success')
+      }}</template>
+      <template v-else-if="contactFormFailed">{{
+        longTextMap.get('index-page-backdrop-submission-failure')
+      }}</template>
+    </BaseBox>
+  </BaseBackdrop>
 </template>
 
 <script lang="ts" setup>

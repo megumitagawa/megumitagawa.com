@@ -8,13 +8,17 @@
 </template>
 
 <script lang="ts">
+import { PropType } from 'vue'
+
+type Component = 'div' | 'span'
+
 export default defineNuxtComponent({
   name: 'SecondaryBody',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
   },
 })
 </script>

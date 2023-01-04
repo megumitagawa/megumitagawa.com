@@ -55,6 +55,7 @@ Don't use gap for spacing for old iOS
 <script lang="ts">
 import { PropType } from 'vue'
 
+type Component = 'div' | 'h1' | 'header' | 'nav' | 'section' | 'span'
 type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Direction = 'column' | 'row'
 type JustifyContent = 'flex-start' | 'center' | 'flex-end'
@@ -68,7 +69,7 @@ export default defineNuxtComponent({
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
     fullWidth: { type: Boolean, default: true },
     fullHeight: { type: Boolean, default: false },
     direction: {

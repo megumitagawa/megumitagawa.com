@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="disableableComponent"
+    :is="resolvedComponent"
     :disabled="disabled"
     :class="[
       'relative flex justify-center items-center transition',
@@ -60,6 +60,7 @@
 <script lang="ts">
 import { PropType } from 'vue'
 
+type Component = 'button' | 'NuxtLink'
 type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Size = 'xs' | 'base' | 'xl' | '2xl' | '2.5xl'
 type Color = 'base' | 'pale' | 'info'
@@ -70,7 +71,7 @@ export default defineNuxtComponent({
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'button' },
+    component: { type: String as PropType<Component>, default: 'button' },
     fullWidth: {
       type: [Object, Boolean] as PropType<
         { [key in ScreenKey]?: boolean } | boolean
@@ -108,6 +109,14 @@ export default defineNuxtComponent({
     // Force button element if disabled
     disableableComponent() {
       return this.disabled ? 'button' : this.component
+    },
+    // Include dynamic components to bundle
+    // Argument of resolveComponent must not be variable
+    // https://nuxt.com/docs/guide/directory-structure/components#dynamic-components
+    resolvedComponent() {
+      return this.disableableComponent === 'NuxtLink'
+        ? resolveComponent('NuxtLink')
+        : this.disableableComponent
     },
     sizeXs() { return this.size === 'xs' },
     sizeXsXs() { const s = this.size; return typeof s === 'object' ? s.xs === 'xs' : this.sizeXs },

@@ -36,6 +36,7 @@ https://mui.com/material-ui/api/icon-button/
 <script lang="ts">
 import { PropType } from 'vue'
 
+type Component = 'a' | 'button'
 type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Size = '2.5xl' | '3.5xl'
 type Color = 'base' | 'info'
@@ -46,7 +47,7 @@ export default defineNuxtComponent({
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'button' },
+    component: { type: String as PropType<Component>, default: 'button' },
     fullWidth: { type: Boolean, default: false },
     fullHeight: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },

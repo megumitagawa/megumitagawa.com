@@ -20,13 +20,17 @@ https://mui.com/material-ui/api/backdrop/
 </template>
 
 <script lang="ts">
+import { PropType } from 'vue'
+
+type Component = 'div' | 'span'
+
 export default defineNuxtComponent({
   name: 'BaseBackdrop',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
     open: { type: Boolean, default: false },
   },
 })

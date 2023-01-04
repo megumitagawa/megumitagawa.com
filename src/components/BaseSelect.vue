@@ -31,11 +31,13 @@ https://mui.com/material-ui/api/select/
 </template>
 
 <script lang="ts">
+import { PropType } from 'vue'
 import {
   getSelectedLabel,
   isHTMLSelectElement,
 } from '@/models/HTMLSelectElement'
 
+type Component = 'span'
 type Data = {
   label: string
 }
@@ -46,7 +48,7 @@ export default defineNuxtComponent({
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
     name: { type: String, required: true },
     value: { type: String, required: true },
   },

@@ -20,6 +20,10 @@
     </Head>
 
     <Body>
+      <NuxtLoadingIndicator
+        :color="tailwindTheme.extend.colors.lime"
+        :height="4"
+      />
       <BaseBox
         :class="[
           'fixed top-0 left-0 w-full h-screen',

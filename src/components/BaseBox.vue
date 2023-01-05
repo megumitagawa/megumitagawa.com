@@ -1,12 +1,20 @@
 <!--
 Inspired by MUI
 https://mui.com/material-ui/api/box/
+
+Remove slot if component is void element
+to avoid hydration children mismatch warning
 -->
 
 <template>
-  <component :is="component" v-bind="$attrs">
-    <slot />
-  </component>
+  <template v-if="voidElement">
+    <component :is="component" v-bind="$attrs" />
+  </template>
+  <template v-else>
+    <component :is="component" v-bind="$attrs">
+      <slot />
+    </component>
+  </template>
 </template>
 
 <script lang="ts">
@@ -31,6 +39,12 @@ export default defineNuxtComponent({
 
   props: {
     component: { type: String as PropType<Component>, default: 'span' },
+  },
+
+  computed: {
+    voidElement() {
+      return this.component === 'hr'
+    },
   },
 })
 </script>

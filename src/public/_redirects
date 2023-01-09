@@ -1,5 +1,0 @@
-# Redirects for Netlify
-
-# Workaround to avoid 404 of NuxtPicture in production
-# https://github.com/nuxt/image/issues/671#issuecomment-1339418130
-/_ipx/*/img/:base /img/:base 302

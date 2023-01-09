@@ -32,23 +32,14 @@
         ]"
       >
         <BaseImage
-          src="/img/background-xs.jpg"
-          :width="856"
-          :height="1618"
+          :src="{
+            xs: '/img/background-xs.jpg',
+            lg: '/img/background-lg.jpg',
+          }"
+          :width="{ xs: 856, lg: 3840 }"
+          :height="{ xs: 1618, lg: 2160 }"
           alt=""
-          preload
           object-fit="cover"
-          :media="$computedTailwindTheme.mediaQueries.notLg"
-          :rounded="false"
-        />
-        <BaseImage
-          src="/img/background-lg.jpg"
-          :width="3840"
-          :height="2160"
-          alt=""
-          preload
-          object-fit="cover"
-          :media="$computedTailwindTheme.mediaQueries.lg"
           :rounded="false"
         />
       </BaseBox>
@@ -82,7 +73,6 @@
           :width="550"
           :height="1635"
           alt=""
-          preload
           :rounded="false"
         />
       </BaseBox>

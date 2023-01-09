@@ -1,5 +1,3 @@
-// Share settings between Tailwind and NuxtImage
-// Override default value: https://github.com/nuxt/image/blob/93ce78aa0736268de132bf30b2d9f6d062c7c3c8/src/module.ts#L31
 const screens = {
   xs: '428px',
   sm: '640px',

@@ -11,7 +11,7 @@ import { globby } from 'globby'
 console.log('create-local-images.mjs:')
 
 // Correct images that is not hosted in this repository
-const htmlPathList = await globby('.output/public/**/*.html')
+const htmlPathList = await globby('dist/**/*.html')
 const nonUniqueRemoteImageSrcList = []
 for (const htmlPath of htmlPathList) {
   const content = await readFile(htmlPath, 'utf-8')
@@ -27,7 +27,7 @@ const uniqueRemoteImageSrcList = Array.from(
 
 // Request and create image files
 const promises = uniqueRemoteImageSrcList.map((remoteImageSrc) => {
-  const remoteImagePath = `.output/public${remoteImageSrc}`
+  const remoteImagePath = `dist${remoteImageSrc}`
   const remoteImageUrl = `https:/${remoteImageSrc}`
   return (
     fetch(remoteImageUrl)

@@ -33,6 +33,7 @@ export default defineNuxtConfig({
         accessToken: 'dummy',
         space: 'dummy',
       },
+      googleAnalyticsMeasurementId: '',
       indexFullBodyImageDelay: 0,
       indexPageBackdropDelay: 0,
       indexPageWorkListLength: 5,

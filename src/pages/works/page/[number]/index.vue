@@ -60,15 +60,12 @@
         </BaseButton>
       </template>
       <template #current>
-        <BaseSelect
-          :value="`${currentPageNumber}`"
-          name="pager"
-          @input="goToWorksPage"
-        >
+        <BaseSelect name="pager" @input="goToWorksPage">
           <BaseBox
             v-for="pageNumber in totalPageNumber"
             :key="pageNumber"
-            :value="`${pageNumber}`"
+            :value="pageNumber"
+            :selected="currentPageNumber === pageNumber"
             component="option"
           >
             {{ pageNumber }} / {{ totalPageNumber }}

@@ -18,12 +18,11 @@ https://mui.com/material-ui/api/select/
     <select
       ref="select"
       :name="name"
-      :value="value"
       :class="[
         'absolute top-0 left-0 block w-full h-full opacity-0',
         'cursor-pointer',
       ]"
-      @input="updateLabelAndEmitInput"
+      @input="updateLabel"
     >
       <slot />
     </select>
@@ -50,7 +49,6 @@ export default defineNuxtComponent({
   props: {
     component: { type: String as PropType<Component>, default: 'span' },
     name: { type: String, required: true },
-    value: { type: String, required: true },
   },
 
   data(): Data {
@@ -60,15 +58,13 @@ export default defineNuxtComponent({
   },
 
   mounted() {
-    if (isHTMLSelectElement(this.$refs.select))
-      this.label = getSelectedLabel(this.$refs.select)
+    this.updateLabel()
   },
 
   methods: {
-    updateLabelAndEmitInput(formEvent: Event): void {
+    updateLabel(): void {
       if (isHTMLSelectElement(this.$refs.select))
         this.label = getSelectedLabel(this.$refs.select)
-      this.$emit('input', formEvent)
     },
   },
 })

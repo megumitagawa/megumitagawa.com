@@ -6,6 +6,9 @@
 import { globby } from 'globby'
 import sharp from 'sharp'
 
+// eslint-disable-next-line no-console
+console.log('create-webp-images.mjs:')
+
 const legacyImagePathList = await globby(
   '.output/public/**/*.{gif,jpg,jpeg,png}'
 )
@@ -17,4 +20,6 @@ for (const legacyImagePath of legacyImagePathList) {
   sharp(legacyImagePath)
     .toFormat('webp', { quality: 100 })
     .toFile(webpImagePath)
+  // eslint-disable-next-line no-console
+  console.log(`  Created ${webpImagePath}`)
 }

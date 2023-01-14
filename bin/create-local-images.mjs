@@ -7,6 +7,9 @@ import { readFile } from 'node:fs/promises'
 import { outputFile } from 'fs-extra/esm'
 import { globby } from 'globby'
 
+// eslint-disable-next-line no-console
+console.log('create-local-images.mjs:')
+
 // Correct images that is not hosted in this repository
 const htmlPathList = await globby('.output/public/**/*.html')
 const nonUniqueRemoteImageSrcList = []
@@ -37,7 +40,9 @@ const promises = uniqueRemoteImageSrcList.map((remoteImageSrc) => {
         outputFile(remoteImagePath, Buffer.from(arrayBuffer))
       )
       // eslint-disable-next-line no-console
-      .catch((error) => console.log(`${remoteImageUrl}: ${error.message}`))
+      .then(() => console.log(`  Created ${remoteImagePath}`))
+      // eslint-disable-next-line no-console
+      .catch((error) => console.log(`  ${error.message} ${remoteImageUrl}`))
   )
 })
 await Promise.allSettled(promises)

@@ -114,4 +114,16 @@ export default defineNuxtConfig({
     // https://stackoverflow.com/a/74801367
     pinia: '@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
   },
+
+  app: {
+    head: {
+      script: [
+        // Workaround to avoid errors of contentful on console in development
+        // https://github.com/contentful/contentful.js/issues/422#issuecomment-1054400365
+        ...(process.env.NODE_ENV === 'development'
+          ? [{ src: '/scripts/inject-process.js' }]
+          : []),
+      ],
+    },
+  },
 })

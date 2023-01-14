@@ -57,11 +57,16 @@ export default defineNuxtConfig({
     // https://github.com/nuxt/framework/issues/4919#issuecomment-1124349857
     async 'nitro:config'({ prerender }) {
       const {
-        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_ACCESS_TOKEN:
-          accessToken = 'dummy',
-        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_SPACE: space = 'dummy',
-        NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH: worksPageWorkListLength = '',
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_ACCESS_TOKEN: accessToken,
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_SPACE: space,
+        NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH: worksPageWorkListLength,
       } = process.env
+      if (
+        typeof accessToken === 'undefined' ||
+        typeof space === 'undefined' ||
+        typeof worksPageWorkListLength === 'undefined'
+      )
+        return
       const contentfulClientApi = createClient({ accessToken, space })
       const unsafeLimit = parseInt(worksPageWorkListLength, 10)
       const limit = Number.isNaN(unsafeLimit) ? 20 : unsafeLimit

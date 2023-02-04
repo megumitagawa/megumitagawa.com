@@ -21,9 +21,7 @@
           :color="{ xs: 'base', lg: 'pale' }"
           opaque
         >
-          {{
-            $accessor.resources.shortTextMap.get('site-navigation-works-link')
-          }}
+          {{ shortTextMap.get('site-navigation-works-link') }}
         </BaseButton>
         <BaseButton
           component="NuxtLink"
@@ -34,9 +32,7 @@
           :color="{ xs: 'base', lg: 'pale' }"
           opaque
         >
-          {{
-            $accessor.resources.shortTextMap.get('site-navigation-profile-link')
-          }}
+          {{ shortTextMap.get('site-navigation-profile-link') }}
         </BaseButton>
         <BaseButton
           component="NuxtLink"
@@ -47,9 +43,7 @@
           :color="{ xs: 'base', lg: 'pale' }"
           opaque
         >
-          {{
-            $accessor.resources.shortTextMap.get('site-navigation-contact-link')
-          }}
+          {{ shortTextMap.get('site-navigation-contact-link') }}
         </BaseButton>
       </BaseStack>
       <BaseIconButton
@@ -70,17 +64,8 @@
   </BaseBox>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script setup lang="ts">
+import { useResourcesStore } from '../stores/resources'
 
-type Data = {}
-type Methods = {}
-type Computed = {}
-type Props = {}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
-  name: 'SiteNavigation',
-
-  inheritAttrs: false,
-})
+const { shortTextMap } = useResourcesStore()
 </script>

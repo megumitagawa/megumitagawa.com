@@ -14,22 +14,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { FormEvent } from '@/models/FormEvent'
-
-type Data = {}
-type Methods = {
-  emitInput(formEvent: FormEvent<HTMLTextAreaElement>): void
-}
-type Computed = {}
-type Props = {
-  name: string
-  value: string
-  placeholder: string
-  required: boolean
-}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseTextarea',
 
   inheritAttrs: false,
@@ -42,7 +27,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 
   methods: {
-    emitInput(formEvent) {
+    emitInput(formEvent: Event): void {
       this.$emit('input', formEvent)
     },
   },

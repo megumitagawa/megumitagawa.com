@@ -47,108 +47,53 @@ Don't use gap for spacing for old iOS
       },
     ]"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <slot />
   </component>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { theme } from '@/../tailwind.config'
+import { PropType } from 'vue'
 
+type Component = 'div' | 'h1' | 'header' | 'nav' | 'section' | 'span'
+type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Direction = 'column' | 'row'
 type JustifyContent = 'flex-start' | 'center' | 'flex-end'
 type AlignItems = 'flex-start' | 'center' | 'flex-end'
 // prettier-ignore
 type Spacing = 0 | '6xs' | '5xs' | '4xs' | '3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-type Data = {}
-type Methods = {}
-// prettier-ignore
-type Computed = {
-  directionRow: boolean, directionRowXs: boolean, directionRowLg: boolean, directionRow3xl: boolean, directionRow4xl: boolean
-  directionColumn: boolean, directionColumnXs: boolean, directionColumnLg: boolean, directionColumn3xl: boolean, directionColumn4xl: boolean
-  justifyContentFlexStart: boolean, justifyContentFlexStartXs: boolean, justifyContentFlexStartLg: boolean, justifyContentFlexStart3xl: boolean, justifyContentFlexStart4xl: boolean,
-  justifyContentCenter: boolean, justifyContentCenterXs: boolean, justifyContentCenterLg: boolean, justifyContentCenter3xl: boolean, justifyContentCenter4xl: boolean,
-  justifyContentFlexEnd: boolean, justifyContentFlexEndXs: boolean, justifyContentFlexEndLg: boolean, justifyContentFlexEnd3xl: boolean, justifyContentFlexEnd4xl: boolean,
-  alignItemsFlexStart: boolean, alignItemsFlexStartXs: boolean, alignItemsFlexStartLg: boolean, alignItemsFlexStart3xl: boolean, alignItemsFlexStart4xl: boolean,
-  alignItemsCenter: boolean, alignItemsCenterXs: boolean, alignItemsCenterLg: boolean, alignItemsCenter3xl: boolean, alignItemsCenter4xl: boolean,
-  alignItemsFlexEnd: boolean, alignItemsFlexEndXs: boolean, alignItemsFlexEndLg: boolean, alignItemsFlexEnd3xl: boolean, alignItemsFlexEnd4xl: boolean,
-  spacing0: boolean, spacing0Xs: boolean, spacing0Lg: boolean, spacing03xl: boolean, spacing04xl: boolean
-  spacing6xs: boolean, spacing6xsXs: boolean, spacing6xsLg: boolean, spacing6xs3xl: boolean, spacing6xs4xl: boolean
-  spacing5xs: boolean, spacing5xsXs: boolean, spacing5xsLg: boolean, spacing5xs3xl: boolean, spacing5xs4xl: boolean
-  spacing4xs: boolean, spacing4xsXs: boolean, spacing4xsLg: boolean, spacing4xs3xl: boolean, spacing4xs4xl: boolean
-  spacing3xs: boolean, spacing3xsXs: boolean, spacing3xsLg: boolean, spacing3xs3xl: boolean, spacing3xs4xl: boolean
-  spacing2xs: boolean, spacing2xsXs: boolean, spacing2xsLg: boolean, spacing2xs3xl: boolean, spacing2xs4xl: boolean
-  spacingXs: boolean, spacingXsXs: boolean, spacingXsLg: boolean, spacingXs3xl: boolean, spacingXs4xl: boolean
-  spacingSm: boolean, spacingSmXs: boolean, spacingSmLg: boolean, spacingSm3xl: boolean, spacingSm4xl: boolean
-  spacingMd: boolean, spacingMdXs: boolean, spacingMdLg: boolean, spacingMd3xl: boolean, spacingMd4xl: boolean
-  spacingLg: boolean, spacingLgXs: boolean, spacingLgLg: boolean, spacingLg3xl: boolean, spacingLg4xl: boolean
-  spacingXl: boolean, spacingXlXs: boolean, spacingXlLg: boolean, spacingXl3xl: boolean, spacingXl4xl: boolean
-}
-// prettier-ignore
-type Props = {
-  component: string
-  fullWidth: boolean
-  fullHeight: boolean
-  direction: Direction | { [key in keyof typeof theme.screens]?: Direction }
-  justifyContent: JustifyContent | { [key in keyof typeof theme.screens]?: JustifyContent }
-  alignItems: AlignItems | { [key in keyof typeof theme.screens]?: AlignItems }
-  spacing: Spacing | { [key in keyof typeof theme.screens]?: Spacing }
-}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseStack',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
     fullWidth: { type: Boolean, default: true },
     fullHeight: { type: Boolean, default: false },
-    // prettier-ignore
     direction: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['column', 'row'].includes(value)
-          )
-        : ['column', 'row'].includes(value),
+      type: [Object, String] as PropType<
+        { [key in ScreenKey]?: Direction } | Direction
+      >,
       default: 'column',
     },
-    // prettier-ignore
     justifyContent: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['flex-start', 'center', 'flex-end'].includes(value)
-          )
-        : ['flex-start', 'center', 'flex-end'].includes(value),
+      type: [Object, String] as PropType<
+        { [key in ScreenKey]?: JustifyContent } | JustifyContent
+      >,
       default: 'flex-start',
     },
-    // prettier-ignore
     alignItems: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['flex-start', 'center', 'flex-end'].includes(value)
-          )
-        : ['flex-start', 'center', 'flex-end'].includes(value),
+      type: [Object, String] as PropType<
+        { [key in ScreenKey]?: AlignItems } | AlignItems
+      >,
       default: 'flex-start',
     },
-    // prettier-ignore
     spacing: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              [0, '6xs', '5xs', '4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)
-          )
-        : [0, '6xs', '5xs', '4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value),
+      type: [Object, String] as PropType<
+        { [key in ScreenKey]?: Spacing } | Spacing
+      >,
       default: 0,
     },
   },

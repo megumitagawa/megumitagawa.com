@@ -16,6 +16,7 @@ export const createPage: CreatePage = (pageEntry, ogUrl) => {
     ogImage,
     resources: resourcesEntry,
   } = pageEntry.fields
+  const assetFile = ogImage?.fields.file
   const meta = [
     {
       hid: 'description',
@@ -35,7 +36,7 @@ export const createPage: CreatePage = (pageEntry, ogUrl) => {
     {
       hid: 'og:image',
       name: 'og:image',
-      content: ogImage ? `https:${ogImage.fields.file.url}` : '',
+      content: assetFile ? `https:${assetFile.url}` : '',
     },
     {
       hid: 'og:url',

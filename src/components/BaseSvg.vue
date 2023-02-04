@@ -20,39 +20,19 @@
     ]"
     xmlns="http://www.w3.org/2000/svg"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <slot />
   </svg>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { theme } from '@/../tailwind.config'
+import { PropType } from 'vue'
 
+type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Size = 'xs' | 'xl' | '2.5xl' | '3.5xl'
+type Color = 'invert' | 'inherit' | 'base'
 
-type Data = {}
-type Methods = {}
-// prettier-ignore
-type Computed = {
-  sizeXs: boolean, sizeXsXs: boolean, sizeXsLg: boolean, sizeXs3xl: boolean, sizeXs4xl: boolean,
-  sizeXl: boolean, sizeXlXs: boolean, sizeXlLg: boolean, sizeXl3xl: boolean, sizeXl4xl: boolean,
-  size2hxl: boolean, size2hxlXs: boolean, size2hxlLg: boolean, size2hxl3xl: boolean, size2hxl4xl: boolean,
-  size3hxl: boolean, size3hxlXs: boolean, size3hxlLg: boolean, size3hxl3xl: boolean, size3hxl4xl: boolean,
-  colorInvert: boolean
-  colorInherit: boolean
-  colorBase: boolean
-}
-type Props = {
-  viewBox: string
-  fullWidth: boolean
-  fullHeight: boolean
-  size: Size | { [key in keyof typeof theme.screens]?: Size }
-  color: 'invert' | 'inherit' | 'base'
-}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseSvg',
 
   inheritAttrs: false,
@@ -61,19 +41,12 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     viewBox: { type: String, required: true },
     fullWidth: { type: Boolean, default: false },
     fullHeight: { type: Boolean, default: false },
-    // prettier-ignore
     size: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['xs', 'xl', '2.5xl', '3.5xl'].includes(value)
-          )
-        : ['xs', 'xl', '2.5xl', '3.5xl'].includes(value),
+      type: [Object, String] as PropType<{ [key in ScreenKey]?: Size } | Size>,
       default: 'xs',
     },
     color: {
-      validator: (value) => ['invert', 'inherit', 'base'].includes(value),
+      type: String as PropType<Color>,
       default: 'base',
     },
   },

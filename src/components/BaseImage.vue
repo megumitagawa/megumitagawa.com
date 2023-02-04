@@ -1,29 +1,41 @@
 <!--
-NuxtPicture does not have the option to set the media attribute of source elements
-So instead provide the option to display only when media query is matched
-https://github.com/nuxt/image/issues/309
+Workaround until NuxtPicture is fixed
+
+Because NuxtPicture does not provide the following features
+- Media attribute of source elements
+- Conversion to WebP format
+
+Use with the following scripts
+- bin/create-local-images.mjs
+- bin/create-webp-images.mjs
 -->
 
 <template>
-  <NuxtPicture
-    v-if="existing"
-    :src="src"
-    :sizes="$defaultImgSizes"
-    :width="width"
-    :height="height"
-    :alt="alt"
-    :loading="loading"
-    :preload="preload"
+  <picture
     :class="[
       'block overflow-hidden',
       {
         'w-full': fullWidth,
         'h-full': objectCover || objectContain || fullHeight,
-        rounded: rounded,
+        rounded,
       },
     ]"
-    :img-attrs="{
-      class: [
+  >
+    <source
+      v-for="source of slicedSourceList"
+      :key="source.key"
+      :srcset="source.srcset"
+      :media="source.media"
+      :width="source.width"
+      :height="source.height"
+    />
+    <img
+      :src="xsSource.srcset"
+      :width="xsSource.width"
+      :height="xsSource.height"
+      :alt="alt"
+      :loading="loading"
+      :class="[
         'block',
         {
           'w-full': fullWidth,
@@ -32,78 +44,97 @@ https://github.com/nuxt/image/issues/309
           'object-cover': objectCover,
           'object-contain': objectContain,
         },
-      ],
-    }"
-  />
+      ]"
+    />
+  </picture>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {
-  addChangeEventListener,
-  removeChangeEventListener,
-} from '@/models/MediaQueryList'
-import { createMediaQueryList } from '@/models/Window'
+import { PropType } from 'vue'
 
-type Data = {
-  existing: boolean
-  mediaQueryList: MediaQueryList | null
-}
-type Methods = {
-  updateExisting(mediaQueryListEvent: MediaQueryListEvent): void
-}
-type Computed = {
-  objectFill: boolean
-  objectCover: boolean
-  objectContain: boolean
-}
-type Props = {
-  src: string
-  width: number
-  height: number
-  alt: string
-  loading: 'eager' | 'lazy'
-  preload: boolean
-  objectFit: 'fill' | 'cover' | 'contain'
-  media: string | null
-  fullWidth: boolean
-  fullHeight: boolean
-  rounded: boolean
-}
+type ObjectFit = 'fill' | 'cover' | 'contain'
+type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseImage',
 
   inheritAttrs: false,
 
   props: {
-    src: { type: String, required: true },
-    width: { type: Number, required: true },
-    height: { type: Number, required: true },
+    src: {
+      type: [Object, String] as PropType<
+        { [key in ScreenKey]?: string } | string
+      >,
+      required: true,
+    },
+    width: {
+      type: [Object, Number] as PropType<
+        { [key in ScreenKey]?: number } | number
+      >,
+      required: true,
+    },
+    height: {
+      type: [Object, Number] as PropType<
+        { [key in ScreenKey]?: number } | number
+      >,
+      required: true,
+    },
     alt: { type: String, default: '' },
     loading: {
-      validator: (value) => ['eager', 'lazy'].includes(value),
+      type: String as PropType<HTMLImageElement['loading']>,
       default: 'eager',
     },
-    preload: { type: Boolean, default: false },
     objectFit: {
-      validator: (value) => ['fill', 'cover', 'contain'].includes(value),
+      type: String as PropType<ObjectFit>,
       default: 'fill',
     },
-    media: { type: String, default: null },
     fullWidth: { type: Boolean, default: true },
     fullHeight: { type: Boolean, default: false },
     rounded: { type: Boolean, default: true },
   },
 
-  data() {
-    return {
-      existing: !this.media,
-      mediaQueryList: null,
-    }
-  },
-
   computed: {
+    srcObject() {
+      return typeof this.src === 'object' ? this.src : { xs: this.src }
+    },
+    widthObject() {
+      return typeof this.width === 'object' ? this.width : { xs: this.width }
+    },
+    heightObject() {
+      return typeof this.height === 'object' ? this.height : { xs: this.height }
+    },
+    sourceList() {
+      const productionFlag = this.$config.public.nodeEnv === 'production'
+      const mediaQueries = this.$computedTailwindTheme.mediaQueries
+      return this.$computedTailwindTheme.screenKeyList
+        .map((screenKey) => {
+          if (!(screenKey in this.srcObject)) return []
+          const srcset = productionFlag
+            ? this.srcObject[screenKey]?.replace(/^https:\//, '')
+            : this.srcObject[screenKey]
+          const partialSource = {
+            media: screenKey === 'xs' ? undefined : mediaQueries[screenKey],
+            width: this.widthObject[screenKey],
+            height: this.heightObject[screenKey],
+          }
+          const source = { key: screenKey, srcset, ...partialSource }
+          if (!productionFlag || !/.(gif|jpg|jpeg|png)$/i.test(srcset ?? ''))
+            return [source]
+          const webpSource = {
+            key: `${screenKey}Webp`,
+            srcset: srcset?.replace(/.(gif|jpg|jpeg|png)$/i, '.webp'),
+            ...partialSource,
+          }
+          return [webpSource, source]
+        })
+        .flat()
+    },
+    slicedSourceList() {
+      return this.sourceList.slice(0, -1)
+    },
+    xsSource() {
+      return this.sourceList[this.sourceList.length - 1]
+    },
     objectFill() {
       return this.objectFit === 'fill'
     },
@@ -112,26 +143,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     },
     objectContain() {
       return this.objectFit === 'contain'
-    },
-  },
-
-  mounted() {
-    if (this.media) {
-      this.mediaQueryList = createMediaQueryList(window, this.media)
-      addChangeEventListener(this.mediaQueryList, this.updateExisting)
-      this.existing = this.mediaQueryList.matches
-    }
-  },
-
-  beforeDestroy() {
-    if (this.mediaQueryList) {
-      removeChangeEventListener(this.mediaQueryList, this.updateExisting)
-    }
-  },
-
-  methods: {
-    updateExisting({ matches }) {
-      this.existing = matches
     },
   },
 })

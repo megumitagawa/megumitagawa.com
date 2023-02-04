@@ -1,47 +1,36 @@
 <!--
 Inspired by MUI
 https://mui.com/material-ui/api/backdrop/
-
-MountingPortal should be replace to teleport in Vue3
 -->
 
 <template>
-  <client-only>
-    <MountingPortal mount-to="body" append>
-      <component
-        :is="component"
-        :class="[
-          'fixed inset-0 z-20 flex justify-center items-center',
-          'overflow-hidden bg-white/90 transition-visibility-opacity',
-          { invisible: !open, 'opacity-0': !open },
-        ]"
-        v-bind="$attrs"
-        v-on="$listeners"
-      >
-        <slot />
-      </component>
-    </MountingPortal>
-  </client-only>
+  <Teleport to="body">
+    <component
+      :is="component"
+      :class="[
+        'fixed inset-0 z-20 flex justify-center items-center',
+        'overflow-hidden bg-white/90 transition-visibility-opacity',
+        { invisible: !open, 'opacity-0': !open },
+      ]"
+      v-bind="$attrs"
+    >
+      <slot />
+    </component>
+  </Teleport>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { PropType } from 'vue'
 
-type Data = {}
-type Methods = {}
-type Computed = {}
-type Props = {
-  component: string
-  open: boolean
-}
+type Component = 'div' | 'span'
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseBackdrop',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
     open: { type: Boolean, default: false },
   },
 })

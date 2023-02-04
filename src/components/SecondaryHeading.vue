@@ -8,22 +8,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { PropType } from 'vue'
 
-type Data = {}
-type Methods = {}
-type Computed = {}
-type Props = {
-  component: string
-}
+type Component = 'h2' | 'h3' | 'span'
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'SecondaryHeading',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
   },
 })
 </script>

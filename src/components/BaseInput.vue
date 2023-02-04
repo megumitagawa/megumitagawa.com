@@ -20,31 +20,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { FormEvent } from '@/models/FormEvent'
+import { PropType } from 'vue'
 
-type Data = {}
-type Methods = {
-  emitInput(formEvent: FormEvent<HTMLInputElement>): void
-}
-type Computed = {}
-type Props = {
-  type: 'text' | 'email' | 'hidden'
-  name: string
-  value: string
-  placeholder: string
-  required: boolean
-  invisible: boolean
-}
+type Type = 'text' | 'email' | 'hidden'
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseInput',
 
   inheritAttrs: false,
 
   props: {
     type: {
-      validator: (value) => ['text', 'email', 'hidden'].includes(value),
+      type: String as PropType<Type>,
       required: true,
     },
     name: { type: String, required: true },
@@ -55,7 +42,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
   },
 
   methods: {
-    emitInput(formEvent) {
+    emitInput(formEvent: Event): void {
       this.$emit('input', formEvent)
     },
   },

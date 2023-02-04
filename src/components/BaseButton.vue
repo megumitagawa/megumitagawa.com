@@ -1,7 +1,7 @@
 <template>
   <component
-    :is="disableableComponent"
-    :disabled="nullableDisabled"
+    :is="resolvedComponent"
+    :disabled="disabled"
     :class="[
       'relative flex justify-center items-center transition',
       // prettier-ignore
@@ -46,7 +46,6 @@
       },
     ]"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <span class="absolute top-1/2 left-4 -translate-y-1/2">
       <slot name="startIcon" />
@@ -59,93 +58,43 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { theme } from '@/../tailwind.config'
+import { PropType } from 'vue'
 
+type Component = 'button' | 'NuxtLink'
+type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Size = 'xs' | 'base' | 'xl' | '2xl' | '2.5xl'
 type Color = 'base' | 'pale' | 'info'
 
-type Data = {}
-type Methods = {}
-// prettier-ignore
-type Computed = {
-  fullWidthXs: boolean, fullWidthLg: boolean, fullWidth3xl: boolean, fullWidth4xl: boolean,
-  disableableComponent: string
-  nullableDisabled: boolean | null
-  sizeXs: boolean, sizeXsXs: boolean, sizeXsLg: boolean, sizeXs3xl: boolean, sizeXs4xl: boolean
-  sizeBase: boolean, sizeBaseXs: boolean, sizeBaseLg: boolean, sizeBase3xl: boolean, sizeBase4xl: boolean
-  sizeXl: boolean, sizeXlXs: boolean, sizeXlLg: boolean, sizeXl3xl: boolean, sizeXl4xl: boolean
-  size2xl: boolean, size2xlXs: boolean, size2xlLg: boolean, size2xl3xl: boolean, size2xl4xl: boolean
-  size2hxl: boolean, size2hxlXs: boolean, size2hxlLg: boolean, size2hxl3xl: boolean, size2hxl4xl: boolean
-  colorBase: boolean, colorBaseXs: boolean, colorBaseLg: boolean, colorBase3xl: boolean, colorBase4xl: boolean,
-  colorPale: boolean, colorPaleXs: boolean, colorPaleLg: boolean, colorPale3xl: boolean, colorPale4xl: boolean,
-  colorInfo: boolean, colorInfoXs: boolean, colorInfoLg: boolean, colorInfo3xl: boolean, colorInfo4xl: boolean,
-  textXs: boolean, textLg: boolean, text3xl: boolean, text4xl: boolean,
-}
-type Props = {
-  component: string
-  fullWidth: boolean | { [key in keyof typeof theme.screens]?: boolean }
-  fullHeight: boolean
-  disabled: boolean
-  size: Size | { [key in keyof typeof theme.screens]?: Size }
-  color: Color | { [key in keyof typeof theme.screens]?: Color }
-  blurred: boolean
-  text: boolean | { [key in keyof typeof theme.screens]?: boolean }
-  opaque: boolean
-}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseButton',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'button' },
-    // prettier-ignore
+    component: { type: String as PropType<Component>, default: 'button' },
     fullWidth: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              typeof value === 'boolean'
-          )
-        : typeof value === 'boolean',
+      type: [Object, Boolean] as PropType<
+        { [key in ScreenKey]?: boolean } | boolean
+      >,
       default: false,
     },
     fullHeight: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    // prettier-ignore
     size: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['xs', 'base', 'xl', '2xl', '2.5xl'].includes(value)
-          )
-        : ['xs', 'base', 'xl', '2xl', '2.5xl'].includes(value),
+      type: [Object, String] as PropType<{ [key in ScreenKey]?: Size } | Size>,
       default: 'base',
     },
-    // prettier-ignore
     color: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['base', 'pale', 'info'].includes(value)
-          )
-        : ['base', 'pale', 'info'].includes(value),
+      type: [Object, String] as PropType<
+        { [key in ScreenKey]?: Color } | Color
+      >,
       default: 'base',
     },
     blurred: { type: Boolean, default: true },
-    // prettier-ignore
     text: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              typeof value === 'boolean'
-          )
-        : typeof value === 'boolean',
+      type: [Object, Boolean] as PropType<
+        { [key in ScreenKey]?: boolean } | boolean
+      >,
       default: false,
     },
     opaque: { type: Boolean, default: false },
@@ -161,9 +110,13 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     disableableComponent() {
       return this.disabled ? 'button' : this.component
     },
-    // Don't set disabled if not disabled
-    nullableDisabled() {
-      return this.disabled || null
+    // Include dynamic components to bundle
+    // Argument of resolveComponent must not be variable
+    // https://nuxt.com/docs/guide/directory-structure/components#dynamic-components
+    resolvedComponent() {
+      return this.disableableComponent === 'NuxtLink'
+        ? resolveComponent('NuxtLink')
+        : this.disableableComponent
     },
     sizeXs() { return this.size === 'xs' },
     sizeXsXs() { const s = this.size; return typeof s === 'object' ? s.xs === 'xs' : this.sizeXs },

@@ -5,54 +5,46 @@ https://mui.com/material-ui/api/pagination/
 
 <template>
   <component
-    :is="component"
+    :is="resolvedComponent"
     class="flex justify-center items-center w-full"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <slot name="previous" :previous-page-number="previousPageNumber" />
-    <slot
-      name="current"
-      :current-page-number="currentPageNumber"
-      :total-page-number="totalPageNumber"
-    />
+    <slot name="current" />
     <slot name="next" :next-page-number="nextPageNumber" />
   </component>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { PropType } from 'vue'
 import {
   PageNumber,
-  isPageNumber,
   createPreviousPageNumber,
   createNextPageNumber,
 } from '@/models/PageNumber'
 
-type Data = {}
-type Methods = {}
-type Computed = {
-  previousPageNumber: PageNumber | null
-  nextPageNumber: PageNumber | null
-}
-type Props = {
-  component: string
-  currentPageNumber: PageNumber
-  totalPageNumber: PageNumber
-}
+type Component = 'BaseStack' | 'span'
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BasePager',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
-    currentPageNumber: { validator: isPageNumber, required: true },
-    totalPageNumber: { validator: isPageNumber, required: true },
+    component: { type: String as PropType<Component>, default: 'span' },
+    currentPageNumber: { type: Number as PropType<PageNumber>, required: true },
+    totalPageNumber: { type: Number as PropType<PageNumber>, required: true },
   },
 
   computed: {
+    // Include dynamic components to bundle
+    // Argument of resolveComponent must not be variable
+    // https://nuxt.com/docs/guide/directory-structure/components#dynamic-components
+    resolvedComponent() {
+      return this.component === 'BaseStack'
+        ? resolveComponent('BaseStack')
+        : this.component
+    },
     previousPageNumber() {
       return createPreviousPageNumber(this.currentPageNumber)
     },

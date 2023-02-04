@@ -1,31 +1,50 @@
 <!--
 Inspired by MUI
 https://mui.com/material-ui/api/box/
+
+Remove slot if component is void element
+to avoid hydration children mismatch warning
 -->
 
 <template>
-  <component :is="component" v-bind="$attrs" v-on="$listeners">
-    <slot />
-  </component>
+  <template v-if="voidElement">
+    <component :is="component" v-bind="$attrs" />
+  </template>
+  <template v-else>
+    <component :is="component" v-bind="$attrs">
+      <slot />
+    </component>
+  </template>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { PropType } from 'vue'
 
-type Data = {}
-type Methods = {}
-type Computed = {}
-type Props = {
-  component: string
-}
+type Component =
+  | 'article'
+  | 'div'
+  | 'footer'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'hr'
+  | 'option'
+  | 'p'
+  | 'span'
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseBox',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
+  },
+
+  computed: {
+    voidElement() {
+      return this.component === 'hr'
+    },
   },
 })
 </script>

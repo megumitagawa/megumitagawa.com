@@ -1,5 +1,5 @@
 <template>
-  <BaseSvg viewBox="0 0 27 27" v-bind="$attrs" v-on="$listeners">
+  <BaseSvg viewBox="0 0 27 27" v-bind="$attrs">
     <circle cx="15" cy="24" r="3" fill="currentColor" />
     <circle cx="24" cy="24" r="3" fill="currentColor" />
     <line
@@ -58,14 +58,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-type Data = {}
-type Methods = {}
-type Computed = {}
-type Props = {}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'SoundListIcon',
 
   inheritAttrs: false,

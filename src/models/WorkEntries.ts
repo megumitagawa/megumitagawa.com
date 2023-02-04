@@ -11,12 +11,12 @@ export const createTotalPageNumber: CreateTotalPageNumber = (workEntries) => {
   return Math.ceil(total / limit)
 }
 
-type CreateNuxtOptionsGenerateRoute = (
+type CreateDynamicRouteList = (
   workEntries: WorkEntries,
   pathPrefix: string
 ) => string[]
 
-export const createNuxtOptionsGenerateRoute: CreateNuxtOptionsGenerateRoute = (
+export const createDynamicRouteList: CreateDynamicRouteList = (
   workEntries,
   pathPrefix
 ) =>

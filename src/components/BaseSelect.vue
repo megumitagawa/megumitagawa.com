@@ -18,12 +18,11 @@ https://mui.com/material-ui/api/select/
     <select
       ref="select"
       :name="name"
-      :value="value"
       :class="[
         'absolute top-0 left-0 block w-full h-full opacity-0',
         'cursor-pointer',
       ]"
-      @input="updateLabelAndEmitInput"
+      @input="updateLabel"
     >
       <slot />
     </select>
@@ -31,48 +30,41 @@ https://mui.com/material-ui/api/select/
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { FormEvent } from '@/models/FormEvent'
-import { getSelectedLabel } from '@/models/HTMLSelectElement'
+import { PropType } from 'vue'
+import {
+  getSelectedLabel,
+  isHTMLSelectElement,
+} from '@/models/HTMLSelectElement'
 
+type Component = 'span'
 type Data = {
   label: string
 }
-type Methods = {
-  updateLabelAndEmitInput(formEvent: FormEvent<HTMLSelectElement>): void
-}
-type Computed = {}
-type Props = {
-  component: string
-  name: string
-  value: string
-}
 
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseSelect',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'span' },
+    component: { type: String as PropType<Component>, default: 'span' },
     name: { type: String, required: true },
-    value: { type: String, required: true },
   },
 
-  data() {
+  data(): Data {
     return {
       label: '',
     }
   },
 
   mounted() {
-    this.label = getSelectedLabel(this.$refs.select as HTMLSelectElement)
+    this.updateLabel()
   },
 
   methods: {
-    updateLabelAndEmitInput(formEvent) {
-      this.label = getSelectedLabel(this.$refs.select as HTMLSelectElement)
-      this.$emit('input', formEvent)
+    updateLabel(): void {
+      if (isHTMLSelectElement(this.$refs.select))
+        this.label = getSelectedLabel(this.$refs.select)
     },
   },
 })

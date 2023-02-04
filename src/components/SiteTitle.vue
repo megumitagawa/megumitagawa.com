@@ -16,37 +16,23 @@
       :spacing="{ xs: 'sm', lg: '6xs', '3xl': '5xs', '4xl': '4xs' }"
     >
       <BaseBox>
-        {{ $accessor.resources.shortTextMap.get('site-title-ja') }}
+        {{ shortTextMap.get('site-title-ja') }}
       </BaseBox>
       <BaseBox class="lg:hidden">
         <SingleDotIcon size="xs" />
       </BaseBox>
       <BaseBox>
-        {{ $accessor.resources.shortTextMap.get('site-title-en') }}
+        {{ shortTextMap.get('site-title-en') }}
       </BaseBox>
     </BaseStack>
   </BaseButton>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script setup lang="ts">
+import { useResourcesStore } from '../stores/resources'
 
-type Data = {}
-type Methods = {}
-type Computed = {
-  component: string
-}
-type Props = {}
+const { shortTextMap } = useResourcesStore()
 
-export default Vue.extend<Data, Methods, Computed, Props>({
-  name: 'SiteTitle',
-
-  inheritAttrs: false,
-
-  computed: {
-    component() {
-      return this.$startingFromIndexPage ? 'h1' : 'header'
-    },
-  },
-})
+const { path } = useRoute()
+const component = computed(() => (path === '/' ? 'h1' : 'header'))
 </script>

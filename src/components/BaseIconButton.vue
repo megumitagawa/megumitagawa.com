@@ -6,7 +6,7 @@ https://mui.com/material-ui/api/icon-button/
 <template>
   <component
     :is="disableableComponent"
-    :disabled="nullableDisabled"
+    :disabled="disabled"
     :class="[
       'flex justify-center items-center grow-0 shrink-0 rounded-full shadow-md',
       'transition',
@@ -23,67 +23,40 @@ https://mui.com/material-ui/api/icon-button/
         'text-black': colorBase && !disabled,
         'text-lightgray': colorBase && disabled,
         'text-white': colorInfo,
-        'pointer-device:hover:shadow-none': !nullableDisabled,
-        'pointer-device:hover:translate-y-0.5': !nullableDisabled,
+        'pointer-device:hover:shadow-none': !disabled,
+        'pointer-device:hover:translate-y-0.5': !disabled,
       },
     ]"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <slot />
   </component>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { theme } from '@/../tailwind.config'
+import { PropType } from 'vue'
 
+type Component = 'a' | 'button'
+type ScreenKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type Size = '2.5xl' | '3.5xl'
+type Color = 'base' | 'info'
 
-type Data = {}
-type Methods = {}
-// prettier-ignore
-type Computed = {
-  disableableComponent: string
-  nullableDisabled: boolean | null
-  size2hxl: boolean, size2hxlXs: boolean, size2hxlLg: boolean, size2hxl3xl: boolean, size2hxl4xl: boolean,
-  size3hxl: boolean, size3hxlXs: boolean, size3hxlLg: boolean, size3hxl3xl: boolean, size3hxl4xl: boolean,
-  colorInfo: boolean
-  colorBase: boolean
-}
-type Props = {
-  component: string
-  fullWidth: boolean
-  fullHeight: boolean
-  disabled: boolean
-  size: Size | { [key in keyof typeof theme.screens]?: Size }
-  color: 'base' | 'info'
-  blurred: boolean
-}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'BaseIconButton',
 
   inheritAttrs: false,
 
   props: {
-    component: { type: String, default: 'button' },
+    component: { type: String as PropType<Component>, default: 'button' },
     fullWidth: { type: Boolean, default: false },
     fullHeight: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    // prettier-ignore
     size: {
-      validator: (value) => typeof value === 'object'
-        ? Object.entries(value).every(
-            ([key, value]) =>
-              Object.keys(theme.screens).includes(key) &&
-              ['2.5xl', '3.5xl'].includes(value)
-          )
-        : ['2.5xl', '3.5xl'].includes(value),
+      type: [Object, String] as PropType<{ [key in ScreenKey]?: Size } | Size>,
       default: '2.5xl',
     },
     color: {
-      validator: (value) => ['base', 'info'].includes(value),
+      type: String as PropType<Color>,
       default: 'base',
     },
     blurred: { type: Boolean, default: true },
@@ -94,10 +67,6 @@ export default Vue.extend<Data, Methods, Computed, Props>({
     // Force button element if disabled
     disableableComponent() {
       return this.disabled ? 'button' : this.component
-    },
-    // Don't set disabled if not disabled
-    nullableDisabled() {
-      return this.disabled || null
     },
     size2hxl() { return this.size === '2.5xl' },
     size2hxlXs() { const s = this.size; return typeof s === 'object' ? s.xs === '2.5xl' : this.size2hxl },

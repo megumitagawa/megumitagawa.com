@@ -15,5 +15,6 @@ module.exports = {
       'error',
       { ignoreRestSiblings: true },
     ],
+    'vue/no-multiple-template-root': 0,
   },
 }

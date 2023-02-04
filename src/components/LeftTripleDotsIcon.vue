@@ -1,5 +1,5 @@
 <template>
-  <BaseSvg viewBox="0 0 20 20" v-bind="$attrs" v-on="$listeners">
+  <BaseSvg viewBox="0 0 20 20" v-bind="$attrs">
     <circle cx="3" cy="10" r="3" fill="currentColor" />
     <circle cx="12" cy="10" r="2" fill="currentColor" />
     <circle cx="19" cy="10" r="1" fill="currentColor" />
@@ -7,14 +7,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-type Data = {}
-type Methods = {}
-type Computed = {}
-type Props = {}
-
-export default Vue.extend<Data, Methods, Computed, Props>({
+export default defineNuxtComponent({
   name: 'LeftTripleDotsIcon',
 
   inheritAttrs: false,

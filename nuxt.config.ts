@@ -1,190 +1,135 @@
 import { createClient } from 'contentful'
-import { NuxtConfig } from '@nuxt/types'
-import { NuxtOptionsRuntimeConfig } from '@nuxt/types/config/runtime'
-import { theme } from './tailwind.config'
-import { createNuxtOptionsGenerateRoute } from './src/models/WorkEntries'
+import { version as contentfulVersion } from 'contentful/package.json'
+import { createDynamicRouteList } from './src/models/WorkEntries'
 import { WorkFields } from './src/models/WorkFields'
+import { theme } from './tailwind.config'
 
-const {
-  NODE_ENV = 'production',
-  NUXT_PUBLIC_SITE_URL = '',
-  NUXT_PUBLIC_INDEX_PAGE_WORK_LIST_LENGTH = '',
-  NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH = '',
-  NUXT_PUBLIC_NETLIFY_FORM_NAME = '',
-  NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY = '',
-  NUXT_PUBLIC_INDEX_FULL_BODY_IMAGE_DELAY = '',
-  NUXT_PRIVATE_CTF_SPACE_ID = '',
-  NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN = '',
-  NUXT_PRIVATE_META_ROBOTS_NONE = 'off',
-} = process.env
-
-const indexPageWorkListLengthNumber = +NUXT_PUBLIC_INDEX_PAGE_WORK_LIST_LENGTH
-const indexPageWorkListLength =
-  indexPageWorkListLengthNumber > 0 ? indexPageWorkListLengthNumber : 5
-const worksPageWorkListLengthNumber = +NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH
-const worksPageWorkListLength =
-  worksPageWorkListLengthNumber > 0 ? worksPageWorkListLengthNumber : 20
-
-// When target is static, asyncData behavior is different between nuxt dev and nuxt start
-// Plugin and environment variables for contentful should be available when running nuxt dev
-const productionMode = NODE_ENV === 'production'
-const createClientParams = {
-  space: NUXT_PRIVATE_CTF_SPACE_ID,
-  accessToken: NUXT_PRIVATE_CTF_CDA_ACCESS_TOKEN,
-}
-
-const indexPageBackdropDelayNumber = +NUXT_PUBLIC_INDEX_PAGE_BACKDROP_DELAY
-const indexPageBackdropDelay = indexPageBackdropDelayNumber || 0
-const indexFullBodyImageDelayNumber = +NUXT_PUBLIC_INDEX_FULL_BODY_IMAGE_DELAY
-const indexFullBodyImageDelay = indexFullBodyImageDelayNumber || 0
-
-const metaRobotsNone = NUXT_PRIVATE_META_ROBOTS_NONE.toLowerCase() === 'on'
-
-// For NuxtImage, convert Tailwind breakpoints settings to unit-less
-const screensWithoutUnits = Object.fromEntries(
-  Object.entries(theme.screens).map(([key, value]) => [
-    key,
-    parseInt(value, 10),
-  ])
-)
-
-const nuxtConfig: NuxtConfig = {
-  // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-
-  // Source directory: https://nuxtjs.org/docs/configuration-glossary/configuration-srcdir
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
   srcDir: 'src/',
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    title: 'megumitagawa.com',
-    htmlAttrs: {
-      lang: 'en',
-    },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'format-detection', content: 'telephone=no' },
-      ...(metaRobotsNone
-        ? [{ name: 'robots', content: 'noindex,nofollow' }]
-        : []),
-    ],
-    link: [
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: 'anonymous',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&family=Quicksand:wght@600&display=swap',
-        media: 'print',
-        onload: 'this.media="all"',
-      },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    ],
-  },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/main.css'],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '@/plugins/Fragment.ts', mode: 'all' },
-    { src: '@/plugins/setClientErrorHandler.ts', mode: 'client' },
-    { src: '@/plugins/setServerErrorHandler.ts', mode: 'server' },
-    {
-      src: '@/plugins/injectContentfulClientApi.ts',
-      mode: productionMode ? 'server' : 'all',
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
     },
-    { src: '@/plugins/injectStartingFromIndexPage.ts', mode: 'all' },
-    { src: '@/plugins/injectMediaQueries.ts', mode: 'all' },
-    { src: '@/plugins/injectDefaultImgSizes.ts', mode: 'all' },
-    { src: '@/plugins/updateViewportMeta.ts', mode: 'client' },
-  ],
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module',
-    // https://image.nuxtjs.org/
-    '@nuxt/image',
-    // https://typed-vuex.roe.dev/
-    'nuxt-typed-vuex',
-    // https://github.com/nuxt/postcss8
-    '@nuxt/postcss8',
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://sentry.nuxtjs.org/
-    '@nuxtjs/sentry',
-    // https://portal-vue.linusb.org/
-    'portal-vue/nuxt',
-  ],
-
-  // Image optimization: https://image.nuxtjs.org/api/options/
-  image: {
-    domains: ['images.ctfassets.net'],
-    screens: screensWithoutUnits,
   },
 
-  // Sentry: https://sentry.nuxtjs.org/sentry/options
-  sentry: {
-    disabled: !productionMode,
-    lazy: true,
-    sourceMapStyle: 'hidden-source-map',
-  },
+  modules: [['@pinia/nuxt', { autoImports: ['defineStore'] }]],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
+  runtimeConfig: {
+    // Must not be empty
+    // https://github.com/contentful/contentful.js/blob/beta-v10/lib/contentful.ts#L37
+    contentfulCreateClientParams: {
+      accessToken: 'dummy',
+      space: 'dummy',
+    },
+    public: {
+      // Must not be empty
+      // https://github.com/contentful/contentful.js/blob/beta-v10/lib/contentful.ts#L37
+      contentfulCreateClientParams: {
+        accessToken: 'dummy',
+        space: 'dummy',
       },
+      googleAnalyticsMeasurementId: '',
+      indexFullBodyImageDelay: 0,
+      indexPageBackdropDelay: 0,
+      indexPageWorkListLength: 5,
+      metaRobotsNone: false,
+      netlifyFormName: '',
+      nodeEnv: process.env.NODE_ENV,
+      tailwindTheme: theme,
+      sentryDsn: '',
+      sentryTracesSampleRate: 1,
+      siteHostname: '',
+      siteUrl: '',
+      worksPageWorkListLength: 20,
     },
   },
 
-  // Public environment variables: https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config
-  publicRuntimeConfig: {
-    siteUrl: NUXT_PUBLIC_SITE_URL,
-    indexPageWorkListLength,
-    worksPageWorkListLength,
-    netlifyFormName: NUXT_PUBLIC_NETLIFY_FORM_NAME,
-    indexPageBackdropDelay,
-    indexFullBodyImageDelay,
-    ...(productionMode ? {} : { createClientParams }),
-  } as NuxtOptionsRuntimeConfig,
+  routeRules: {
+    '/works': { redirect: { to: '/works/page/1', statusCode: 301 } },
+  },
 
-  // Private environment variables: https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config
-  privateRuntimeConfig: {
-    ...(productionMode ? { createClientParams } : {}),
-  } as NuxtOptionsRuntimeConfig,
-
-  // Generating configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
-  generate: {
-    async routes() {
-      const contentfulClientApi = createClient(createClientParams)
+  hooks: {
+    // Workaround to generate dynamic routes instead of generate.routes
+    // https://github.com/nuxt/framework/issues/4919#issuecomment-1124349857
+    async 'nitro:config'({ prerender }) {
+      const {
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_ACCESS_TOKEN: accessToken,
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_SPACE: space,
+        NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH: worksPageWorkListLength,
+      } = process.env
+      if (
+        typeof accessToken === 'undefined' ||
+        typeof space === 'undefined' ||
+        typeof worksPageWorkListLength === 'undefined'
+      )
+        return
+      const contentfulClientApi = createClient({ accessToken, space })
+      const unsafeLimit = parseInt(worksPageWorkListLength, 10)
+      const limit = Number.isNaN(unsafeLimit) ? 20 : unsafeLimit
       const workEntries =
         await contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
-          { content_type: 'work', limit: worksPageWorkListLength }
+          {
+            content_type: 'work',
+            limit,
+          }
         )
-      return createNuxtOptionsGenerateRoute(workEntries, '/works/page/')
+      const routes = createDynamicRouteList(workEntries, '/works/page/')
+      if (prerender?.routes) prerender.routes.push(...routes)
     },
   },
 
-  // Loading: https://nuxtjs.org/docs/features/loading/
-  loading: {
-    color: theme.extend.colors.lime,
-    height: '4px',
+  build: {
+    // Workaround to build with @contentful/rich-text-types and contentful-rich-text-vue-renderer in development
+    // https://nuxt.com/docs/guide/concepts/esm#transpiling-libraries
+    transpile: [
+      '@contentful/rich-text-types',
+      'contentful-rich-text-vue-renderer',
+    ],
   },
-}
 
-export default nuxtConfig
+  vite: {
+    define: {
+      // Required variable to import contentful as TypeScript
+      // https://github.com/contentful/contentful.js/blob/2ede16730b869e7f8041d35ea176b54550098da0/webpack.config.js#L4
+      // This is workaround for following issues of contentful
+      // - Different handling of modules between production and development
+      //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
+      // - Bundle code containing eval
+      __VERSION__: `'${contentfulVersion}'`,
+    },
+    optimizeDeps: {
+      // Workaround to build with @contentful/rich-text-types in production
+      // https://ja.vitejs.dev/config/dep-optimization-options.html#optimizedeps-include
+      include: ['@contentful/rich-text-types'],
+    },
+  },
+
+  alias: {
+    // Required alias to import contentful as TypeScript
+    // This is workaround for following issues of contentful
+    // - Different handling of modules between production and development
+    //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
+    // - Bundle code containing eval
+    contentful: 'contentful/lib/index',
+    // Workaround to build with @pinia/nuxt
+    // https://stackoverflow.com/a/74801367
+    pinia: '@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
+  },
+
+  app: {
+    head: {
+      script: [
+        // Workaround to avoid errors of contentful on console in development
+        // https://github.com/contentful/contentful.js/issues/422#issuecomment-1054400365
+        ...(process.env.NODE_ENV === 'development'
+          ? [{ src: '/scripts/inject-process.js' }]
+          : []),
+      ],
+    },
+  },
+})

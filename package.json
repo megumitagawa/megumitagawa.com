@@ -1,52 +1,78 @@
 {
   "name": "megumitagawa.com",
+  "version": "2.0.0",
   "private": true,
-  "description": "The front-end of megumitagawa.com",
-  "version": "1.0.2",
-  "author": "dsktschy",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate --fail-on-error",
+    "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore",
+    "lint:prettier": "prettier --check .",
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix && npm run lint:style -- --fix",
+    "prepare": "husky install",
+    "test": "jest",
+    "release": "standard-version"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache",
+    "*.{css,scss,sass,html,vue}": "stylelint",
+    "*.**": "prettier --check --ignore-unknown"
+  },
+  "standard-version": {
+    "scripts": {
+      "postchangelog": "prettier --write CHANGELOG.md"
+    }
+  },
   "dependencies": {
-    "gatsby": "^2.13.50",
-    "gatsby-background-image": "^0.8.3",
-    "gatsby-image": "^2.2.8",
-    "gatsby-plugin-google-analytics": "^2.1.7",
-    "gatsby-plugin-manifest": "^2.2.4",
-    "gatsby-plugin-offline": "^2.2.4",
-    "gatsby-plugin-postcss": "^2.1.3",
-    "gatsby-plugin-react-helmet": "^3.1.3",
-    "gatsby-plugin-sharp": "^2.2.9",
-    "gatsby-plugin-svg-sprite": "^2.0.1",
-    "gatsby-source-contentful": "^2.1.20",
-    "gatsby-source-filesystem": "^2.1.8",
-    "gatsby-transformer-sharp": "^2.2.5",
-    "postcss-preset-env": "^6.7.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.1",
-    "react-transition-group": "^4.2.2",
-    "reset-css": "^4.0.1",
-    "sanitize.css": "^11.0.0"
+    "@contentful/rich-text-html-renderer": "^15.13.1",
+    "@nuxtjs/sentry": "^5.1.7",
+    "contentful": "^10.0.0-beta-v10.3",
+    "core-js": "^3.19.3",
+    "nuxt": "^2.15.8",
+    "nuxt-typed-vuex": "^0.3.0",
+    "portal-vue": "^2.1.7",
+    "vue": "^2.6.14",
+    "vue-frag": "^1.4.0",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "prettier": "^1.18.2"
-  },
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dsktschy/megumitagawa.com"
-  },
-  "bugs": {
-    "url": "https://github.com/dsktschy/megumitagawa.com/issues"
-  },
-  "engines": {
-    "node": ">=12.2.0",
-    "npm": ">=6.9.0"
+    "@babel/eslint-parser": "^7.16.3",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@nuxt/image": "^0.6.2",
+    "@nuxt/postcss8": "^1.1.3",
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^8.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/stylelint-module": "^4.1.0",
+    "@types/lodash.debounce": "^4.0.7",
+    "@vue/test-utils": "^1.3.0",
+    "autoprefixer": "^10.4.7",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^27.4.4",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-nuxt": "^3.1.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.4",
+    "lint-staged": "^12.1.2",
+    "postcss": "^8.4.13",
+    "postcss-html": "^1.3.0",
+    "prettier": "^2.5.1",
+    "standard-version": "^9.3.2",
+    "stylelint": "^14.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended-vue": "^1.1.0",
+    "stylelint-config-standard": "^24.0.0",
+    "tailwindcss": "^3.0.24",
+    "ts-jest": "^27.1.1",
+    "vue-jest": "^3.0.4"
   }
 }

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /**
+   * Required to enable filter and backdrop filter
+   * Because cssnano@^4.1.11 removes empty variables
+   * It can be removed on cssnano@latest
+   * https://github.com/cssnano/cssnano/issues/1165#issuecomment-880284880
+   */
+  --tw-blur: blur(0);
+  --tw-brightness: brightness(1);
+  --tw-contrast: contrast(1);
+  --tw-grayscale: grayscale(0);
+  --tw-hue-rotate: hue-rotate(0);
+  --tw-invert: invert(0);
+  --tw-saturate: saturate(1);
+  --tw-sepia: sepia(0);
+  --tw-drop-shadow: drop-shadow(0 0 #0000);
+  --tw-backdrop-blur: blur(0);
+  --tw-backdrop-brightness: brightness(1);
+  --tw-backdrop-contrast: contrast(1);
+  --tw-backdrop-grayscale: grayscale(0);
+  --tw-backdrop-hue-rotate: hue-rotate(0);
+  --tw-backdrop-invert: invert(0);
+  --tw-backdrop-opacity: opacity(1);
+  --tw-backdrop-saturate: saturate(1);
+  --tw-backdrop-sepia: sepia(0);
+}
+
+html {
+  @apply min-w-screens.xs text-px-base text-black scroll-smooth;
+}
+
+:focus-visible {
+  @apply outline outline-2 -outline-offset-1 outline-lime;
+}
+
+::selection {
+  @apply bg-lime/35;
+}

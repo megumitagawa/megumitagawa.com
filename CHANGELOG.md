@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/megumitagawa/megumitagawa.com/compare/v2.0.0...v3.0.0) (2023-02-04)
+
+
+### Build System
+
+* clean up and nuxi init ([55ef3cf](https://github.com/megumitagawa/megumitagawa.com/commit/55ef3cf23ee96e457df5c6e94d76eeda779f6436))
+
+
+### BREAKING CHANGES
+
+* replace nuxt@2 to nuxt@3
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

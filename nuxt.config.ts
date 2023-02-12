@@ -76,6 +76,7 @@ export default defineNuxtConfig({
           {
             content_type: 'work',
             limit,
+            order: '-fields.date',
           }
         )
       const routes = createDynamicRouteList(workEntries, '/works/page/')

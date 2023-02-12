@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply min-w-screens.xs text-px-base text-black scroll-smooth;
+  @apply min-w-screens.xs break-words text-px-base text-black scroll-smooth;
 }
 
 :focus-visible {

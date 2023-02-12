@@ -4,6 +4,38 @@ import { createDynamicRouteList } from './src/models/WorkEntries'
 import { WorkFields } from './src/models/WorkFields'
 import { theme } from './tailwind.config'
 
+const runtimeConfig = {
+  // Must not be empty
+  // https://github.com/contentful/contentful.js/blob/beta-v10/lib/contentful.ts#L37
+  contentfulCreateClientParams: {
+    accessToken: 'dummy',
+    host: 'cdn.contentful.com',
+    space: 'dummy',
+  },
+  public: {
+    // Must not be empty
+    // https://github.com/contentful/contentful.js/blob/beta-v10/lib/contentful.ts#L37
+    contentfulCreateClientParams: {
+      accessToken: 'dummy',
+      host: 'cdn.contentful.com',
+      space: 'dummy',
+    },
+    googleAnalyticsMeasurementId: '',
+    indexFullBodyImageDelay: 0,
+    indexPageBackdropDelay: 0,
+    indexPageWorkListLength: 5,
+    metaRobotsNone: false,
+    netlifyFormName: '',
+    nodeEnv: process.env.NODE_ENV,
+    tailwindTheme: theme,
+    sentryDsn: '',
+    sentryTracesSampleRate: 1,
+    siteHostname: '',
+    siteUrl: '',
+    worksPageWorkListLength: 20,
+  },
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: 'src/',
@@ -19,35 +51,7 @@ export default defineNuxtConfig({
 
   modules: [['@pinia/nuxt', { autoImports: ['defineStore'] }]],
 
-  runtimeConfig: {
-    // Must not be empty
-    // https://github.com/contentful/contentful.js/blob/beta-v10/lib/contentful.ts#L37
-    contentfulCreateClientParams: {
-      accessToken: 'dummy',
-      space: 'dummy',
-    },
-    public: {
-      // Must not be empty
-      // https://github.com/contentful/contentful.js/blob/beta-v10/lib/contentful.ts#L37
-      contentfulCreateClientParams: {
-        accessToken: 'dummy',
-        space: 'dummy',
-      },
-      googleAnalyticsMeasurementId: '',
-      indexFullBodyImageDelay: 0,
-      indexPageBackdropDelay: 0,
-      indexPageWorkListLength: 5,
-      metaRobotsNone: false,
-      netlifyFormName: '',
-      nodeEnv: process.env.NODE_ENV,
-      tailwindTheme: theme,
-      sentryDsn: '',
-      sentryTracesSampleRate: 1,
-      siteHostname: '',
-      siteUrl: '',
-      worksPageWorkListLength: 20,
-    },
-  },
+  runtimeConfig,
 
   routeRules: {
     '/works': { redirect: { to: '/works/page/1', statusCode: 301 } },
@@ -57,20 +61,25 @@ export default defineNuxtConfig({
     // Workaround to generate dynamic routes instead of generate.routes
     // https://github.com/nuxt/framework/issues/4919#issuecomment-1124349857
     async 'nitro:config'({ prerender }) {
+      if (process.env.npm_lifecycle_event !== 'generate') return
       const {
-        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_ACCESS_TOKEN: accessToken,
-        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_SPACE: space,
-        NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH: worksPageWorkListLength,
+        contentfulCreateClientParams: {
+          accessToken: defaultAccessToken,
+          host: defaultHost,
+          space: defaultSpace,
+        },
+        public: { worksPageWorkListLength: defaultWorksPageWorkListLength },
+      } = runtimeConfig
+      const {
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_ACCESS_TOKEN:
+          accessToken = defaultAccessToken,
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_HOST: host = defaultHost,
+        NUXT_CONTENTFUL_CREATE_CLIENT_PARAMS_SPACE: space = defaultSpace,
+        NUXT_PUBLIC_WORKS_PAGE_WORK_LIST_LENGTH:
+          worksPageWorkListLength = defaultWorksPageWorkListLength,
       } = process.env
-      if (
-        typeof accessToken === 'undefined' ||
-        typeof space === 'undefined' ||
-        typeof worksPageWorkListLength === 'undefined'
-      )
-        return
-      const contentfulClientApi = createClient({ accessToken, space })
-      const unsafeLimit = parseInt(worksPageWorkListLength, 10)
-      const limit = Number.isNaN(unsafeLimit) ? 20 : unsafeLimit
+      const contentfulClientApi = createClient({ accessToken, host, space })
+      const limit = parseInt(`${worksPageWorkListLength}`, 10)
       const workEntries =
         await contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>(
           {

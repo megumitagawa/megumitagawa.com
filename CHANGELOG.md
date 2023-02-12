@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/megumitagawa/megumitagawa.com/compare/v3.0.0...v3.1.0) (2023-02-12)
+
+
+### Features
+
+* sort work entries by date ([43623f3](https://github.com/megumitagawa/megumitagawa.com/commit/43623f3529e92d7d9d92a01f6f21b636cd7f30f5))
+
 ## [3.0.0](https://github.com/megumitagawa/megumitagawa.com/compare/v2.0.0...v3.0.0) (2023-02-04)
 
 ### Build System

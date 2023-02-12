@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/megumitagawa/megumitagawa.com/compare/v3.1.1...v3.2.0) (2023-02-12)
+
+
+### Features
+
+* allow specifying the contentful hostname ([525506f](https://github.com/megumitagawa/megumitagawa.com/commit/525506f1cb5eb1e06af2793857b71c5bb42cf61d))
+
 ## [3.1.1](https://github.com/megumitagawa/megumitagawa.com/compare/v3.1.0...v3.1.1) (2023-02-12)
 
 

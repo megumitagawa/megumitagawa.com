@@ -6,4 +6,5 @@ export interface Work {
   title: string
   content: CFRichTextTypes.Document
   featuredMediaList: Contentful.Asset[]
+  date: Contentful.EntryFields.Date
 }

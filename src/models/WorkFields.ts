@@ -11,4 +11,5 @@ export interface WorkFields {
   title: Contentful.EntryFields.Symbol
   content?: CFRichTextTypes.Document
   featuredMediaList?: Contentful.Asset[]
+  date: Contentful.EntryFields.Date
 }

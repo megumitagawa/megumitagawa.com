@@ -270,6 +270,7 @@ const { data: workEntriesRef } = await useAsyncData(
     $contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>({
       content_type: 'work',
       limit: indexPageWorkListLength,
+      order: '-fields.date',
     })
 )
 if (!workEntriesRef.value) throw createError('No work response')

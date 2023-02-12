@@ -76,6 +76,7 @@ export default defineNuxtConfig({
           {
             content_type: 'work',
             limit,
+            order: '-fields.date',
           }
         )
       const routes = createDynamicRouteList(workEntries, '/works/page/')
@@ -116,9 +117,6 @@ export default defineNuxtConfig({
     //   https://github.com/contentful/contentful.js/issues/1233#issuecomment-1216175360
     // - Bundle code containing eval
     contentful: 'contentful/lib/index',
-    // Workaround to build with @pinia/nuxt
-    // https://stackoverflow.com/a/74801367
-    pinia: '@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
   },
 
   app: {

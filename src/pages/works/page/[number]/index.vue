@@ -134,6 +134,7 @@ const { data: workEntriesRef } = await useAsyncData(
     $contentfulClientApi.withoutUnresolvableLinks.getEntries<WorkFields>({
       content_type: 'work',
       limit: worksPageWorkListLength,
+      order: '-fields.date',
       skip,
     })
 )

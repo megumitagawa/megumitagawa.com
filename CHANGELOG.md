@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/megumitagawa/megumitagawa.com/compare/v3.1.0...v3.1.1) (2023-02-12)
+
+
+### Bug Fixes
+
+* add line breaks mid-word if needed ([77302c3](https://github.com/megumitagawa/megumitagawa.com/commit/77302c343032c5d0b41041e8fc8a492b5a055492))
+
 # [3.1.0](https://github.com/megumitagawa/megumitagawa.com/compare/v3.0.0...v3.1.0) (2023-02-12)
 
 

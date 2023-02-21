@@ -57,6 +57,12 @@ export default defineNuxtConfig({
     '/works': { redirect: { to: '/works/page/1', statusCode: 301 } },
   },
 
+  experimental: {
+    // Keep reactivity on destructuring assignment from defineProps
+    // https://ja.vuejs.org/guide/extras/reactivity-transform.html#vite
+    reactivityTransform: true,
+  },
+
   hooks: {
     // Workaround to generate dynamic routes instead of generate.routes
     // https://github.com/nuxt/framework/issues/4919#issuecomment-1124349857

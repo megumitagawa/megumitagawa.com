@@ -20,7 +20,7 @@ module.exports = {
       fontFamily: {
         sans: ['Quicksand', 'Kiwi Maru', 'sans-serif'],
       },
-      // On nuxt@>3.1.0, nuxt typecheck outputs error about this prop
+      // On nuxt@>3.1.0, nuxt typecheck outputs error about this prop, so can't update nuxt
       fontSize: {
         'px-base': '16px', // to know font size set to body
         xs: [

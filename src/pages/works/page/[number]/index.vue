@@ -26,6 +26,12 @@
           :alt="featuredMedia.fields.description || ''"
           loading="lazy"
         />
+        <BaseOembed
+          v-for="featuredUrl of work.featuredUrlList"
+          :key="featuredUrl.fields.slug"
+          :slug="featuredUrl.fields.slug"
+          :url="featuredUrl.fields.value"
+        />
         <SecondaryHeading component="h2">
           {{ work.title }}
         </SecondaryHeading>

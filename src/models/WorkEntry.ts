@@ -10,13 +10,20 @@ type CreateWork = (workEntry: WorkEntry) => Work
 
 export const createWork: CreateWork = (workEntry) => {
   const { id } = workEntry.sys
-  const { title, content, featuredMediaList = [], date } = workEntry.fields
+  const {
+    title,
+    content,
+    featuredMediaList = [],
+    featuredUrlList = [],
+    date,
+  } = workEntry.fields
 
   return {
     id,
     title,
     content: content || EMPTY_DOCUMENT,
     featuredMediaList,
+    featuredUrlList,
     date,
   }
 }

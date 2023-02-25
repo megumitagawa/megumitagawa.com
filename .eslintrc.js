@@ -16,5 +16,8 @@ module.exports = {
       { ignoreRestSiblings: true },
     ],
     'vue/no-multiple-template-root': 0,
+    // Keep reactivity on destructuring assignment from defineProps
+    // https://ja.vuejs.org/guide/extras/reactivity-transform.html#vite
+    'vue/no-setup-props-destructure': 0,
   },
 }
